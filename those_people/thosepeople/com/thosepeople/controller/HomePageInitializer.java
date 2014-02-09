@@ -1,0 +1,22 @@
+/**
+ * 
+ */
+package com.thosepeople.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+/**
+ * @author chenzhuo
+ *
+ */
+@Controller
+@RequestMapping(value="/index")
+public class HomePageInitializer {
+	
+	@RequestMapping(value="/initialize")
+   public ModelAndView initialize(){
+	   return new ModelAndView("index");
+   }
+}
