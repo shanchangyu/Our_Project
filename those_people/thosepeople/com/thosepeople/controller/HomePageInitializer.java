@@ -17,6 +17,6 @@ public class HomePageInitializer {
 	
 	@RequestMapping(value="/initialize")
    public ModelAndView initialize(){
-	   return new ModelAndView("index");
+	   return new ModelAndView("text_editor");
    }
 }
