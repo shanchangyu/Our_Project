@@ -182,7 +182,7 @@
 						<tr>
 							<td>
 								<h3>
-									<span class="glyphicon glyphicon-edit"></span> 文章（5）
+									<a href="../StaticView/text_editor.jsp"><span class="glyphicon glyphicon-edit"></span> 文章（5）</a>
 								</h3>
 							</td>
 						</tr>
@@ -192,7 +192,7 @@
 									<span class="glyphicon glyphicon-bullhorn"></span> 发布信息
 								</h3> <br>
 								<h4>
-									<a href="../StaticView/post_job_info.html">房屋信息</a>
+									<a href="../StaticView/text_editor.jsp">房屋信息</a>
 								</h4> <br>
 								<h4>
 									<a href="../StaticView/post_love_info.jsp">交友信息</a>

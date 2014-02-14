@@ -7,12 +7,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <link rel="stylesheet" type="text/css" href="../css/common_body.css">
 <link rel="stylesheet" type="text/css" href="../css/home.css">
-<!-- 配置文件 -->
-<script type="text/javascript" src="../ueditor/ueditor.config.js"></script>
-<!-- 编辑器源码文件 -->
-<script type="text/javascript" src="../ueditor/ueditor.all.js"></script>
-<!-- 语言包文件(建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败) -->
-<script type="text/javascript" src="../ueditor/lang/zh-cn/zh-cn.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/editor.css">
+<link
+	href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css"
+	rel="stylesheet">
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="../js/editor/bootstrap-wysiwyg.js"></script>
 <!-[if IE]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]->
@@ -22,16 +23,68 @@
 <body id="common_body">
 	<div class="container">
 		<div class="row">
+			<!--start placeholder-->
 			<div class="col-md-1"></div>
+			<!--end placeholder-->
 			<div class="col-md-7">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<script id="container" name="content" type="text/plain">
-                                                                            这里写你的初始化内容
-                         </script>
-						<script type="text/javascript">
-							var editor = UE.getEditor('container')
-						</script>
+
+				<div class="jumbotron">
+					标题 (必填)<input type="text" class="form-control"> <br>
+					内容
+					<div class="btn-toolbar" data-role="editor-toolbar"
+						data-target="#editor">
+						<div class="btn-group">
+							<a class="btn btn-default" data-edit="bold" title="加粗"> <i
+								class="icon-bold"></i>
+							</a> <a class="btn btn-default" data-edit="italic" title="斜体"> <i
+								class="icon-italic"></i>
+							</a> <a class="btn btn-default" data-edit="strikethrough" title="删除线">
+								<i class="icon-strikethrough"></i>
+							</a> <a class="btn btn-default" data-edit="underline" title="下划线"><i
+								class="icon-underline"></i></a>
+						</div>
+						<div class="btn-group">
+							<a class="btn btn-default" data-edit="insertunorderedlist"
+								title="无序列表"><i class="icon-list-ul"></i></a> <a
+								class="btn btn-default" data-edit="insertorderedlist"
+								title="有序列表"><i class="icon-list-ol"></i></a>
+						</div>
+						<div class="btn-group">
+							<a class="btn btn-default" data-edit="justifyleft" title="左对齐"><i
+								class="icon-align-left"></i></a> <a class="btn btn-default"
+								data-edit="justifycenter" title="居中"><i
+								class="icon-align-center"></i></a> <a class="btn btn-default"
+								data-edit="justifyright" title="右对齐"><i
+								class="icon-align-right"></i></a>
+						</div>
+						<div class="btn-group">
+							<a class="btn btn-default" data-edit="link" title="超链接"> <i
+								class="icon-link"></i>
+							</a>
+						</div>
+						<div class="btn-group">
+							<a class="btn btn-default" title="图片（可直接拖拽）" id="pictureBtn"><i
+								class="icon-picture"></i></a>
+						</div>
+						<div class="btn-group">
+							<a class="btn btn-default" data-edit="undo" title="撤销"><i
+								class="icon-undo"></i></a> <a class="btn btn-default"
+								data-edit="redo" title="恢复"><i class="icon-repeat"></i></a>
+						</div>
+					</div>
+
+					<div id="editor"></div>
+					<br>
+					<div class="row">
+						<div class="col-md-1">
+						<button type="button" class="btn btn-default btn-lg">取消</button>
+						</div>
+						<div class="col-md-9">
+						
+						</div>
+						<div class="col-md-1">
+						<button type="button" class="btn btn-success btn-lg">发布</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -93,8 +146,72 @@
 					</tbody>
 				</table>
 			</div>
+			<!--start placeholder-->
 			<div class="col-md-2"></div>
+			<!--end placeholder-->
 		</div>
 	</div>
+	<script>
+		$(function() {
+			function initToolbarBootstrapBindings() {
+				$('a[title]').tooltip({
+					container : 'body'
+				});
+				$('.dropdown-menu input').click(function() {
+					return false;
+				}).change(
+						function() {
+							$(this).parent('.dropdown-menu').siblings(
+									'.dropdown-toggle').dropdown('toggle');
+						}).keydown('esc', function() {
+					this.value = '';
+					$(this).change();
+				});
+
+				$('[data-role=magic-overlay]').each(
+						//picture
+						function() {
+							var overlay = $(this), target = $(overlay
+									.data('target'));
+							overlay.css('opacity', 0).css('position',
+									'absolute').offset(target.offset()).width(
+									target.outerWidth()).height(
+									target.outerHeight());
+						});
+				if ("onwebkitspeechchange" in document.createElement("input")) {
+					var editorOffset = $('#editor').offset();
+					$('#voiceBtn').css('position', 'absolute').offset(
+							{
+								top : editorOffset.top,
+								left : editorOffset.left
+										+ $('#editor').innerWidth() - 35
+							});
+				} else {
+					$('#voiceBtn').hide();
+				}
+			}
+			;
+			function showErrorAlert(reason, detail) {
+				var msg = '';
+				if (reason === 'unsupported-file-type') {
+					msg = "Unsupported format " + detail;
+				} else {
+					console.log("error uploading file", reason, detail);
+				}
+				$(
+						'<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>'
+								+ '<strong>File upload error</strong> '
+								+ msg
+								+ ' </div>').prependTo('#alerts');
+			}
+			;
+			initToolbarBootstrapBindings();
+			$('#editor').wysiwyg({
+				fileUploadError : showErrorAlert
+			});
+			window.prettyPrint && prettyPrint();
+		});
+	</script>
+	<div id="fb-root"></div>
 </body>
 </html>
