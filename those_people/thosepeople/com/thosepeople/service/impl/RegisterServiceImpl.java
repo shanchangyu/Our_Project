@@ -5,6 +5,7 @@ package com.thosepeople.service.impl;
 
 import org.springframework.util.StringUtils;
 
+import com.thosepeople.exception.BusinessException;
 import com.thosepeople.service.RegisterService;
 
 /**
@@ -14,12 +15,19 @@ import com.thosepeople.service.RegisterService;
 public class RegisterServiceImpl implements RegisterService{
 
 	@Override
-	public boolean registerUser(String userName, String nickName, String email,
-			String passWord) {
-		if(StringUtils.isEmpty(userName)||StringUtils.isEmpty(nickName)||StringUtils.isEmpty(email)
+	public boolean registerUser(String realName, String nickName, String email,
+			String passWord) throws BusinessException {
+		if(StringUtils.isEmpty(realName)||StringUtils.isEmpty(nickName)||StringUtils.isEmpty(email)
 				||StringUtils.isEmpty(passWord)){
-			
+			throw new BusinessException("The param is illegal!");
 		}
+		
+		return false;
+	}
+
+	@Override
+	public boolean verifyTheEmail(String email) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 }
