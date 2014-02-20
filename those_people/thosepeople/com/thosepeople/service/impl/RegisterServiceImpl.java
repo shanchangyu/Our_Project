@@ -3,11 +3,14 @@
  */
 package com.thosepeople.service.impl;
 
+import java.sql.Timestamp;
+
 import org.springframework.util.StringUtils;
 
-import com.thosepeople.dao.IUserDao;
+import com.thosepeople.dao.UserDao;
 import com.thosepeople.exception.BusinessException;
 import com.thosepeople.service.RegisterService;
+import com.thosepeople.util.EncryptUtil;
 
 /**
  * @author dft
@@ -15,9 +18,9 @@ import com.thosepeople.service.RegisterService;
  */
 public class RegisterServiceImpl implements RegisterService {
 
-	private IUserDao userDao;
+	private UserDao userDao;
 
-	public void setUserDao(IUserDao userDao) {
+	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
 
@@ -28,8 +31,14 @@ public class RegisterServiceImpl implements RegisterService {
 				|| StringUtils.isEmpty(email) || StringUtils.isEmpty(passWord)) {
 			throw new BusinessException("The param is illegal!");
 		}
-
-		return false;
+		String encryptPassWord = EncryptUtil.generatePassWord(email, passWord);
+		int result = userDao.registUser(realName, nickName, email,
+				encryptPassWord);
+		if (result == 1) {
+			return true;
+		}else{
+			throw new BusinessException("Register user fail into the DB!");
+		}
 	}
 
 	@Override
@@ -40,6 +49,19 @@ public class RegisterServiceImpl implements RegisterService {
 		int ifValid = userDao.ifEmailHasBeenRegistered(email);
 		if (ifValid == 0) {
 			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean completeUserInfoDetail(int uid, byte age, Boolean gender, String city,
+			String school, String major, Timestamp enrollmentDate,
+			int educationBackground, String signature) throws BusinessException {
+		if (StringUtils.isEmpty(gender) || StringUtils.isEmpty(city)
+				|| StringUtils.isEmpty(school) || StringUtils.isEmpty(major)
+				|| StringUtils.isEmpty(enrollmentDate)
+				|| StringUtils.isEmpty(educationBackground)) {
+              throw new BusinessException("");
 		}
 		return false;
 	}
