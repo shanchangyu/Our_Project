@@ -15,7 +15,7 @@
 	http://www.springframework.org/schema/util
 	http://www.springframework.org/schema/util/spring-util.xsd
 	">
-	<bean id="myTest" class="com.thosepeople.controller.Test">
-	    <property name="testService" ref="testService"/>
+	<bean id="register" class="com.thosepeople.controller.Register">
+	<property name="registerService" ref="registerService"/>
 	</bean>
 	</beans>

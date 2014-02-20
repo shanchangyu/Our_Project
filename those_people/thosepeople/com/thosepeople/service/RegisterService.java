@@ -11,5 +11,5 @@ import com.thosepeople.exception.BusinessException;
  */
 public interface RegisterService {
   boolean registerUser(String userName,String nickName,String email,String passWord) throws BusinessException;
-  boolean verifyTheEmail(String email);
+  boolean verifyTheEmail (String email) throws BusinessException;
 }

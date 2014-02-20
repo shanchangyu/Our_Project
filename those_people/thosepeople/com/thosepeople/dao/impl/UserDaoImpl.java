@@ -19,10 +19,10 @@ public class UserDaoImpl extends JdbcDaoSupport implements IUserDao{
 		return false;
 	}
 
-	private static final String VERIFY_EMAIL="select count(0) from user where email=? ";
+	private static final String VERIFY_EMAIL=" select count(0) from user where email=? ";
 	@Override
 	public int ifEmailHasBeenRegistered(String email) {
-		return 0;
+       return this.getJdbcTemplate().queryForObject(VERIFY_EMAIL, new Object[]{email}, Integer.class);
 	}
 
 }

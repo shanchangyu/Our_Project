@@ -15,7 +15,7 @@
 	http://www.springframework.org/schema/util
 	http://www.springframework.org/schema/util/spring-util.xsd
 	">
-	<bean id="testDao" class="com.thosepeople.dao.impl.TestDaoImpl">
-	
-	</bean>
+      <bean id="userDao" class="com.thosepeople.dao.impl.UserDaoImpl">
+       <property name="dataSource" ref="dataSource"/>
+      </bean>
 	</beans>

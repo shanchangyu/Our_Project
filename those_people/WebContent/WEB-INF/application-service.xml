@@ -15,7 +15,7 @@
 	http://www.springframework.org/schema/util
 	http://www.springframework.org/schema/util/spring-util.xsd
 	">
-	<bean id="testService" class="com.thosepeople.service.impl.TestServiceImpl">
-	  <property name="dao" ref="testDao"/>
+	<bean id="registerService" class="com.thosepeople.service.impl.RegisterServiceImpl">
+	<property name="userDao" ref="userDao"/>
 	</bean>
 	</beans>

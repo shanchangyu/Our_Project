@@ -1,125 +1,132 @@
 <html>
 <head>
-	 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-	 <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<link rel="stylesheet"
+	href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
 </head>
 <body>
-<div class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">那些人</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">鹊桥</a></li>
-            <li><a href="#about">房屋</a></li>
-            <li><a href="#contact">工作</a></li>
-            <li><a href="#activity">活动</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-              <a href="#">
-                 <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#registModal">
-                 <b>注册</b> 
-                 </button>
-               </a>
-            </li>
-            <li>
-              <a href="#
+	<div class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand"
+					href="http://localhost:8080/those_people/index/initialize.do">那些人</a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">鹊桥</a></li>
+					<li><a href="#about">房屋</a></li>
+					<li><a href="#contact">工作</a></li>
+					<li><a href="#activity">活动</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#">
+							<button class="btn btn-info btn-sm" data-toggle="modal"
+								data-target="#registModal">
+								<b>注册</b>
+							</button>
+					</a></li>
+					<li><a href="#
               ">
-                 <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#loginModal">
-                  <b>登录</b>
-                 </button>
-               </a>
-            </li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-	    </div>	
-	    <!-- The Modal dialog of regist-->
-<div class="modal fade" id="registModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">注册</h4>
-      </div>
-      <div class="modal-body">
-           <div class="input-group input-group-lg">
-             <input type="text" class="form-control" placeholder="真实姓名">
-             <span class="input-group-addon">
-               <span class="glyphicon glyphicon-user"></span>
-             </span>
-           </div>
-           <div class="input-group input-group-lg">
-             <input type="text" class="form-control" placeholder="昵称">
-             <span class="input-group-addon">
-               <span class="glyphicon glyphicon-user"></span>
-             </span>
-           </div>
-           <div class="input-group input-group-lg">
-             <input type="text" class="form-control" placeholder="邮箱">
-             <span class="input-group-addon">
-               <span class="glyphicon glyphicon-envelope"></span>
-             </span>
-          </div>
-          <div class="input-group input-group-lg">
-             <input type="password" class="form-control" placeholder="密码">
-             <span class="input-group-addon">
-               <span class="glyphicon glyphicon-lock"></span>
-             </span>
-          </div>
-          <div class="input-group input-group-lg">
-             <input type="password" class="form-control" placeholder="确认密码">
-             <span class="input-group-addon">
-               <span class="glyphicon glyphicon-lock"></span>
-             </span>
-          </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">注册</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--The end of regist model dialog -->
+							<button class="btn btn-info btn-sm" data-toggle="modal"
+								data-target="#loginModal">
+								<b>登录</b>
+							</button>
+					</a></li>
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</div>
+	<!-- The Modal dialog of regist-->
+	<div class="modal fade" id="registModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">注册</h4>
+				</div>
+				<form action="">
+					<div class="modal-body">
+						<div class="input-group input-group-lg">
+							<input type="text" class="form-control" placeholder="真实姓名">
+							<span class="input-group-addon"> <span
+								class="glyphicon glyphicon-user"></span>
+							</span>
+						</div>
+						<div class="input-group input-group-lg">
+							<input type="text" class="form-control" placeholder="昵称">
+							<span class="input-group-addon"> <span
+								class="glyphicon glyphicon-user"></span>
+							</span>
+						</div>
+						<div class="input-group input-group-lg">
+							<input type="text" class="form-control" placeholder="邮箱">
+							<span class="input-group-addon"> <span
+								class="glyphicon glyphicon-envelope"></span>
+							</span>
+						</div>
+						<div class="input-group input-group-lg">
+							<input type="password" class="form-control" placeholder="密码">
+							<span class="input-group-addon"> <span
+								class="glyphicon glyphicon-lock"></span>
+							</span>
+						</div>
+						<div class="input-group input-group-lg">
+							<input type="password" class="form-control" placeholder="确认密码">
+							<span class="input-group-addon"> <span
+								class="glyphicon glyphicon-lock"></span>
+							</span>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary">注册</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!--The end of regist model dialog -->
 
-<!--The Model dialog of Login-->
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">登录</h4>
-      </div>
-      <div class="modal-body">
-        <div class="input-group input-group-lg">
-             <input type="text" class="form-control" placeholder="邮箱">
-             <span class="input-group-addon">
-               <span class="glyphicon glyphicon-envelope"></span>
-             </span>
-          </div>
-       <div class="input-group input-group-lg">
-             <input type="password" class="form-control" placeholder="密码">
-             <span class="input-group-addon">
-               <span class="glyphicon glyphicon-lock"></span>
-             </span>
-          </div>     
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">登录</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--The end of regist model dialog -->
+	<!--The Model dialog of Login-->
+	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">登录</h4>
+				</div>
+				<div class="modal-body">
+					<div class="input-group input-group-lg">
+						<input type="text" class="form-control" placeholder="邮箱">
+						<span class="input-group-addon"> <span
+							class="glyphicon glyphicon-envelope"></span>
+						</span>
+					</div>
+					<div class="input-group input-group-lg">
+						<input type="password" class="form-control" placeholder="密码">
+						<span class="input-group-addon"> <span
+							class="glyphicon glyphicon-lock"></span>
+						</span>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary">登录</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--The end of regist model dialog -->
 </body>
 <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
-<script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script
+	src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
 </html>
-    
