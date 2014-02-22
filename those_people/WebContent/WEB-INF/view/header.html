@@ -57,7 +57,7 @@
 					<div class="alert alert-danger" id="errorRealName" style="display:none"></div>
 						<div class="input-group input-group-lg">
 							<input type="text" name="realName" id="realName" class="form-control"
-								placeholder="真实姓名" onfocus="hideWarnText('errorRealName')"> <span class="input-group-addon">
+								placeholder="真实姓名" onfocus="hideWarnMessage('errorRealName')"> <span class="input-group-addon">
 								<span class="glyphicon glyphicon-user"></span>
 							</span>
 						</div>
@@ -65,7 +65,7 @@
 						<div class="alert alert-danger" id="errorNickName" style="display:none"></div>
 						<div class="input-group input-group-lg">
 							<input type="text" name="nickName" id="nickName" class="form-control"
-								placeholder="昵称" onfocus="hideWarnText('errorNickName')"> <span class="input-group-addon">
+								placeholder="昵称" onfocus="hideWarnMessage('errorNickName')"> <span class="input-group-addon">
 								<span class="glyphicon glyphicon-user"></span>
 							</span>
 						</div>
@@ -73,7 +73,7 @@
 						<div class="alert alert-danger" id="errorEmail" style="display:none"></div>
 						<div class="input-group input-group-lg">
 							<input type="text" name="email" id="email" class="form-control"
-								placeholder="邮箱"  onblur="verifyEmailCB(this.value)"> <span
+								placeholder="邮箱" onfocus="hideWarnMessage('errorEmail')"  onblur="verifyEmailCB(this.value)"> <span
 								class="input-group-addon"> <span
 								class="glyphicon glyphicon-envelope"></span>
 							</span>
@@ -82,7 +82,7 @@
 						<div class="alert alert-danger" id="errorPassword" style="display:none"></div>
 						<div class="input-group input-group-lg">
 							<input type="password" name="passWord" id="password" class="form-control"
-								placeholder="密码(6-10位字符)" maxlength="10" onfocus="hideWarnText('errorPassword')"> <span class="input-group-addon">
+								placeholder="密码(6-10位字符)" maxlength="10" onfocus="hideWarnMessage('errorPassword')"> <span class="input-group-addon">
 								<span class="glyphicon glyphicon-lock"></span>
 							</span>
 						</div>
@@ -90,7 +90,7 @@
 						<div class="alert alert-danger" id="errorRePassword" style="display:none"></div>
 						<div class="input-group input-group-lg">
 							<input type="password" name="rePassword" id="rePassword" onblur="verifyRepeatPassword(this.value)" id="rePassWord" class="form-control"
-								placeholder="确认密码" maxlength="10" onfocus="hideWarnText('errorRePassword')"> <span class="input-group-addon">
+								placeholder="确认密码" maxlength="10" onfocus="hideWarnMessage('errorRePassword')"> <span class="input-group-addon">
 								<span class="glyphicon glyphicon-lock"></span>
 							</span>
 						</div>

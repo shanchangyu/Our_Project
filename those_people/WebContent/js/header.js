@@ -8,18 +8,22 @@ function verifyEmailFormat(email) {
 	}
 	return false;
 }
+function showWarnMessage(elementId, message) {
+	document.getElementById(elementId).innerHTML = "<h6>" + message + "<h6/>";
+	document.getElementById(elementId).style.display = "";
+}
 
+function hideWarnMessage(elementId) {
+	document.getElementById(elementId).style.display = "none";
+}
 function verifyEmailCB(email) {
 	if (email.length == 0) {
 		return;
 	} else {
 		if (!verifyEmailFormat(email)) {
-			document.getElementById('errorEmail').innerHTML = "<h6>邮箱格式不正确，请您输入正确的邮箱地址!<h6/>";
-			document.getElementById('errorEmail').style.display = "";
+			showWarnMessage('errorEmail', "邮箱格式不正确，请您输入正确的邮箱地址!");
 			return;
-		} else {
-			document.getElementById('errorEmail').style.display = "none";
-		}
+		} 
 	}
 	$
 			.getJSON(
@@ -29,31 +33,25 @@ function verifyEmailCB(email) {
 					},
 					function(data, textStatus) {
 						if (data.result == false) {
-							document.getElementById('errorEmail').innerHTML = "<h6>帐号已存在，请直接登录!<h6/>";
-							document.getElementById('errorEmail').style.display = "";
+							showWarnMessage('errorEmail', '该邮箱已经被注册!');
 						}
 					});
 }
-
 function ifPasswordAndRePasswordSame(password, rePassword) {
 	if (password == rePassword) {
 		return true;
 	}
 	return false;
 }
-
 function verifyRepeatPassword(rePassword) {
 	var password = document.getElementById('password').value;
 	if (ifPasswordAndRePasswordSame(password, rePassword)) {
-		document.getElementById('errorRePassword').style.display = "none";
+		hideWarnMessage('errorRePassword');
 	} else {
-		document.getElementById("errorRePassword").innerHTML = "<h6>两次密码不一致!</h6>";
-		document.getElementById('errorRePassword').style.display = "";
+		showWarnMessage('errorRePassword', '两次密码不一致!');
 	}
 }
-function hideWarnText(elementId) {
-	document.getElementById(elementId).style.display = "none";
-}
+
 function checkRegister() {
 	var realName = document.getElementById("realName").value;
 	var nickName = document.getElementById("nickName").value;
@@ -63,32 +61,28 @@ function checkRegister() {
 	if (realName.length == 0 || nickName.length == 0 || email.length == 0
 			|| password.length == 0 || rePassword.lenght == 0) {
 		if (realName.length == 0) {
-			document.getElementById('errorRealName').innerHTML = "<h6>请填写您的真实姓名!<h6/>";
-			document.getElementById('errorRealName').style.display = "";
+			showWarnMessage('errorRealName', '请填写您的真实姓名!');
 		}
 		if (nickName.length == 0) {
-			document.getElementById('errorNickName').innerHTML = "<h6>请填写您的昵称!<h6/>";
-			document.getElementById('errorNickName').style.display = "";
+			showWarnMessage('errorNickName', '请填写您的昵称!');
 		}
 		if (email.length == 0) {
-			document.getElementById('errorEmail').innerHTML = "<h6>请您填写邮箱!<h6/>";
-			document.getElementById('errorEmail').style.display = "";
+			showWarnMessage('errorEmail', '请您填写邮箱!');
 		}
 		if (password.length == 0) {
-			document.getElementById('errorPassword').innerHTML = "<h6>请您填写密码!<h6/>";
-			document.getElementById('errorPassword').style.display = "";
+			showWarnMessage('errorPassword', '请您填写密码!');
 		}
 		if (rePassword.length == 0) {
-			document.getElementById('errorRePassword').innerHTML = "<h6>请您再次填写密码!<h6/>";
-			document.getElementById('errorRePassword').style.display = "";
+			showWarnMessage('errorRePassword', '请您再次填写密码!');
 		}
 		return false;
 	}
 	if (!verifyEmailFormat(email)) {
-         
+		showWarnMessage('errorEmail', "邮箱格式不正确，请您输入正确的邮箱地址!");
+		return false;
 	}
-	if (ifPasswordAndRePasswordSame(password, rePassword)) {
-
+	if (!ifPasswordAndRePasswordSame(password, rePassword)) {
+		showWarnMessage('errorRePassword', '两次密码不一致!');
+		return false;
 	}
-
 }
