@@ -3,6 +3,8 @@
  */
 package com.thosepeople.service.impl;
 
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import com.thosepeople.dao.UserDao;
@@ -14,7 +16,7 @@ import com.thosepeople.util.EncryptUtil;
  * @author chenzhuo
  * 
  */
-public class LoginServiceImpl implements LoginService {
+public class LoginServiceImpl implements InitializingBean, LoginService {
 	UserDao userDao;
 
 	public void setUserDao(UserDao userDao) {
@@ -24,9 +26,6 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public boolean verrifyTheUserPassWord(String email, String passWord)
 			throws BusinessException {
-		if (StringUtils.isEmpty(email) || StringUtils.isEmpty(passWord)) {
-			throw new BusinessException("The param is illegal!");
-		}
 		String encrptPassWord = EncryptUtil.generatePassWord(email, passWord);
 		String savedPassWord = userDao.getPassWordByEmail(email);
 		if (StringUtils.isEmpty(encrptPassWord)) {
@@ -36,6 +35,11 @@ public class LoginServiceImpl implements LoginService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		Assert.notNull(userDao, "userDao should not null!");
 	}
 
 }

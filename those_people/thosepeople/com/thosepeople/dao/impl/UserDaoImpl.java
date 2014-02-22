@@ -3,7 +3,7 @@
  */
 package com.thosepeople.dao.impl;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
@@ -16,12 +16,17 @@ import com.thosepeople.dao.UserDao;
 public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 
 	private static final String REGISTER_USER = " insert into user(realName,nickName,passWord,email) value(?,?,?,?) ";
-
+    private static final String GET_UID=" select id from user where email=? ";
 	@Override
 	public int registUser(String realName, String nickName, String email,
 			String passWord) {
-		return this.getJdbcTemplate().update(REGISTER_USER,
+		int updateResult=this.getJdbcTemplate().update(REGISTER_USER,
 				new Object[] { realName, nickName, passWord, email });
+		if(updateResult==1){
+			return this.getJdbcTemplate().queryForObject(GET_UID, new Object[]{email}, Integer.class);
+		}else{
+			return -1;
+		}
 
 	}
 
@@ -45,12 +50,12 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 			+ "enrollmentDate,educationBackground,signature) value(?,?,?,?,?,?,?,?) ";
 
 	@Override
-	public int completeUserInfoDetail(int uid, byte age, Boolean gender,
-			String city, String school, String major, Timestamp enrollmentDate,
+	public int completeUserInfoDetail(int uid,Date birthday, Boolean gender,
+			String city, String school, String major, Date enrollmentDate,
 			int educationBackground, String signature) {
 		return this.getJdbcTemplate().update(
 				COMPLETE_USER_DETAIL,
-				new Object[] { uid, age, gender, city, school, major,
+				new Object[] { uid, birthday, gender, city, school, major,
 						enrollmentDate, educationBackground, signature });
 	}
 }

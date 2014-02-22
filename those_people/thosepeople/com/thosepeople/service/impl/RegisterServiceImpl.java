@@ -3,20 +3,23 @@
  */
 package com.thosepeople.service.impl;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
-import org.springframework.util.StringUtils;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.util.Assert;
 
 import com.thosepeople.dao.UserDao;
 import com.thosepeople.exception.BusinessException;
+import com.thosepeople.exception.SystemException;
 import com.thosepeople.service.RegisterService;
+import com.thosepeople.util.DateUtils;
 import com.thosepeople.util.EncryptUtil;
 
 /**
  * @author dft
  * 
  */
-public class RegisterServiceImpl implements RegisterService {
+public class RegisterServiceImpl implements InitializingBean, RegisterService {
 
 	private UserDao userDao;
 
@@ -25,27 +28,14 @@ public class RegisterServiceImpl implements RegisterService {
 	}
 
 	@Override
-	public boolean registerUser(String realName, String nickName, String email,
-			String passWord) throws BusinessException {
-		if (StringUtils.isEmpty(realName) || StringUtils.isEmpty(nickName)
-				|| StringUtils.isEmpty(email) || StringUtils.isEmpty(passWord)) {
-			throw new BusinessException("The param is illegal!");
-		}
+	public int getUidAfterRegisterUser(String realName, String nickName,
+			String email, String passWord) throws BusinessException {
 		String encryptPassWord = EncryptUtil.generatePassWord(email, passWord);
-		int result = userDao.registUser(realName, nickName, email,
-				encryptPassWord);
-		if (result == 1) {
-			return true;
-		}else{
-			throw new BusinessException("Register user fail into the DB!");
-		}
+		return userDao.registUser(realName, nickName, email, encryptPassWord);
 	}
 
 	@Override
-	public boolean verifyTheEmail(String email) throws BusinessException {
-		if (StringUtils.isEmpty(email)) {
-			throw new BusinessException("The param is illegal!");
-		}
+	public boolean verifyTheEmail(String email) {
 		int ifValid = userDao.ifEmailHasBeenRegistered(email);
 		if (ifValid == 0) {
 			return true;
@@ -54,15 +44,42 @@ public class RegisterServiceImpl implements RegisterService {
 	}
 
 	@Override
-	public boolean completeUserInfoDetail(int uid, byte age, Boolean gender, String city,
-			String school, String major, Timestamp enrollmentDate,
-			int educationBackground, String signature) throws BusinessException {
-		if (StringUtils.isEmpty(gender) || StringUtils.isEmpty(city)
-				|| StringUtils.isEmpty(school) || StringUtils.isEmpty(major)
-				|| StringUtils.isEmpty(enrollmentDate)
-				|| StringUtils.isEmpty(educationBackground)) {
-              throw new BusinessException("");
+	public boolean completeUserInfoDetail(int uid, String birthday, int gender,
+			String city, String school, String major, String enrollmentDate,
+			int educationBackground, String signature) {
+		if (uid <= 0) {
+			throw new IllegalArgumentException(
+					"The uid should be great more than zero!");
 		}
-		return false;
+		if (educationBackground < 1 || educationBackground > 7) {
+			throw new IllegalArgumentException(
+					"The educationBackground should be great than zero and less than eight !");
+		}
+		Boolean sex;
+		if (gender == 0) {
+			sex = true;// men
+		} else if (gender == 1) {
+			sex = false;// women
+		} else {
+			throw new IllegalArgumentException(
+					"the gender should be zero or one !");
+		}
+		Date bornDate = DateUtils.getDateOfYMDFormat(birthday);
+		Date enrollmentTime = DateUtils.getDateOfYMDFormat(enrollmentDate);
+		if (bornDate == null || enrollmentTime == null) {
+			throw new SystemException("parse string to date fial !");
+		}
+		int result = userDao.completeUserInfoDetail(uid, bornDate, sex, city,
+				school, major, enrollmentTime, educationBackground, signature);
+		if (result == 1) {
+			return true;
+		} else {
+			throw new SystemException("Insert into the DB fail!");
+		}
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		Assert.notNull(userDao, "userDao should not null!");
 	}
 }

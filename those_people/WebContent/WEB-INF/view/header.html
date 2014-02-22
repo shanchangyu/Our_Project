@@ -1,6 +1,6 @@
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet"
 	href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
 </head>
@@ -14,27 +14,27 @@
 						class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand"
-					href="http://localhost:8080/those_people/index/initialize.do">那些人</a>
+					href="http://localhost:8080/those_people/index/initialize.do">閭ｄ簺浜�</a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">鹊桥</a></li>
-					<li><a href="#about">房屋</a></li>
-					<li><a href="#contact">工作</a></li>
-					<li><a href="#activity">活动</a></li>
+					<li class="active"><a href="#">楣婃ˉ</a></li>
+					<li><a href="#about">鎴垮眿</a></li>
+					<li><a href="#contact">宸ヤ綔</a></li>
+					<li><a href="#activity">娲诲姩</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#">
 							<button class="btn btn-info btn-sm" data-toggle="modal"
 								data-target="#registModal">
-								<b>注册</b>
+								<b>娉ㄥ唽</b>
 							</button>
 					</a></li>
 					<li><a href="#
               ">
 							<button class="btn btn-info btn-sm" data-toggle="modal"
 								data-target="#loginModal">
-								<b>登录</b>
+								<b>鐧诲綍</b>
 							</button>
 					</a></li>
 				</ul>
@@ -50,43 +50,53 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">注册</h4>
+					<h4 class="modal-title" id="myModalLabel">娉ㄥ唽</h4>
 				</div>
-				<form action="">
+				<form action="/those_people/register/registUser.do" onsubmit="return checkRegister()" method="post">
 					<div class="modal-body">
+					<div class="alert alert-danger" id="errorRealName" style="display:none"></div>
 						<div class="input-group input-group-lg">
-							<input type="text" class="form-control" placeholder="真实姓名">
-							<span class="input-group-addon"> <span
-								class="glyphicon glyphicon-user"></span>
+							<input type="text" name="realName" id="realName" class="form-control"
+								placeholder="鐪熷疄濮撳悕" onfocus="hideWarnText('errorRealName')"> <span class="input-group-addon">
+								<span class="glyphicon glyphicon-user"></span>
 							</span>
 						</div>
+						<br>
+						<div class="alert alert-danger" id="errorNickName" style="display:none"></div>
 						<div class="input-group input-group-lg">
-							<input type="text" class="form-control" placeholder="昵称">
-							<span class="input-group-addon"> <span
-								class="glyphicon glyphicon-user"></span>
+							<input type="text" name="nickName" id="nickName" class="form-control"
+								placeholder="鏄电О" onfocus="hideWarnText('errorNickName')"> <span class="input-group-addon">
+								<span class="glyphicon glyphicon-user"></span>
 							</span>
 						</div>
+						<br>
+						<div class="alert alert-danger" id="errorEmail" style="display:none"></div>
 						<div class="input-group input-group-lg">
-							<input type="text" class="form-control" placeholder="邮箱">
-							<span class="input-group-addon"> <span
+							<input type="text" name="email" id="email" class="form-control"
+								placeholder="閭"  onblur="verifyEmailCB(this.value)"> <span
+								class="input-group-addon"> <span
 								class="glyphicon glyphicon-envelope"></span>
 							</span>
 						</div>
+						<br>
+						<div class="alert alert-danger" id="errorPassword" style="display:none"></div>
 						<div class="input-group input-group-lg">
-							<input type="password" class="form-control" placeholder="密码">
-							<span class="input-group-addon"> <span
-								class="glyphicon glyphicon-lock"></span>
+							<input type="password" name="passWord" id="password" class="form-control"
+								placeholder="瀵嗙爜(6-10浣嶅瓧绗�)" maxlength="10" onfocus="hideWarnText('errorPassword')"> <span class="input-group-addon">
+								<span class="glyphicon glyphicon-lock"></span>
 							</span>
 						</div>
+						<br>
+						<div class="alert alert-danger" id="errorRePassword" style="display:none"></div>
 						<div class="input-group input-group-lg">
-							<input type="password" class="form-control" placeholder="确认密码">
-							<span class="input-group-addon"> <span
-								class="glyphicon glyphicon-lock"></span>
+							<input type="password" name="rePassword" id="rePassword" onblur="verifyRepeatPassword(this.value)" id="rePassWord" class="form-control"
+								placeholder="纭瀵嗙爜" maxlength="10" onfocus="hideWarnText('errorRePassword')"> <span class="input-group-addon">
+								<span class="glyphicon glyphicon-lock"></span>
 							</span>
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary">注册</button>
+						<button type="submit"  class="btn btn-primary">娉ㄥ唽</button>
 					</div>
 				</form>
 			</div>
@@ -102,24 +112,25 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">登录</h4>
+					<h4 class="modal-title" id="myModalLabel">鐧诲綍</h4>
 				</div>
 				<div class="modal-body">
 					<div class="input-group input-group-lg">
-						<input type="text" class="form-control" placeholder="邮箱">
+						<input type="text" class="form-control" placeholder="閭">
 						<span class="input-group-addon"> <span
 							class="glyphicon glyphicon-envelope"></span>
 						</span>
 					</div>
+					<br>
 					<div class="input-group input-group-lg">
-						<input type="password" class="form-control" placeholder="密码">
+						<input type="password" class="form-control" placeholder="瀵嗙爜">
 						<span class="input-group-addon"> <span
 							class="glyphicon glyphicon-lock"></span>
 						</span>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary">登录</button>
+					<button type="button" class="btn btn-primary">鐧诲綍</button>
 				</div>
 			</div>
 		</div>
@@ -129,4 +140,5 @@
 <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
 <script
 	src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../js/header.js"> </script>
 </html>

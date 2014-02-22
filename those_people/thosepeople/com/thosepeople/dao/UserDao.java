@@ -3,7 +3,7 @@
  */
 package com.thosepeople.dao;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * @author chenzhuo
@@ -17,7 +17,7 @@ public interface UserDao {
 
 	String getPassWordByEmail(String email);
 
-	int completeUserInfoDetail(int uid, byte age, Boolean gender, String city,
-			String school, String major, Timestamp enrollmentDate,
+	int completeUserInfoDetail(int uid, Date birthday, Boolean gender, String city,
+			String school, String major, Date enrollmentDate,
 			int educationBackground, String signature);
 }

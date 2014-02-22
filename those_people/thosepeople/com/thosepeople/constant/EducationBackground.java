@@ -18,7 +18,7 @@ public enum EducationBackground {
 		this.degree = degree;
 	}
 
-	public String getDegreeByLevel(int level) {
+	public static String getDegreeByLevel(int level) {
 		for (EducationBackground eb : EducationBackground.values()) {
 			if (level == eb.getLevel()) {
 				return eb.getDegree();
