@@ -16,6 +16,8 @@ function showWarnMessage(elementId, message) {
 function hideWarnMessage(elementId) {
 	document.getElementById(elementId).style.display = "none";
 }
+
+var verifyEmailResult=-1;
 function verifyEmailCB(email) {
 	if (email.length == 0) {
 		return;
@@ -33,7 +35,10 @@ function verifyEmailCB(email) {
 					},
 					function(data, textStatus) {
 						if (data.result == false) {
+							verifyEmailResult=0;
 							showWarnMessage('errorEmail', '该邮箱已经被注册!');
+						}else{
+							verifyEmailResult=1;
 						}
 					});
 }
@@ -85,4 +90,9 @@ function checkRegister() {
 		showWarnMessage('errorRePassword', '两次密码不一致!');
 		return false;
 	}
+	if(verifyEmailResult==0){
+	   showWarnMessage('errorEmail', '该邮箱已经被注册!');
+	   return false;
+	}
+	return true;
 }

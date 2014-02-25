@@ -49,14 +49,14 @@ public class Register {
 			@RequestParam("passWord") String passWord,
 			@RequestParam("email") String email, ModelMap model)
 			throws BusinessException {
-		/*int result = registerService.getUidAfterRegisterUser(realName,
+		int result = registerService.getUidAfterRegisterUser(realName,
 				nickName, email, passWord);
 		if (result <= 0) {
 			throw new SystemException("register user fail !");
 		}
 		model.put("uid", result);
 		model.put("realName", realName);
-		model.put("nickName", nickName);*/
+		model.put("nickName", nickName);
 		return new ModelAndView("register_success");
 	}
 
