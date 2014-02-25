@@ -11,7 +11,7 @@
     <![endif]-> </head>
 <title>首页</title>
 </head>
-<jsp:include page="header.html"/>
+<jsp:include page="/WEB-INF/view/header.html"/>
 <body>
 <!--首屏轮播开始-->  
     <div class="carousel slide"  data-ride="carousel" id="carousel-116699">
