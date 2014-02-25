@@ -34,13 +34,14 @@ public class Login {
 	}
 
 	@ResponseBody
-	@RequestMapping("/verifyPassWord")
+	@RequestMapping("/verifyPassword")
 	public Map<String, Boolean> verifyThePassWord(
-			@RequestParam("email") String email,
-			@RequestParam("passWord") String passWord) throws BusinessException {
+			@RequestParam("loginEmail") String email,
+			@RequestParam("loginPassword") String passWord){
 		Map<String, Boolean> result = new HashMap<>(1);
 		boolean verifyResult = loginService.verrifyTheUserPassWord(email,
 				passWord);
+		System.out.println("ddddddddddfffffffffffffaaaaaaaaaaaaaaaggggggggggggg");
 		result.put("result", verifyResult);
 		return result;
 	}

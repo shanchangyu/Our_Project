@@ -17,6 +17,6 @@ public class HomePageInitializer {
 	
 	@RequestMapping(value="/initialize")
    public ModelAndView initialize(){
-	   return new ModelAndView("home");
+	   return new ModelAndView("complete_detail_info");
    }
 }

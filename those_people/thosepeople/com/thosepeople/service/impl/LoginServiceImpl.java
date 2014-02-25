@@ -8,7 +8,6 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import com.thosepeople.dao.UserDao;
-import com.thosepeople.exception.BusinessException;
 import com.thosepeople.service.LoginService;
 import com.thosepeople.util.EncryptUtil;
 
@@ -24,13 +23,12 @@ public class LoginServiceImpl implements InitializingBean, LoginService {
 	}
 
 	@Override
-	public boolean verrifyTheUserPassWord(String email, String passWord)
-			throws BusinessException {
-		String encrptPassWord = EncryptUtil.generatePassWord(email, passWord);
+	public boolean verrifyTheUserPassWord(String email, String passWord){
 		String savedPassWord = userDao.getPassWordByEmail(email);
-		if (StringUtils.isEmpty(encrptPassWord)) {
-			throw new BusinessException("Get password wrong!");
+		if (StringUtils.isEmpty(savedPassWord)) {
+			return false;
 		}
+		String encrptPassWord = EncryptUtil.generatePassWord(email, passWord);
 		if (encrptPassWord.equals(savedPassWord)) {
 			return true;
 		}

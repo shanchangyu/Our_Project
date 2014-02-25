@@ -14,7 +14,7 @@
 						class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand"
-					href="http://localhost:8080/those_people/index/initialize.do">那些人</a>
+					href="/those_people/StaticView/index.jsp">那些人</a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
@@ -114,24 +114,28 @@
 						aria-hidden="true">&times;</button>
 					<h4 class="modal-title" id="myModalLabel">登录</h4>
 				</div>
+				<form action="" onsubmit="return checkLogin()" method="post">
 				<div class="modal-body">
 					<div class="input-group input-group-lg">
-						<input type="text" class="form-control" placeholder="邮箱">
+						<input type="text" class="form-control" id="loginEmail" name="loginEmail" placeholder="邮箱">
 						<span class="input-group-addon"> <span
 							class="glyphicon glyphicon-envelope"></span>
 						</span>
 					</div>
 					<br>
 					<div class="input-group input-group-lg">
-						<input type="password" class="form-control" placeholder="密码">
+						<input type="password" class="form-control" id="loginPassword" name="loginPassword" placeholder="密码" onblur="verifyLogin()">
 						<span class="input-group-addon"> <span
 							class="glyphicon glyphicon-lock"></span>
 						</span>
 					</div>
+					<br>
+					<div class="alert alert-danger" id="errorLogin" style="display:none"></div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary">登录</button>
+					<button type="submit" class="btn btn-primary">登录</button>
 				</div>
+				</form>
 			</div>
 		</div>
 	</div>

@@ -57,13 +57,13 @@ public class Register {
 		model.put("uid", result);
 		model.put("realName", realName);
 		model.put("nickName", nickName);
-		return new ModelAndView("register_success");
+		return new ModelAndView("complete_detail_info");
 	}
 
 	@RequestMapping(value="verifyEmail",method=RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Boolean> verifyTheEamil(
-			@RequestParam("email") String email) throws BusinessException {
+			@RequestParam("email") String email){
 		Map<String, Boolean> result = new HashMap<>(1);
 		Boolean flag = registerService.verifyTheEmail(email);
 		result.put("result", flag);
@@ -84,8 +84,7 @@ public class Register {
 			@RequestParam("enrollmentDate") String enrollmentDate,
 			@RequestParam("educationBackground") int educationBackground,
 			@RequestParam(value = "signature", required = false) String signature,
-			SessionStatus sessionStatus, HttpSession session)
-			throws BusinessException {
+			SessionStatus sessionStatus, HttpSession session) {
 		boolean result = registerService.completeUserInfoDetail(uid, birthday,
 				gender, city, school, major, enrollmentDate,
 				educationBackground, signature);
