@@ -76,7 +76,6 @@ public class Register {
 			@ModelAttribute("uid") int uid,
 			@ModelAttribute("realName") String realName,
 			@ModelAttribute("nickName") String nickName,
-			@RequestParam(value = "birthday", required = false) String birthday,
 			@RequestParam("gender") int gender,
 			@RequestParam("city") String city,
 			@RequestParam("school") String school,
@@ -85,12 +84,11 @@ public class Register {
 			@RequestParam("educationBackground") int educationBackground,
 			@RequestParam(value = "signature", required = false) String signature,
 			SessionStatus sessionStatus, HttpSession session) {
-		boolean result = registerService.completeUserInfoDetail(uid, birthday,
+		boolean result = registerService.completeUserInfoDetail(uid,
 				gender, city, school, major, enrollmentDate,
 				educationBackground, signature);
 		UserInfo userInfo = new UserInfo();
 		if (result) {
-			userInfo.setBirthday(birthday);
 			userInfo.setCity(city);
 			userInfo.setEducationBackGround(EducationBackground
 					.getDegreeByLevel(educationBackground));

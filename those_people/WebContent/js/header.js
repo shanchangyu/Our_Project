@@ -94,8 +94,10 @@ function checkRegister() {
 }
 
 
-var verifyLogin = -1;
-function verifyLogin(loginEmail,loginPassword){
+var verifyLoginResult = -1;
+function verifyLoginPassword(){
+	var loginEmail = document.getElementById("loginEmail").value;
+	var loginPassword = document.getElementById("loginPassword").value;
 	if(loginEmail.length==0||loginPassword.length==0){
 		return;
 	}
@@ -104,9 +106,9 @@ function verifyLogin(loginEmail,loginPassword){
 		loginPassword:loginPassword
 	}, function(data, textStatus) {
 		if (data.result == false) {
-			verifyLogin = 0;
+			verifyLoginResult = 0;
 		} else {
-			verifyLogin = 1;
+			verifyLoginResult = 1;
 		}
 	});
 }
@@ -121,9 +123,7 @@ function checkLogin() {
 		showWarnMessage('errorLogin', "邮箱格式不正确，请您输入正确的邮箱地址!");
 		return false;
 	}
-	alert(verifyLogin);
-	verifyLogin(loginEmail,loginPassword);
-	if(verifyLogin!=1){
+	if(verifyLoginResult!=1){
 		showWarnMessage('errorLogin', "用户名与密码不符合!");
 		return false;
 	}
