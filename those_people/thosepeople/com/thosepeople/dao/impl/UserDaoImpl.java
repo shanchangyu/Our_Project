@@ -4,6 +4,7 @@
 package com.thosepeople.dao.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
@@ -23,11 +24,11 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 		int updateResult=this.getJdbcTemplate().update(REGISTER_USER,
 				new Object[] { realName, nickName, passWord, email });
 		if(updateResult==1){
-			return this.getJdbcTemplate().queryForObject(GET_UID, new Object[]{email}, Integer.class);
+			List<Integer> result=this.getJdbcTemplate().queryForList(GET_UID, Integer.class, new Object[]{email});
+                return result.get(0);				
 		}else{
 			return -1;
 		}
-
 	}
 
 	private static final String VERIFY_EMAIL = " select count(0) from user where email=? ";
@@ -38,24 +39,27 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 				new Object[] { email }, Integer.class);
 	}
 
-	private static final String GET_PASSWORD_BY_EMAIL = " select passWord from user where email=? limit 1 ";
+	private static final String GET_PASSWORD_BY_EMAIL = " select password from user where email=? limit 1 ";
 
 	@Override
 	public String getPassWordByEmail(String email) {
-		return this.getJdbcTemplate().queryForObject(GET_PASSWORD_BY_EMAIL,
-				new Object[] { email }, String.class);
+		List<String> result=this.getJdbcTemplate().queryForList(GET_PASSWORD_BY_EMAIL, String.class, new Object[]{email});
+		if(!result.isEmpty()){
+			return result.get(0);
+		}
+		return null;
 	}
 
 	private static final String COMPLETE_USER_DETAIL = " insert into user_info(age,gender,city,school,major,"
 			+ "enrollmentDate,educationBackground,signature) value(?,?,?,?,?,?,?,?) ";
 
 	@Override
-	public int completeUserInfoDetail(int uid,Date birthday, Boolean gender,
+	public int completeUserInfoDetail(int uid,Boolean gender,
 			String city, String school, String major, Date enrollmentDate,
 			int educationBackground, String signature) {
 		return this.getJdbcTemplate().update(
 				COMPLETE_USER_DETAIL,
-				new Object[] { uid, birthday, gender, city, school, major,
+				new Object[] { uid,gender, city, school, major,
 						enrollmentDate, educationBackground, signature });
 	}
 }

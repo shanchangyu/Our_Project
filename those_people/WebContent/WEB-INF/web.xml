@@ -2,6 +2,13 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>those_people</display-name>
   
+  <!-- config jsp to support EL -->
+  <jsp-config>  
+  <jsp-property-group>  
+    <url-pattern>*.jsp</url-pattern>  
+    <el-ignored>false</el-ignored>  
+  </jsp-property-group>  
+  </jsp-config>
   <!-- The listener who startup the springmvc with the web container-->
   <listener>  
      <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>  

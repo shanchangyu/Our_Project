@@ -44,7 +44,7 @@ public class RegisterServiceImpl implements InitializingBean, RegisterService {
 	}
 
 	@Override
-	public boolean completeUserInfoDetail(int uid, String birthday, int gender,
+	public boolean completeUserInfoDetail(int uid, int gender,
 			String city, String school, String major, String enrollmentDate,
 			int educationBackground, String signature) {
 		if (uid <= 0) {
@@ -64,12 +64,11 @@ public class RegisterServiceImpl implements InitializingBean, RegisterService {
 			throw new IllegalArgumentException(
 					"the gender should be zero or one !");
 		}
-		Date bornDate = DateUtils.getDateOfYMDFormat(birthday);
 		Date enrollmentTime = DateUtils.getDateOfYMDFormat(enrollmentDate);
-		if (bornDate == null || enrollmentTime == null) {
+		if (enrollmentTime == null) {
 			throw new SystemException("parse string to date fial !");
 		}
-		int result = userDao.completeUserInfoDetail(uid, bornDate, sex, city,
+		int result = userDao.completeUserInfoDetail(uid, sex, city,
 				school, major, enrollmentTime, educationBackground, signature);
 		if (result == 1) {
 			return true;
