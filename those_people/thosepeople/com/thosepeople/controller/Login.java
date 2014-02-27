@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.thosepeople.exception.BusinessException;
 import com.thosepeople.service.LoginService;
 
 /**
@@ -41,13 +40,12 @@ public class Login {
 		Map<String, Boolean> result = new HashMap<>(1);
 		boolean verifyResult = loginService.verrifyTheUserPassWord(email,
 				passWord);
-		System.out.println("ddddddddddfffffffffffffaaaaaaaaaaaaaaaggggggggggggg");
 		result.put("result", verifyResult);
 		return result;
 	}
 	
 	@RequestMapping("/goIntoWeb")
-	public ModelAndView login(@RequestParam("email") String email){
+	public ModelAndView login(@RequestParam("loginEmail") String email){
 		
 		return new ModelAndView();
 	}

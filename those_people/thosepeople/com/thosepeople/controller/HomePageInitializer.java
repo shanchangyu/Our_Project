@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping(value="/index")
 public class HomePageInitializer {
-	
 	@RequestMapping(value="/initialize")
    public ModelAndView initialize(){
 	   return new ModelAndView("complete_detail_info");
