@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <link rel="stylesheet" type="text/css" href="../css/common_body.css">
+<link rel="stylesheet" type="text/css" href="../css/imgSelector/imgareaselect-default.css">
 <!-[if IE]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]->
@@ -31,13 +32,23 @@
 								</tr>
 								<tr>
 									<td>头像</td>
-									<td><img
-										src="../img/head-pic/headpic_default.jpg
-									
-									"
+									<td><img id="headerpic" src="../img/head-pic/headpic_default.jpg"
 										alt="..." class="img-thumbnail"></td>
 									<td>
-										<button type="file" class="btn btn-primary btn-lg">选择头像</button>
+										<div style="position: relative;">
+										<form action="/those_people/upload_head_pic/handle_head_pic.do" id="headpictoupload" target="iframupload">
+											<a class='btn btn-primary' href='javascript:;'> 选择头像 <input
+												type="file" id="headpicfile"
+												style='position: absolute; z-index: 2; top: 0; left: 0; filter: alpha(opacity = 0); -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; opacity: 0; background-color: transparent; color: transparent;'
+												name="file_source" onchange="preview(this)" size="40">
+											</a>
+											<input type="hidden" name="x" id="picx">
+											<input type="hidden" name="y" id="picy">
+											<input type="hidden" name="width" id="picwid">
+											<input type="hidden" name="height" id="pichei">
+										</form>
+										<iframe name="iframupload" style="display: none"></iframe>
+										</div>
 									</td>
 									<td></td>
 								</tr>
@@ -154,5 +165,23 @@
 			<div class="col-md-3"></div>
 		</div>
 	</div>
+	<div class="modal fade" id="uploadHeadPicModal" data-backdrop="static">
+		<div class="modal-dialog" style="heigth: 400px; width: 350px">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">编辑头像</h4>
+				</div>
+				<div id="preview" class="modal-body"></div>
+				<div class="modal-footer">
+					<button type="button"  onclick="" class="btn btn-primary">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
+<script type="text/javascript"
+	src="../js/imgSelector/jquery.imgareaselect.pack.js"></script>
+	<script type="text/javascript" src="../js/uploadheadpic.js"></script>
 </html>
