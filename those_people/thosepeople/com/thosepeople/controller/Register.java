@@ -3,27 +3,18 @@
  */
 package com.thosepeople.controller;
 
-import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javax.imageio.ImageIO;
-import javax.imageio.ImageReadParam;
-import javax.imageio.ImageReader;
-import javax.imageio.stream.ImageInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +34,7 @@ import com.thosepeople.constant.EducationBackground;
 import com.thosepeople.exception.BusinessException;
 import com.thosepeople.exception.SystemException;
 import com.thosepeople.service.RegisterService;
+import com.thosepeople.util.PictureUtil;
 import com.thosepeople.vo.UserInfo;
 
 /**
@@ -60,10 +52,8 @@ public class Register {
 	public void setRegisterService(RegisterService registerService) {
 		this.registerService = registerService;
 	}
-
-	private final static String SAVE_PATH = "upload/headpic/";
-	private final static String TMP_PATH = "upload/tmppic/";
-
+	private static final String TEMP_PATH="upload\\temp";
+	private static final String SAVE_PATH="upload\\headpic";
 	@RequestMapping(value = "registUser", method = RequestMethod.POST)
 	public ModelAndView register(@RequestParam("realName") String realName,
 			@RequestParam("nickName") String nickName,
@@ -97,15 +87,12 @@ public class Register {
 
 		String serverPath = request.getSession().getServletContext()
 				.getRealPath("/");
-		if (!new File(serverPath + SAVE_PATH).isDirectory()) {
-			new File(serverPath + SAVE_PATH).mkdirs();
-		}
-		if (!new File(serverPath + TMP_PATH).isDirectory()) {
-			new File(serverPath + TMP_PATH).mkdirs();
+		if (!new File(serverPath + TEMP_PATH).isDirectory()) {
+			new File(serverPath + TEMP_PATH).mkdirs();
 		}
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		factory.setSizeThreshold(50 * 1024);// 50k阀值，超过后以临时文件形式存储到硬盘
-		factory.setRepository(new File(serverPath + TMP_PATH));
+		factory.setRepository(new File(serverPath + TEMP_PATH));
 		ServletFileUpload fileUpload = new ServletFileUpload(factory);
 		fileUpload.setFileSizeMax(1024 * 1024);// 最大上传现实1M
 		try {
@@ -115,9 +102,8 @@ public class Register {
 				return;
 			}
 			int x = 0,y=0,width=0,height=0;
-			ByteArrayInputStream fileInputStream;
-			ImageInputStream imgInputStream = null;
-			Iterator<ImageReader> imgIterator = null;
+			String suffix = null;
+			String tempSavePath = null;
 			while(it.hasNext()){
 				FileItem item=it.next();
 				if(item.isFormField()){
@@ -132,35 +118,22 @@ public class Register {
 						height=Integer.parseInt(item.getString());
 					}
 				}else{
-					fileInputStream =(ByteArrayInputStream) item.getInputStream();
-					imgInputStream = ImageIO.createImageInputStream(fileInputStream);
-					imgIterator = ImageIO.getImageReaders(imgInputStream);
+					suffix=PictureUtil.getSuffix(item.getName());
+					tempSavePath=PictureUtil.saveTmpImg(item,suffix,"001",serverPath );             
 				}
 			}
-			System.out.println(x+" "+y+" "+width+" "+height);
-			ImageReader imgReader = imgIterator.next();
-			ImageReadParam imgReadParam = imgReader.getDefaultReadParam();
-			imgReader.setInput(imgInputStream, true, true);
-			Rectangle rect = new Rectangle(x, y, width, height);
-			imgReadParam.setSourceRegion(rect);
-			BufferedImage imgBuffer;
-			try {
-				imgBuffer = imgReader.read(0, imgReadParam);
-			} finally {
-				imgReader.dispose();
-				imgInputStream.close();
-			}
-			String fileName = String.valueOf(System.currentTimeMillis()) + "_"
-					+ "001";
-			String filePath = SAVE_PATH + fileName;
-			ImageIO.write(imgBuffer, " jpg ", new File(filePath));
+			String fileName=System.currentTimeMillis()+"_001";
+			String targetPath=PictureUtil.getTargetPath(suffix,fileName, serverPath, SAVE_PATH);
+			System.out.println("targetPath:"+targetPath);
+			System.out.println("tempSavePath"+tempSavePath);
+            PictureUtil.cutImg(suffix, tempSavePath, targetPath, x, y, width, height);
+            //new File(tempSavePath.toString()).delete();
 			PrintWriter out = response.getWriter();
-			System.out.println(filePath+"dddddd");
-			out.print("<script>parent.callbackupload('" + filePath
+			out.print("<script>parent.callbackupload('" + SAVE_PATH +File.separator+fileName
 					+ "')</script>");
 			out.flush();
 			out.close();
-		} catch (FileUploadException | IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
@@ -200,5 +173,6 @@ public class Register {
 			sessionStatus.setComplete();
 		}
 		return new ModelAndView("home").addObject("userInfo", userInfo);
-	}
+	} 
+	
 }
