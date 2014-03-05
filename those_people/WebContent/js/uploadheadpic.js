@@ -1,5 +1,4 @@
 //this is for upload head picture
-var x, y, width, height;
 function preview(file) {
 	console.log("onchange preview");
 	var prevDiv = document.getElementById('preview');
@@ -26,16 +25,16 @@ function preview(file) {
 			resizable : false,
 			persistent : true,
 			onInit : function(img, selection) {
-				documen = selection.x1;
-				y = selection.y1;
-				width = selection.width;
-				height = selection.height;
+				$("#picx").val(selection.x1);
+				$("#picy").val(selection.y1);
+				$("#picwid").val(selection.width);
+				$("#pichei").val(selection.height);
 			},
 			onSelectEnd : function(img, selection) {
-				x = selection.x1;
-				y = selection.y1;
-				width = selection.width;
-				height = selection.height;
+				$("#picx").val(selection.x1);
+				$("#picy").val(selection.y1);
+				$("#picwid").val(selection.width);
+				$("#pichei").val(selection.height);
 			}
 		});
 	});
@@ -46,7 +45,7 @@ function preview(file) {
 	});
 }
 
-function checkUploadType() {
+function checkUploadAndSubmit() {
 	var location = document.getElementById("headpicfile").value;
 	if (location == "") {
 		alert("请先选择图片文件");
@@ -56,12 +55,13 @@ function checkUploadType() {
 	var type = location.substr(point);
 	if (type == ".jpg" || type == ".gif" || type == ".JPG" || type == ".GIF"
 			|| type == ".PNG" || type == ".png") {
+		 $("#headpictoupload").submit();
 	} else {
 		alert("只能输入jpg或者gif格式的图片");
 		return;
 	}
 }
 
-function callbackupload(headpicurl){
-	 $("#headerpic").attr("src", headpicurl);
+function callbackupload(headpicurl) {
+	$("#headerpic").attr("src", headpicurl);
 }

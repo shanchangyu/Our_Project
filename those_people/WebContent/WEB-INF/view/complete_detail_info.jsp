@@ -36,7 +36,7 @@
 										alt="..." class="img-thumbnail"></td>
 									<td>
 										<div style="position: relative;">
-										<form action="/those_people/upload_head_pic/handle_head_pic.do" id="headpictoupload" target="iframupload">
+										<form action="/those_people/register/handle_head_pic.do" id="headpictoupload" target="iframupload" method="post" enctype="multipart/form-data">
 											<a class='btn btn-primary' href='javascript:;'> 选择头像 <input
 												type="file" id="headpicfile"
 												style='position: absolute; z-index: 2; top: 0; left: 0; filter: alpha(opacity = 0); -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; opacity: 0; background-color: transparent; color: transparent;'
@@ -175,7 +175,7 @@
 				</div>
 				<div id="preview" class="modal-body"></div>
 				<div class="modal-footer">
-					<button type="button"  onclick="" class="btn btn-primary">保存</button>
+					<button type="button"  onclick="checkUploadAndSubmit()" class="btn btn-primary">保存</button>
 				</div>
 			</div>
 		</div>
