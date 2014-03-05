@@ -3,11 +3,29 @@
  */
 package com.thosepeople.controller;
 
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReadParam;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.ImageInputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -43,6 +61,9 @@ public class Register {
 		this.registerService = registerService;
 	}
 
+	private final static String SAVE_PATH = "upload/headpic/";
+	private final static String TMP_PATH = "upload/tmppic/";
+
 	@RequestMapping(value = "registUser", method = RequestMethod.POST)
 	public ModelAndView register(@RequestParam("realName") String realName,
 			@RequestParam("nickName") String nickName,
@@ -60,17 +81,91 @@ public class Register {
 		return new ModelAndView("complete_detail_info");
 	}
 
-	@RequestMapping(value="verifyEmail",method=RequestMethod.GET)
+	@RequestMapping(value = "verifyEmail", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Boolean> verifyTheEamil(
-			@RequestParam("email") String email){
+			@RequestParam("email") String email) {
 		Map<String, Boolean> result = new HashMap<>(1);
 		Boolean flag = registerService.verifyTheEmail(email);
 		result.put("result", flag);
 		return result;
 	}
 
-	
+	@RequestMapping(value = "/handle_head_pic", method = RequestMethod.POST)
+	public void handleTheUploadPic(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		String serverPath = request.getSession().getServletContext()
+				.getRealPath("/");
+		if (!new File(serverPath + SAVE_PATH).isDirectory()) {
+			new File(serverPath + SAVE_PATH).mkdirs();
+		}
+		if (!new File(serverPath + TMP_PATH).isDirectory()) {
+			new File(serverPath + TMP_PATH).mkdirs();
+		}
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+		factory.setSizeThreshold(50 * 1024);// 50k阀值，超过后以临时文件形式存储到硬盘
+		factory.setRepository(new File(serverPath + TMP_PATH));
+		ServletFileUpload fileUpload = new ServletFileUpload(factory);
+		fileUpload.setFileSizeMax(1024 * 1024);// 最大上传现实1M
+		try {
+			List<FileItem> fileItem = fileUpload.parseRequest(request);
+			Iterator<FileItem> it=fileItem.iterator();
+			if (!it.hasNext()) {
+				return;
+			}
+			int x = 0,y=0,width=0,height=0;
+			ByteArrayInputStream fileInputStream;
+			ImageInputStream imgInputStream = null;
+			Iterator<ImageReader> imgIterator = null;
+			while(it.hasNext()){
+				FileItem item=it.next();
+				if(item.isFormField()){
+					switch(item.getFieldName()){
+					case "x":
+						x=Integer.parseInt(item.getString());
+					case "y":
+						y=Integer.parseInt(item.getString());
+					case "width":
+						width=Integer.parseInt(item.getString());
+					case "heigth":
+						height=Integer.parseInt(item.getString());
+					}
+				}else{
+					fileInputStream =(ByteArrayInputStream) item.getInputStream();
+					imgInputStream = ImageIO.createImageInputStream(fileInputStream);
+					imgIterator = ImageIO.getImageReaders(imgInputStream);
+				}
+			}
+			System.out.println(x+" "+y+" "+width+" "+height);
+			ImageReader imgReader = imgIterator.next();
+			ImageReadParam imgReadParam = imgReader.getDefaultReadParam();
+			imgReader.setInput(imgInputStream, true, true);
+			Rectangle rect = new Rectangle(x, y, width, height);
+			imgReadParam.setSourceRegion(rect);
+			BufferedImage imgBuffer;
+			try {
+				imgBuffer = imgReader.read(0, imgReadParam);
+			} finally {
+				imgReader.dispose();
+				imgInputStream.close();
+			}
+			String fileName = String.valueOf(System.currentTimeMillis()) + "_"
+					+ "001";
+			String filePath = SAVE_PATH + fileName;
+			ImageIO.write(imgBuffer, " jpg ", new File(filePath));
+			PrintWriter out = response.getWriter();
+			System.out.println(filePath+"dddddd");
+			out.print("<script>parent.callbackupload('" + filePath
+					+ "')</script>");
+			out.flush();
+			out.close();
+		} catch (FileUploadException | IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	@RequestMapping("completeDetailInfo")
 	public ModelAndView completeDetailUserInfo(
 			@ModelAttribute("uid") int uid,
@@ -84,9 +179,9 @@ public class Register {
 			@RequestParam("educationBackground") int educationBackground,
 			@RequestParam(value = "signature", required = false) String signature,
 			SessionStatus sessionStatus, HttpSession session) {
-		boolean result = registerService.completeUserInfoDetail(uid,
-				gender, city, school, major, enrollmentDate,
-				educationBackground, signature);
+		boolean result = registerService.completeUserInfoDetail(uid, gender,
+				city, school, major, enrollmentDate, educationBackground,
+				signature);
 		UserInfo userInfo = new UserInfo();
 		if (result) {
 			userInfo.setCity(city);
@@ -106,5 +201,4 @@ public class Register {
 		}
 		return new ModelAndView("home").addObject("userInfo", userInfo);
 	}
-
 }
