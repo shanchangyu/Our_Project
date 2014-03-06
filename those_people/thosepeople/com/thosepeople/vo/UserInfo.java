@@ -8,23 +8,47 @@ package com.thosepeople.vo;
  * 
  */
 public class UserInfo {
-	private String birthday;
+	private int uid;
 	private String nickName;
 	private String realName;
 	private String school;
 	private String major;
 	private String city;
 	private String enrollmentDate;
-	private String educationBackGround;
 	private String signature;
-	private int gender;
-
-	public String getBirthday() {
-		return birthday;
+	private boolean gender;
+	private boolean showType;
+	private String headPicPath;
+	public String getHeadPicPath() {
+		return headPicPath;
 	}
 
-	public void setBirthday(String birthday) {
-		this.birthday = birthday;
+	public void setHeadPicPath(String headPicPath) {
+		this.headPicPath = headPicPath;
+	}
+
+	public int getUid() {
+		return uid;
+	}
+
+	public void setUid(int uid) {
+		this.uid = uid;
+	}
+
+	public boolean isGender() {
+		return gender;
+	}
+
+	public void setGender(boolean gender) {
+		this.gender = gender;
+	}
+
+	public boolean isShowType() {
+		return showType;
+	}
+
+	public void setShowType(boolean showType) {
+		this.showType = showType;
 	}
 
 	public String getNickName() {
@@ -75,27 +99,11 @@ public class UserInfo {
 		this.enrollmentDate = enrollmentDate;
 	}
 
-	public String getEducationBackGround() {
-		return educationBackGround;
-	}
-
-	public void setEducationBackGround(String educationBackGround) {
-		this.educationBackGround = educationBackGround;
-	}
-
 	public String getSignature() {
 		return signature;
 	}
 
 	public void setSignature(String signature) {
 		this.signature = signature;
-	}
-
-	public int getGender() {
-		return gender;
-	}
-
-	public void setGender(int gender) {
-		this.gender = gender;
 	}
 }

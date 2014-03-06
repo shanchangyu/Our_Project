@@ -44,32 +44,19 @@ public class RegisterServiceImpl implements InitializingBean, RegisterService {
 	}
 
 	@Override
-	public boolean completeUserInfoDetail(int uid, int gender,
-			String city, String school, String major, String enrollmentDate,
-			int educationBackground, String signature) {
+	public boolean completeUserInfoDetail(int uid, boolean gender,
+			String city, String school, String major, String enrollmentDate, 
+			String signature,boolean showType,String company,String headPicPath) {
 		if (uid <= 0) {
 			throw new IllegalArgumentException(
 					"The uid should be great more than zero!");
-		}
-		if (educationBackground < 1 || educationBackground > 7) {
-			throw new IllegalArgumentException(
-					"The educationBackground should be great than zero and less than eight !");
-		}
-		Boolean sex;
-		if (gender == 0) {
-			sex = true;// men
-		} else if (gender == 1) {
-			sex = false;// women
-		} else {
-			throw new IllegalArgumentException(
-					"the gender should be zero or one !");
 		}
 		Date enrollmentTime = DateUtils.getDateOfYMDFormat(enrollmentDate);
 		if (enrollmentTime == null) {
 			throw new SystemException("parse string to date fial !");
 		}
-		int result = userDao.completeUserInfoDetail(uid, sex, city,
-				school, major, enrollmentTime, educationBackground, signature);
+		int result = userDao.completeUserInfoDetail(uid, gender, city,
+				school, major, enrollmentTime,signature,showType,company,headPicPath);
 		if (result == 1) {
 			return true;
 		} else {
@@ -77,6 +64,12 @@ public class RegisterServiceImpl implements InitializingBean, RegisterService {
 		}
 	}
 
+	
+	@Override
+	public void saveheadPicPath(int uid, String path) {
+		
+	}
+	
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		Assert.notNull(userDao, "userDao should not null!");

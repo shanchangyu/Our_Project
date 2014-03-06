@@ -12,7 +12,7 @@ import java.util.Date;
  * 
  */
 public class DateUtils {
-	private static final String YMD_FORMAT = "yyyy-MM-dd";
+	private static final String YMD_FORMAT = "yyyy";
 
 	public static Date getDateOfYMDFormat(String time) {
 		SimpleDateFormat format = new SimpleDateFormat(YMD_FORMAT);

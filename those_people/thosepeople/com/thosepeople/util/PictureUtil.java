@@ -3,17 +3,17 @@
  */
 package com.thosepeople.util;
 
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.awt.image.CropImageFilter;
-import java.awt.image.FilteredImageSource;
-import java.awt.image.ImageFilter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Iterator;
 
 import javax.imageio.ImageIO;
+import javax.imageio.ImageReadParam;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.ImageInputStream;
 
 import org.apache.commons.fileupload.FileItem;
 
@@ -22,7 +22,9 @@ import org.apache.commons.fileupload.FileItem;
  * 
  */
 public class PictureUtil {
-
+	private final static String IMAGE_FORMAT_OF_JPG = "jpg";
+	private final static String IMAGE_FORMAT_OF_PNG = "png";
+	private final static String IMAGE_FORMAT_OF_GIF="gif";
 	public static String saveTmpImg(FileItem fileItem, String suffix,
 			String uid, String serverPath) {
 		String name = String.valueOf(System.currentTimeMillis() + "_" + uid);
@@ -45,36 +47,30 @@ public class PictureUtil {
 		return sourcePath.toString();
 	}
 
-	public static void cutImg(String suffix, String sourcePath,
-			String targetPath, int x, int y, int width, int height){
-		try {  
-            Image img;  
-            ImageFilter cropFilter;  
-            File sourceImgFile = new File(sourcePath);  
-            BufferedImage bi = ImageIO.read(sourceImgFile);  
-            int srcWidth = bi.getWidth();  
-            int srcHeight = bi.getHeight(); 
-            System.out.println(srcWidth);
-            if (srcWidth >= width && srcHeight >= height) {  
-                Image image = bi.getScaledInstance(srcWidth, srcHeight,  
-                        Image.SCALE_DEFAULT);  
-                cropFilter = new CropImageFilter(x, y, width, height);  
-                img = Toolkit.getDefaultToolkit().createImage(  
-                        new FilteredImageSource(image.getSource(), cropFilter));  
-                BufferedImage tag = new BufferedImage(width, height,  
-                        BufferedImage.TYPE_INT_RGB);  
-                Graphics g = tag.getGraphics();  
-                g.drawImage(img, 0, 0, null);  
-                g.dispose(); 
-                ImageIO.write(tag, suffix, new File(targetPath));
-            }  
-        } catch (Exception e) {  
-            e.printStackTrace();  
-        }  
+	public static void cutImage(String sourcePath, String targetPath,String suffix, int x,
+			int y, int width, int height) throws IOException {
+		FileInputStream is = null;
+		ImageInputStream iis = null;
+		try {
+			is = new FileInputStream(sourcePath);
+			Iterator<ImageReader> it = getImageReadersByFormatName(suffix);
+			ImageReader reader = it.next();
+			iis = ImageIO.createImageInputStream(is);
+			reader.setInput(iis, true);
+			ImageReadParam param = reader.getDefaultReadParam();
+			Rectangle rect = new Rectangle(x, y, width, height);
+			param.setSourceRegion(rect);
+			BufferedImage bi = reader.read(0, param);
+			ImageIO.write(bi, suffix,new File(targetPath));
+		} finally {
+			if (is != null)
+				is.close();
+			if (iis != null)
+				iis.close();
+		}
 	}
-
 	public static String getSuffix(String fileName) {
-		return fileName.substring(fileName.lastIndexOf("."));
+		return fileName.substring(fileName.lastIndexOf(".")+1);
 	}
 
 	public static String getTargetPath(String suffix, String fileName,
@@ -87,5 +83,18 @@ public class PictureUtil {
 		targetPath.append(fileName);
 		targetPath.append(suffix);
 		return targetPath.toString();
+	}
+	private static Iterator<ImageReader> getImageReadersByFormatName(
+			String suffix) {
+		switch (suffix) {
+		case IMAGE_FORMAT_OF_JPG:
+			return ImageIO.getImageReadersByFormatName(IMAGE_FORMAT_OF_JPG);
+		case IMAGE_FORMAT_OF_PNG:
+			return ImageIO.getImageReadersByFormatName(IMAGE_FORMAT_OF_PNG);
+		case IMAGE_FORMAT_OF_GIF:
+			return ImageIO.getImageReadersByFormatName(IMAGE_FORMAT_OF_GIF);
+		default:
+			return ImageIO.getImageReadersByFormatName(IMAGE_FORMAT_OF_JPG);
+		}
 	}
 }

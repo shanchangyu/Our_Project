@@ -20,8 +20,8 @@ function preview(file) {
 		$('#preview').imgAreaSelect({
 			x1 : 60,
 			y1 : 40,
-			x2 : 320,
-			y2 : 300,
+			x2 : 220,
+			y2 : 200,
 			resizable : false,
 			persistent : true,
 			onInit : function(img, selection) {
@@ -56,6 +56,11 @@ function checkUploadAndSubmit() {
 	if (type == ".jpg" || type == ".gif" || type == ".JPG" || type == ".GIF"
 			|| type == ".PNG" || type == ".png") {
 		 $("#headpictoupload").submit();
+		 $('#uploadHeadPicModal').modal('hide');
+		 $('#preview').imgAreaSelect({
+				remove : true
+			});
+		 
 	} else {
 		alert("只能输入jpg或者gif格式的图片");
 		return;

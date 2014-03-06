@@ -17,7 +17,7 @@ public interface UserDao {
 
 	String getPassWordByEmail(String email);
 
-	int completeUserInfoDetail(int uid,Boolean gender, String city,
-			String school, String major, Date enrollmentDate,
-			int educationBackground, String signature);
+	int completeUserInfoDetail(int uid,boolean gender, String city,
+			String school, String major, Date enrollmentDate, String signature,boolean showType,String company,String headPicPath);
+	void saveHeadPicPath(int uid,String path);
 }

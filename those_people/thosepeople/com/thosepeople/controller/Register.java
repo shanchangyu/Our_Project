@@ -30,7 +30,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.thosepeople.constant.EducationBackground;
 import com.thosepeople.exception.BusinessException;
 import com.thosepeople.exception.SystemException;
 import com.thosepeople.service.RegisterService;
@@ -43,7 +42,7 @@ import com.thosepeople.vo.UserInfo;
  */
 @Controller
 @RequestMapping("/register")
-@SessionAttributes({ "uid,realName,nickName" })
+@SessionAttributes({ "uid", "realName", "nickName", "headPicPath" })
 public class Register {
 	@Autowired
 	@Qualifier("registerService")
@@ -52,8 +51,11 @@ public class Register {
 	public void setRegisterService(RegisterService registerService) {
 		this.registerService = registerService;
 	}
-	private static final String TEMP_PATH="upload\\temp";
-	private static final String SAVE_PATH="upload\\headpic";
+
+	private static final String TEMP_PATH = "upload\\temp";
+	private static final String SAVE_PATH = "upload\\headpic";
+	private static final String RESPONSE_PATH = "upload/headpic";
+
 	@RequestMapping(value = "registUser", method = RequestMethod.POST)
 	public ModelAndView register(@RequestParam("realName") String realName,
 			@RequestParam("nickName") String nickName,
@@ -83,7 +85,8 @@ public class Register {
 
 	@RequestMapping(value = "/handle_head_pic", method = RequestMethod.POST)
 	public void handleTheUploadPic(HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response, @ModelAttribute("uid") int uid,
+			ModelMap model) {
 
 		String serverPath = request.getSession().getServletContext()
 				.getRealPath("/");
@@ -94,43 +97,46 @@ public class Register {
 		factory.setSizeThreshold(50 * 1024);// 50k阀值，超过后以临时文件形式存储到硬盘
 		factory.setRepository(new File(serverPath + TEMP_PATH));
 		ServletFileUpload fileUpload = new ServletFileUpload(factory);
-		fileUpload.setFileSizeMax(1024 * 1024);// 最大上传现实1M
+		fileUpload.setFileSizeMax(2 * 1024 * 1024);// 最大上传现实1M
 		try {
 			List<FileItem> fileItem = fileUpload.parseRequest(request);
-			Iterator<FileItem> it=fileItem.iterator();
+			Iterator<FileItem> it = fileItem.iterator();
 			if (!it.hasNext()) {
 				return;
 			}
-			int x = 0,y=0,width=0,height=0;
+			int x = 0, y = 0, width = 0, height = 0;
 			String suffix = null;
 			String tempSavePath = null;
-			while(it.hasNext()){
-				FileItem item=it.next();
-				if(item.isFormField()){
-					switch(item.getFieldName()){
+			while (it.hasNext()) {
+				FileItem item = it.next();
+				if (item.isFormField()) {
+					switch (item.getFieldName()) {
 					case "x":
-						x=Integer.parseInt(item.getString());
+						x = Integer.parseInt(item.getString());
 					case "y":
-						y=Integer.parseInt(item.getString());
+						y = Integer.parseInt(item.getString());
 					case "width":
-						width=Integer.parseInt(item.getString());
+						width = Integer.parseInt(item.getString());
 					case "heigth":
-						height=Integer.parseInt(item.getString());
+						height = Integer.parseInt(item.getString());
 					}
-				}else{
-					suffix=PictureUtil.getSuffix(item.getName());
-					tempSavePath=PictureUtil.saveTmpImg(item,suffix,"001",serverPath );             
+				} else {
+					suffix = PictureUtil.getSuffix(item.getName());
+					tempSavePath = PictureUtil.saveTmpImg(item, suffix, "001",
+							serverPath);
 				}
 			}
-			String fileName=System.currentTimeMillis()+"_001";
-			String targetPath=PictureUtil.getTargetPath(suffix,fileName, serverPath, SAVE_PATH);
-			System.out.println("targetPath:"+targetPath);
-			System.out.println("tempSavePath"+tempSavePath);
-            PictureUtil.cutImg(suffix, tempSavePath, targetPath, x, y, width, height);
-            //new File(tempSavePath.toString()).delete();
+			String fileName = System.currentTimeMillis() + "_" + uid + "."
+					+ suffix;
+			String targetPath = serverPath + File.separator + SAVE_PATH
+					+ File.separator;
+			PictureUtil.cutImage(tempSavePath, targetPath + fileName, suffix,
+					x, y, width, height);
+			String savePath="../" + RESPONSE_PATH + "/" + fileName;
+			model.put("headPicPath",savePath);
+			new File(tempSavePath.toString()).delete();
 			PrintWriter out = response.getWriter();
-			out.print("<script>parent.callbackupload('" + SAVE_PATH +File.separator+fileName
-					+ "')</script>");
+			out.print("<script>parent.callbackupload('" + savePath+ "')</script>");
 			out.flush();
 			out.close();
 		} catch (Exception e) {
@@ -144,22 +150,23 @@ public class Register {
 			@ModelAttribute("uid") int uid,
 			@ModelAttribute("realName") String realName,
 			@ModelAttribute("nickName") String nickName,
-			@RequestParam("gender") int gender,
+			@ModelAttribute("headPicPath") String headPicPath,
+			@RequestParam("gender") boolean gender,
 			@RequestParam("city") String city,
 			@RequestParam("school") String school,
 			@RequestParam("major") String major,
 			@RequestParam("enrollmentDate") String enrollmentDate,
-			@RequestParam("educationBackground") int educationBackground,
+			@RequestParam("company") String company,
 			@RequestParam(value = "signature", required = false) String signature,
+			@RequestParam("showType") boolean showType,
 			SessionStatus sessionStatus, HttpSession session) {
 		boolean result = registerService.completeUserInfoDetail(uid, gender,
-				city, school, major, enrollmentDate, educationBackground,
-				signature);
+				city, school, major, enrollmentDate, signature, showType,
+				company,headPicPath);
 		UserInfo userInfo = new UserInfo();
 		if (result) {
+			userInfo.setUid(uid);
 			userInfo.setCity(city);
-			userInfo.setEducationBackGround(EducationBackground
-					.getDegreeByLevel(educationBackground));
 			userInfo.setEnrollmentDate(enrollmentDate);
 			userInfo.setGender(gender);
 			userInfo.setMajor(major);
@@ -167,12 +174,14 @@ public class Register {
 			userInfo.setRealName(realName);
 			userInfo.setSchool(school);
 			userInfo.setSignature(signature);
+			userInfo.setShowType(showType);
+			userInfo.setHeadPicPath(headPicPath);
 			// put the user account info to the HttpSession
 			session.setAttribute("userInfo", userInfo);
 			// after complete the detail info clean the scope session
 			sessionStatus.setComplete();
 		}
 		return new ModelAndView("home").addObject("userInfo", userInfo);
-	} 
-	
+	}
+
 }
