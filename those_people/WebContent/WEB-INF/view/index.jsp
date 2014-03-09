@@ -3,6 +3,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">   
     <link rel="stylesheet" type="text/css" href="../css/carousel.css">  
@@ -11,7 +12,14 @@
     <![endif]-> </head>
 <title>首页</title>
 </head>
-<jsp:include page="/WEB-INF/view/header.html"/>
+<c:choose>
+<c:when test="${!empty sessionScope.userInfo}">
+<jsp:include page="/WEB-INF/view/login_header.jsp" />
+</c:when>
+<c:otherwise>
+<jsp:include page="/WEB-INF/view/header.jsp" />
+</c:otherwise>
+</c:choose>
 <body>
 <!--首屏轮播开始-->  
     <div class="carousel slide"  data-ride="carousel" id="carousel-116699">
