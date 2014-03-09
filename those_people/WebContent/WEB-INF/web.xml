@@ -1,26 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-  <display-name>those_people</display-name>
-  
-  <!-- config jsp to support EL -->
-  <jsp-config>  
-  <jsp-property-group>  
-    <url-pattern>*.jsp</url-pattern>  
-    <el-ignored>false</el-ignored>  
-  </jsp-property-group>  
-  </jsp-config>
-  <!-- The listener who startup the springmvc with the web container-->
-  <listener>  
-     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>  
-  </listener>  
-        
-  <!-- The path for load the config file of springmvc -->
-  <context-param>
-      <param-name>contextConfigLocation</param-name>
-      <param-value>/WEB-INF/application-*.xml</param-value>
-  </context-param>
-  
-  <filter>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>those_people</display-name>
+
+	<!-- config jsp to support EL -->
+	<jsp-config>
+		<jsp-property-group>
+			<url-pattern>*.jsp</url-pattern>
+			<el-ignored>false</el-ignored>
+		</jsp-property-group>
+
+	</jsp-config>
+	<jsp-config>
+		<taglib>
+			<taglib-uri>http://java.sun.com/jstl/fmt</taglib-uri>
+			<taglib-location>/WEB-INF/tld/fmt.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://java.sun.com/jstl/core</taglib-uri>
+			<taglib-location>/WEB-INF/tld/c.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://java.sun.com/jstl/sql</taglib-uri>
+			<taglib-location>/WEB-INF/tld/sql.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://java.sun.com/jstl/x</taglib-uri>
+			<taglib-location>/WEB-INF/tld/x.tld</taglib-location>
+		</taglib>
+	</jsp-config>
+	<!-- The listener who startup the springmvc with the web container -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- The path for load the config file of springmvc -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/application-*.xml</param-value>
+	</context-param>
+
+	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
 		<init-param>
@@ -32,39 +54,39 @@
 			<param-value>true</param-value>
 		</init-param>
 	</filter>
-	
+
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
+
 	<!-- The Servlet -->
 	<servlet>
-	<servlet-name>app</servlet-name>
-	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-	<load-on-startup>1</load-on-startup>
+		<servlet-name>app</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
 	</servlet>
-	
+
 	<!-- Mapping for servlet -->
 	<servlet-mapping>
 		<servlet-name>app</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
-	
-	<!--welcome page-->
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-  </welcome-file-list>
-  
-  <!--error page-->
-  <error-page>
-  <error-code>404</error-code>
-  <location>/StaticView/error/404.jsp</location>
-  </error-page>
-  <error-page>
-  
-  <error-code>500</error-code>
-  <location>/StaticView/error/500.jsp</location>
-  </error-page>
+
+	<!--welcome page -->
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!--error page -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/StaticView/error/404.jsp</location>
+	</error-page>
+	<error-page>
+
+		<error-code>500</error-code>
+		<location>/StaticView/error/500.jsp</location>
+	</error-page>
 </web-app>

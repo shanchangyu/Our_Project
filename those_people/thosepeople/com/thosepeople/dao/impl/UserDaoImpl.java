@@ -6,9 +6,12 @@ package com.thosepeople.dao.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import com.thosepeople.dao.UserDao;
+import com.thosepeople.vo.UserInfo;
 
 /**
  * @author chenzhuo
@@ -16,6 +19,11 @@ import com.thosepeople.dao.UserDao;
  */
 public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 
+	private static final BeanPropertyRowMapper<UserInfo> rowMapper = new BeanPropertyRowMapper<UserInfo>(
+			UserInfo.class);
+	static {
+		rowMapper.setPrimitivesDefaultedForNullValue(true);
+	}
 	private static final String REGISTER_USER = " insert into user(realName,nickName,passWord,email) value(?,?,?,?) ";
 	private static final String GET_UID = " select id from user where email=? ";
 
@@ -63,12 +71,26 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 		return this.getJdbcTemplate().update(
 				COMPLETE_USER_DETAIL,
 				new Object[] { uid, gender, city, school, major,
-						enrollmentDate, signature, showType, company,headPicPath});
+						enrollmentDate, signature, showType, company,
+						headPicPath });
 	}
 
 	@Override
 	public void saveHeadPicPath(int uid, String path) {
 		// TODO Auto-generated method stub
 
+	}
+
+	private static final String GET_USER_DETAIL = " select U.realName,U.nickName,UD.uid,UD.gender,UD.city,UD.school, "
+			+ " UD.major,UD.enrollmentDate,UD.signature,UD.showType,UD.company,UD.headPicPath from"
+			+ " user U,user_detail UD where U.email=? and U.id=UD.uid ";
+
+	@Override
+	public UserInfo getDetailUserInfo(String email) {
+        List<UserInfo> result=this.getJdbcTemplate().query(GET_USER_DETAIL,new Object[]{email}, rowMapper);
+        if(!CollectionUtils.isEmpty(result)){
+        	return result.get(0);
+        }
+		return null;
 	}
 }

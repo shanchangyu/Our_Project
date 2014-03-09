@@ -8,8 +8,10 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import com.thosepeople.dao.UserDao;
+import com.thosepeople.exception.BusinessException;
 import com.thosepeople.service.LoginService;
 import com.thosepeople.util.EncryptUtil;
+import com.thosepeople.vo.UserInfo;
 
 /**
  * @author chenzhuo
@@ -23,7 +25,7 @@ public class LoginServiceImpl implements InitializingBean, LoginService {
 	}
 
 	@Override
-	public boolean verrifyTheUserPassWord(String email, String passWord){
+	public boolean verrifyTheUserPassWord(String email, String passWord) {
 		String savedPassWord = userDao.getPassWordByEmail(email);
 		if (StringUtils.isEmpty(savedPassWord)) {
 			return false;
@@ -36,8 +38,19 @@ public class LoginServiceImpl implements InitializingBean, LoginService {
 	}
 
 	@Override
+	public UserInfo getUserDetail(String email) throws BusinessException {
+		if (StringUtils.isEmpty(email)) {
+			return null;
+		}
+		UserInfo userInfo = userDao.getDetailUserInfo(email);
+		if (userInfo == null) {
+			throw new BusinessException(" Get userInfo from db fail!");
+		}
+		return userInfo;
+	}
+
+	@Override
 	public void afterPropertiesSet() throws Exception {
 		Assert.notNull(userDao, "userDao should not null!");
 	}
-
 }

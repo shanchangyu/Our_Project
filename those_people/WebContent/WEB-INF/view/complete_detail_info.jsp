@@ -3,6 +3,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <link rel="stylesheet" type="text/css" href="../css/common_body.css">
@@ -13,7 +14,14 @@
 </head>
 <title>title</title>
 </head>
-<jsp:include page="/WEB-INF/view/header.html" />
+<c:choose>
+<c:when test="${!empty sessionScope.userInfo}">
+<jsp:include page="/WEB-INF/view/login_header.jsp" />
+</c:when>
+<c:otherwise>
+<jsp:include page="/WEB-INF/view/header.jsp" />
+</c:otherwise>
+</c:choose>
 <body id="common_body">
 	<div class="container">
 		<div class="row">
@@ -31,7 +39,7 @@
 										style="padding-top: 50px; padding-bottom: 40px;">${realName}</td>
 								</tr>
 								<tr>
-									<td>头像</td>
+									<td>头像 </td>
 									<td><img id="headerpic" src="../img/head-pic/headpic_default.jpg"
 										alt="..." class="img-thumbnail" style="width:120px;height:120px"></td>
 									<td>

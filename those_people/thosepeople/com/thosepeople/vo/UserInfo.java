@@ -19,6 +19,16 @@ public class UserInfo {
 	private boolean gender;
 	private boolean showType;
 	private String headPicPath;
+	private String company;
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
 	public String getHeadPicPath() {
 		return headPicPath;
 	}

@@ -101,6 +101,7 @@ function verifyLoginPassword(){
 	if(loginEmail.length==0||loginPassword.length==0){
 		return;
 	}
+	$.ajaxSettings.async = false;
 	$.getJSON("/those_people/login/verifyPassword.do", {
 		loginEmail : loginEmail,
 		loginPassword:loginPassword
