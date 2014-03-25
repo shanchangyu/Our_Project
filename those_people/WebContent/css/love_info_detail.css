@@ -1,0 +1,14 @@
+#head-pic-detail {
+	height: 70px;
+	width: 70px;
+}
+
+#commentBtn {
+	float: right;
+	margin-right: 15px;
+	margin-top: 10px;
+}
+
+#collectBtn {
+	margin-left: 250px;
+}
