@@ -15,6 +15,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.util.CollectionUtils;
 
+import com.mysql.jdbc.Statement;
 import com.thosepeople.dao.PostInfoDao;
 import com.thosepeople.model.LoveInfo;
 
@@ -33,18 +34,19 @@ public class PostInfoDaoImpl extends JdbcDaoSupport implements PostInfoDao {
 	public int postLove(int uid, String title, String selfDescribe,
 			String expectOther, String contactWay) {
 		final String post_sql = " insert into love_info(uid,title,selfDescribe,"
-				+ "expectOther,contactWay) value("
+				+ "expectOther,contactWay) value( "
 				+ uid
 				+ ","
 				+ title
 				+ ","
-				+ selfDescribe + "," + expectOther + "," + contactWay + ")";
+				+ selfDescribe + "," + expectOther + "," +"'"+ contactWay + "' );";
+		System.out.println(post_sql);
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		this.getJdbcTemplate().update(new PreparedStatementCreator() {
 			@Override
 			public PreparedStatement createPreparedStatement(Connection con)
 					throws SQLException {
-				PreparedStatement ps = con.prepareStatement(post_sql);
+				PreparedStatement ps = con.prepareStatement(post_sql, Statement.RETURN_GENERATED_KEYS);
 				return ps;
 			}
 		}, keyHolder);

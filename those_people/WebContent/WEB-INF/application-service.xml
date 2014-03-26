@@ -20,4 +20,7 @@
 	<bean id="loginService" class="com.thosepeople.service.impl.LoginServiceImpl">
 	<property name="userDao" ref="userDao"/>
 	</bean>
+	<bean id="postLoveInfoService" class="com.thosepeople.service.impl.PostLoveInfoServiceImpl">
+	<property name="postInfoDao" ref="postInfoDao"/>
+	</bean>
 	</beans>

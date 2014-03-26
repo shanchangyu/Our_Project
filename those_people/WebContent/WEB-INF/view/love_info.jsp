@@ -50,9 +50,13 @@
 						&nbsp
 						<div class="row">
 							<div id="infocommentstatus">
-								<span class="glyphicon glyphicon-eye-open">(29)</span> &nbsp <span
-									class="glyphicon glyphicon-thumbs-up">(32)</span> &nbsp <span
-									class="glyphicon glyphicon-comment">(18)</span>
+								<span class="glyphicon glyphicon-eye-open">(29)</span> 
+								&nbsp 
+								<a onclick="javascript:likeThisInfo(); return false;" href="#"> 
+								<span class="glyphicon glyphicon-thumbs-up">(32)</span>
+								</a> 
+								&nbsp 
+								<span class="glyphicon glyphicon-comment">(18)</span>
 							</div>
 						</div>
 						<hr class="featurette-divider">

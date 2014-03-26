@@ -9,13 +9,13 @@ import org.springframework.util.Assert;
 
 import com.thosepeople.dao.PostInfoDao;
 import com.thosepeople.model.LoveInfo;
-import com.thosepeople.service.PostLoveService;
+import com.thosepeople.service.PostLoveInfoService;
 
 /**
  * @author chenzhuo
  *
  */
-public class PostLoveServiceImpl implements InitializingBean, PostLoveService{
+public class PostLoveInfoServiceImpl implements InitializingBean, PostLoveInfoService{
     PostInfoDao postInfoDao;
     
 	public void setPostInfoDao(PostInfoDao postInfoDao) {

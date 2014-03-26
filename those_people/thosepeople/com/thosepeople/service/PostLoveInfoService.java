@@ -9,6 +9,6 @@ import com.thosepeople.model.LoveInfo;
  * @author chenzhuo
  *
  */
-public interface PostLoveService {
+public interface PostLoveInfoService {
    LoveInfo postLoveInfo(int uid,String title,String selfDescribe,String expectOther,String contactWay);
 }

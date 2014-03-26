@@ -31,21 +31,21 @@
 						<h3>发布交友信息</h3>
 					</div>
 					<div class="panel-body">
-					<form action="/those_people/post_love_info/post.do" method="post">
+					<form action="/those_people/post_love_info/post.do" onsubmit="return checkPostLoveInfo()" method="post">
 						<div class="input-group input-group-lg">
 							<span class="input-group-addon">标题</span> <input type="text"
-							name="infoTitle"	class="form-control" placeholder="必填内容" maxlength="30">
+							name="infoTitle"	 id="infoTitle" class="form-control" placeholder="必填内容" maxlength="30">
 						</div>
 						<br> 
 						<h3>
 							<span class="label label-primary">自我描述（必填内容）</span>
 						</h3>
-						<textarea name="selfDescribe" class="form-control" rows="10"></textarea>
+						<textarea name="selfDescribe" id="selfDescribe" class="form-control" rows="10"></textarea>
 						<br>
 						<h3>
 							<span class="label label-primary">期望对方（必填内容）</span>
 						</h3>
-						<textarea name="expectOther" class="form-control" rows="10"></textarea>
+						<textarea name="expectOther" id="expectOther" class="form-control" rows="10"></textarea>
 						<br>
 						<h3>
 							<span class="label label-danger">无图无真相(可选)</span>
@@ -53,8 +53,11 @@
 						<input type="file"> <br>
 						<div class="input-group input-group-lg">
 							<span class="input-group-addon">联系方式</span> <input type="text"
-							name="contactWay"	class="form-control" placeholder="必填内容">
+							name="contactWay"	id="contactWay" class="form-control" placeholder="必填内容">
 						</div>
+						<br>
+						<div class="alert alert-danger" id="errorInfo"
+							style="display: none"></div>
 						<br>
 						<div class="row">
 							<div class="col-md-1"></div>
@@ -73,4 +76,5 @@
 		</div>
 	</div>
 </body>
+<script type="text/javascript" src="../js/love_info.js"></script>
 </html>

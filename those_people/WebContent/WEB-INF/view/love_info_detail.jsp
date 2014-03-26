@@ -30,7 +30,7 @@
 			<div class="col-md-7">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h4>工作信息详情</h4>
+						<h4>交友信息详情</h4>
 					</div>
 					<div class="panel-body">
 						<div class="row">
@@ -39,7 +39,9 @@
 									id="head-pic-detail"> <label style="padding-left: 15px;">忒各色</label>
 							</div>
 							<div class="col-md-10">
-								<div class="col-md-8">公司：北极光通信 地点：建国门内大街23号</div>
+								<div class="col-md-8">
+								${loveInfo.title}
+								</div>
 								<div class="col-md-4">
 									发布时间：2014-3-20 <br> <br> 浏览人数：100人
 								</div>
@@ -47,15 +49,18 @@
 						</div>
 						<hr class="featurette-divider">
 						<p>自我描述：</p>
-						<p>1)独立负责浏览器重要功能的产品设计，包括撰写需求文档、原型设计文档及组织实施产品开发等；
-							2)推动产品的上线、运营，并根据数据分析、用户反馈，持续优化； 3)负责浏览器功能产品的调研、分析及竞品研究；
-							4)与设计、开发、测试和商务团队紧密合作，推动产品快速发展；</p>
+						<p>
+						${loveInfo.selfDescribe}
+                        </p>
 
 						<br> <br>
 						<p>期望对方：</p>
-						<p>1)独立负责浏览器重要功能的产品设计，包括撰写需求文档、原型设计文档及组织实施产品开发等；
-							2)推动产品的上线、运营，并根据数据分析、用户反馈，持续优化； 3)负责浏览器功能产品的调研、分析及竞品研究；
-							4)与设计、开发、测试和商务团队紧密合作，推动产品快速发展；</p>
+						<p>
+						${loveInfo.expectOther}
+                        </p>
+                        <br><br>
+                        <p>联系方式：</p>
+                        <p>${loveInfo.contactWay}</p>
 						<hr class="featurette-divider">
 						<button type="button" class="btn btn-info" id="collectBtn">收藏</button>
 					</div>
