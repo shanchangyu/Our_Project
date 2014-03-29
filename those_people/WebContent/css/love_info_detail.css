@@ -1,8 +1,11 @@
+#head-pic-comment {
+	height: 30px;
+	width: 30px;
+}
 #head-pic-detail {
 	height: 70px;
 	width: 70px;
 }
-
 #commentBtn {
 	float: right;
 	margin-right: 15px;
@@ -11,4 +14,9 @@
 
 #collectBtn {
 	margin-left: 250px;
+}
+
+#commentUser{
+padding-left: 5px;
+font-size:10px;
 }

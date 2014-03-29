@@ -40,7 +40,7 @@
 							</div>
 							<div class="col-md-10">
 								<div class="col-md-8">
-								${loveInfo.title}
+								<B>${loveInfo.title}</B>
 								</div>
 								<div class="col-md-4">
 									发布时间：2014-3-20 <br> <br> 浏览人数：100人
@@ -77,7 +77,31 @@
 						<div class="row">
 							<div class="col-md-2">
 								<img src="../img/head-pic/head.jpg" class="img-rounded"
-									id="head-pic-detail"> <label style="padding-left: 15px;">忒各色</label>
+									id="head-pic-comment"> <label id="commentUser">忒各色:</label>
+							</div>
+							<div class="col-md-10">哇塞，美女哦！真心不错，男同胞们快来吧！</div>
+						</div>
+						<hr class="featurette-divider">
+						<div class="row">
+							<div class="col-md-2">
+								<img src="../img/head-pic/head.jpg" class="img-rounded"
+									id="head-pic-comment"> <label id="commentUser">忒各色</label>
+							</div>
+							<div class="col-md-10">哇塞，美女哦！真心不错，男同胞们快来吧！</div>
+						</div>
+						<hr class="featurette-divider">
+						<div class="row">
+							<div class="col-md-2">
+								<img src="../img/head-pic/head.jpg" class="img-rounded"
+									id="head-pic-comment"> <label id="commentUser">忒各色</label>
+							</div>
+							<div class="col-md-10">哇塞，美女哦！真心不错，男同胞们快来吧！</div>
+						</div>
+						<hr class="featurette-divider">
+						<div class="row">
+							<div class="col-md-2">
+								<img src="../img/head-pic/head.jpg" class="img-rounded"
+									id="head-pic-comment"> <label id="commentUser">忒各色</label>
 							</div>
 							<div class="col-md-10">哇塞，美女哦！真心不错，男同胞们快来吧！</div>
 						</div>

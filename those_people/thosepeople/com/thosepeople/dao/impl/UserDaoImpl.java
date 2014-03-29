@@ -87,10 +87,19 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 
 	@Override
 	public UserInfo getDetailUserInfo(String email) {
-        List<UserInfo> result=this.getJdbcTemplate().query(GET_USER_DETAIL,new Object[]{email}, rowMapper);
-        if(!CollectionUtils.isEmpty(result)){
-        	return result.get(0);
-        }
+		List<UserInfo> result = this.getJdbcTemplate().query(GET_USER_DETAIL,
+				new Object[] { email }, rowMapper);
+		if (!CollectionUtils.isEmpty(result)) {
+			return result.get(0);
+		}
 		return null;
+	}
+
+	private static final String GET_NICKNAME = " select nickName from user where id=? ";
+
+	@Override
+	public String getUserNickNameById(int id) {
+		return this.getJdbcTemplate().queryForObject(GET_NICKNAME,
+				new Object[] { id }, String.class);
 	}
 }

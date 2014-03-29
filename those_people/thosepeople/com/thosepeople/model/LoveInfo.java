@@ -16,6 +16,15 @@ public class LoveInfo {
   private String selfDescribe;
   private String expectOther;
   private Date postTime;
+  private String contactWay;
+
+	public String getContactWay() {
+	return contactWay;
+}
+
+public void setContactWay(String contactWay) {
+	this.contactWay = contactWay;
+}
 
 	public int getId() {
 		return id;

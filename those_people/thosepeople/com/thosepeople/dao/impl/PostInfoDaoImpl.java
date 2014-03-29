@@ -37,16 +37,23 @@ public class PostInfoDaoImpl extends JdbcDaoSupport implements PostInfoDao {
 				+ "expectOther,contactWay) value( "
 				+ uid
 				+ ","
+				+ "'"
 				+ title
+				+ "'"
 				+ ","
-				+ selfDescribe + "," + expectOther + "," +"'"+ contactWay + "' );";
-		System.out.println(post_sql);
+				+ "'"
+				+ selfDescribe
+				+ "'"
+				+ ","
+				+ "'"
+				+ expectOther + "'" + "," + "'" + contactWay + "' );";
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		this.getJdbcTemplate().update(new PreparedStatementCreator() {
 			@Override
 			public PreparedStatement createPreparedStatement(Connection con)
 					throws SQLException {
-				PreparedStatement ps = con.prepareStatement(post_sql, Statement.RETURN_GENERATED_KEYS);
+				PreparedStatement ps = con.prepareStatement(post_sql,
+						Statement.RETURN_GENERATED_KEYS);
 				return ps;
 			}
 		}, keyHolder);
@@ -78,7 +85,7 @@ public class PostInfoDaoImpl extends JdbcDaoSupport implements PostInfoDao {
 	public LoveInfo getLoveInfoById(int infoId) {
 		List<LoveInfo> result = this.getJdbcTemplate().query(
 				GET_INFO_BY_INFOID, new Object[] { infoId }, rowMapper);
-		if(!CollectionUtils.isEmpty(result)){
+		if (!CollectionUtils.isEmpty(result)) {
 			return result.get(0);
 		}
 		return null;

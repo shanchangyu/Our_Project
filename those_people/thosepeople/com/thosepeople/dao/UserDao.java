@@ -23,4 +23,5 @@ public interface UserDao {
 			String school, String major, Date enrollmentDate, String signature,boolean showType,String company,String headPicPath);
 	void saveHeadPicPath(int uid,String path);
 	UserInfo getDetailUserInfo(String email);
-}
+	String getUserNickNameById(int id);
+	}
