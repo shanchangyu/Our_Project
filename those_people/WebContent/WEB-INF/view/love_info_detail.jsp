@@ -40,6 +40,7 @@
 							</div>
 							<div class="col-md-10">
 								<div class="col-md-8">
+								<input type="hidden" id="infoId" value="${loveInfo.id}">
 								<B>${loveInfo.title}</B>
 								</div>
 								<div class="col-md-4">
@@ -68,9 +69,9 @@
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<span class="glyphicon glyphicon-comment"></span> 说两句 <br>
-						<textarea class="form-control" rows="5"></textarea>
+						<textarea id="commentConten" class="form-control" rows="5"></textarea>
 						<div class="row">
-							<button type="button" class="btn btn-info" id="commentBtn">评论</button>
+							<button type="button" onclick="postCommnet(1,0,${userInfo.uid})" class="btn btn-info" id="commentBtn">评论</button>
 						</div>
 						<h4>评论</h4>
 						<br>
@@ -113,4 +114,5 @@
 		</div>
 	</div>
 </body>
+<script type="text/javascript" src="../js/post_comment.js"></script>
 </html>

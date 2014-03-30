@@ -15,12 +15,16 @@
 	http://www.springframework.org/schema/util
 	http://www.springframework.org/schema/util/spring-util.xsd">
 	<bean id="registerService" class="com.thosepeople.service.impl.RegisterServiceImpl">
-	<property name="userDao" ref="userDao"/>
+		<property name="userDao" ref="userDao" />
 	</bean>
 	<bean id="loginService" class="com.thosepeople.service.impl.LoginServiceImpl">
-	<property name="userDao" ref="userDao"/>
+		<property name="userDao" ref="userDao" />
 	</bean>
 	<bean id="postLoveInfoService" class="com.thosepeople.service.impl.PostLoveInfoServiceImpl">
-	<property name="postInfoDao" ref="postInfoDao"/>
+		<property name="postInfoDao" ref="postInfoDao" />
 	</bean>
-	</beans>
+	<bean id="postCommentService" class="com.thosepeople.service.impl.PostCommentServiceImpl">
+		<property name="postCommentDao" ref="postCommentDao" />
+		<property name="userDao" ref="userDao" />
+	</bean>
+</beans>

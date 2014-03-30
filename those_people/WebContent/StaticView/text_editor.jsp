@@ -3,6 +3,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <link rel="stylesheet" type="text/css" href="../css/common_body.css">
@@ -11,14 +12,18 @@
 <link
 	href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css"
 	rel="stylesheet">
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-<script src="../js/editor/bootstrap-wysiwyg.js"></script>
 <!-[if IE]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]->
 </head>
-<jsp:include page="/WEB-INF/view/header.html" />
+<c:choose>
+	<c:when test="${!empty sessionScope.userInfo}">
+		<jsp:include page="/WEB-INF/view/login_header.jsp" />
+	</c:when>
+	<c:otherwise>
+		<jsp:include page="/WEB-INF/view/header.jsp" />
+	</c:otherwise>
+</c:choose>
 <body>
 <body id="common_body">
 	<div class="container">
@@ -61,10 +66,18 @@
 							<a class="btn btn-default" data-edit="link" title="超链接"> <i
 								class="icon-link"></i>
 							</a>
+							<div class="dropdown-menu input-append">
+								<input class="span2" placeholder="URL" type="text"
+									data-edit="createLink" />
+								<button class="btn" type="button">Add</button>
+							</div>
 						</div>
 						<div class="btn-group">
 							<a class="btn btn-default" title="图片（可直接拖拽）" id="pictureBtn"><i
-								class="icon-picture"></i></a>
+								class="icon-picture"></i> </a> 
+								<input type="file"
+								data-role="magic-overlay" data-target="#pictureBtn"
+								data-edit="insertImage"/>
 						</div>
 						<div class="btn-group">
 							<a class="btn btn-default" data-edit="undo" title="撤销"><i
@@ -77,13 +90,11 @@
 					<br>
 					<div class="row">
 						<div class="col-md-1">
-						<button type="button" class="btn btn-default btn-lg">取消</button>
+							<button type="button" class="btn btn-default btn-lg">取消</button>
 						</div>
-						<div class="col-md-9">
-						
-						</div>
+						<div class="col-md-9"></div>
 						<div class="col-md-1">
-						<button type="button" class="btn btn-success btn-lg">发布</button>
+							<button type="button" class="btn btn-success btn-lg">发布</button>
 						</div>
 					</div>
 				</div>
@@ -214,4 +225,6 @@
 	</script>
 	<div id="fb-root"></div>
 </body>
+<script src="../js/editor/bootstrap-wysiwyg.js"></script>
+<script src="../js/editor/jquery.hotkeys.js"></script>
 </html>
