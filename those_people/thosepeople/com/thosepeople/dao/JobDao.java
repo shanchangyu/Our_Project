@@ -17,6 +17,5 @@ import com.thosepeople.vo.JobInfoProfile;
 public interface JobDao {
 
 	boolean postJobInfo(final JobInfo job);
-	List<JobInfoProfile> loadJobInfo(String key);
 	JobDetailInfo loadJobDetailInfo(int jid);
 }

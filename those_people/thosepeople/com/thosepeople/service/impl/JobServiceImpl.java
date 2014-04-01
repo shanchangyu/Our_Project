@@ -39,17 +39,6 @@ public class JobServiceImpl implements InitializingBean,JobService {
 		return jobDao.loadJobDetailInfo(jid);
 	}
 
-	
-	@Override
-	public List<JobInfoProfile> loadJobInfo(String key) {
-
-		//TODO
-		List<JobInfoProfile> list = new ArrayList<JobInfoProfile>(10);
-
-		list=jobDao.loadJobInfo(null);
-
-		return list;
-	}
 
 	@Override
 	public void afterPropertiesSet() throws Exception {

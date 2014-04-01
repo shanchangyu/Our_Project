@@ -28,8 +28,12 @@
 		<property name="userDao" ref="userDao" />
 	</bean>
 	
-		<bean id="jobService" class="com.thosepeople.service.impl.JobServiceImpl">
-	<property name="jobDao" ref="jobDao"/>
+	<bean id="jobService" class="com.thosepeople.service.impl.JobServiceImpl">
+		<property name="jobDao" ref="jobDao"/>
+	</bean>
+	
+	<bean id="pageService" class="com.thosepeople.service.impl.PageServiceImpl">
+		<property name="pagedao" ref="pagedao"/>
 	</bean>
 	
 </beans>

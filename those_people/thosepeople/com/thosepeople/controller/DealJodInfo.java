@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.thosepeople.exception.SystemException;
 import com.thosepeople.po.JobInfo;
 import com.thosepeople.service.JobService;
+import com.thosepeople.service.PageService;
 import com.thosepeople.vo.JobDetailInfo;
 import com.thosepeople.vo.JobInfoProfile;
 import com.thosepeople.vo.UserInfo;
@@ -35,7 +36,9 @@ public class DealJodInfo {
 	@Autowired
 	@Qualifier("jobService")
 	private JobService jobService;
-
+	@Autowired
+	@Qualifier("pageService")
+	private PageService pageService;
 
 	public void setJobService(JobService jobService) {
 		this.jobService = jobService;
@@ -122,8 +125,8 @@ public class DealJodInfo {
 	@RequestMapping("/jobInfo")
 	public ModelAndView loadJobInfo()
 	{
-
-		List<JobInfoProfile> list=jobService.loadJobInfo(null);
+		@SuppressWarnings("unchecked")
+		List<JobInfoProfile> list=(List<JobInfoProfile>)pageService.getMoreInfo(null, 1, 10,"job");
 
 		ModelMap modelMap=new ModelMap();
 		modelMap.put("jobInfo", list);

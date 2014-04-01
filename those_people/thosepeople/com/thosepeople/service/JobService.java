@@ -9,6 +9,5 @@ import com.thosepeople.vo.JobInfoProfile;
 public interface JobService {
 
 	boolean postJobInfo(JobInfo job);
-	List<JobInfoProfile> loadJobInfo(String key);
 	JobDetailInfo loadJobDetail(int jid);
 }
