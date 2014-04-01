@@ -23,4 +23,11 @@
 	<bean id="postCommentDao" class="com.thosepeople.dao.impl.PostCommentDaoImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+
+
+	<bean id="jobDao" class="com.thosepeople.dao.impl.JobDaoImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+
 </beans>
