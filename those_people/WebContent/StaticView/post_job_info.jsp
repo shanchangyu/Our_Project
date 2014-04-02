@@ -79,10 +79,10 @@
 								style="display: none"></div>
 
 							<select class="form-control" name="jobType" id="workType" >
-								<option>工作性质</option>
-								<option>实习生</option>
-								<option>应届生</option>
-								<option>社会招聘</option>
+								<option value="0">工作性质</option>
+								<option value="1">实习生</option>
+								<option value="2">应届生</option>
+								<option value="3">社会招聘</option>
 							</select> <br>
 
 							<div class="input-group input-group-lg">

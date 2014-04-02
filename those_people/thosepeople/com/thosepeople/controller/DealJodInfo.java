@@ -58,7 +58,7 @@ public class DealJodInfo {
 			@RequestParam("workplace")String workPlace,
 			@RequestParam("jobContent")String jobContent,
 			@RequestParam("jobRequire")String jobRequire,
-			@RequestParam("jobType")String jobType,
+			@RequestParam("jobType")int jobType,
 			@RequestParam("contactEmail")String email,
 			@RequestParam("contactTel")String tel,
 			@RequestParam("uid")int uid,
@@ -71,7 +71,7 @@ public class DealJodInfo {
 				||workPlace==null||workPlace==""
 				||jobContent==null||jobContent==""
 				||jobRequire==null||jobRequire==""
-				||jobType==null||jobType==""
+				||jobType==0
 				||email==null||email==""
 				)
 		{

@@ -1,7 +1,7 @@
 package com.thosepeople.vo;
 
 public class JobDetailInfo {
-	
+
 	private int id;
 	private String nickName;
 	private String headPicPath;
@@ -45,7 +45,19 @@ public class JobDetailInfo {
 		this.workPlace = workPlace;
 	}
 	public String getJobtype() {
-		return jobtype;
+
+		switch(jobtype)
+		{
+		case "1":
+			return "实习生";
+		case "2":
+			return "校园招聘";
+		case "3":
+			return "社会招聘";
+		default:
+			return "";
+
+		}
 	}
 	public void setJobtype(String jobtype) {
 		this.jobtype = jobtype;
@@ -86,7 +98,7 @@ public class JobDetailInfo {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	
-	
+
+
 
 }

@@ -1,12 +1,14 @@
 package com.thosepeople.po;
 
+import java.util.BitSet;
+
 public class JobInfo {
 
 	private int id;
 	private int uid;
 	private String title;
 	private String workplace;
-	private String jobtype;
+	private int jobtype;
 	private String postdate;
 	
 	private String company;
@@ -18,7 +20,7 @@ public class JobInfo {
 	
 
 
-	public JobInfo(int uid, String title, String workplace, String jobtype,
+	public JobInfo(int uid, String title, String workplace, int jobtype,
 			String postdate, String company, String content, String require,
 			String email, String tel) {
 		super();
@@ -57,10 +59,10 @@ public class JobInfo {
 	public void setWorkplace(String workplace) {
 		this.workplace = workplace;
 	}
-	public String getJobtype() {
+	public int getJobtype() {
 		return jobtype;
 	}
-	public void setJobtype(String jobtype) {
+	public void setJobtype(int jobtype) {
 		this.jobtype = jobtype;
 	}
 	public String getPostdate() {

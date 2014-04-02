@@ -33,7 +33,18 @@ public class JobInfoProfile {
 		this.headPicPath = headPicPath;
 	}
 	public String getJobtype() {
-		return jobtype;
+		switch(jobtype)
+		{
+		case "1":
+			return "实习生";
+		case "2":
+			return "校园招聘";
+		case "3":
+			return "社会招聘";
+		default:
+			return "";
+
+		}
 	}
 	public void setJobtype(String jobtype) {
 		this.jobtype = jobtype;
