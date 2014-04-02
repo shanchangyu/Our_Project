@@ -1,15 +1,11 @@
 package com.thosepeople.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.InitializingBean;
 
 import com.thosepeople.dao.JobDao;
 import com.thosepeople.po.JobInfo;
 import com.thosepeople.service.JobService;
 import com.thosepeople.vo.JobDetailInfo;
-import com.thosepeople.vo.JobInfoProfile;
 
 
 /**

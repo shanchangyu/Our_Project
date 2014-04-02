@@ -28,15 +28,14 @@
 <body id="common_body">
 
 	<input type="hidden" id="uid" value="${sessionScope.userInfo.uid}" />
+	<input type="hidden" id="currentPage" value="${currentPage}" />
 	<div class="container">
 		<div class="row">
 			<div class="col-md-1"></div>
 			<div class="col-md-7">
 				<div class="panel panel-default">
-					<div class="panel-body">
-
+					<div id="infoBody" class="panel-body">
 						<c:forEach items="${jobInfo}" var="res">
-
 							<div class="row">
 								<div class="col-md-2">
 									<img src="${res.headPicPath}" class="img-rounded"
@@ -61,8 +60,9 @@
 						</c:forEach>
 					</div>
 
+					<div id="noMoreInfo"></div>
 					<div class="panel-footer" style="text-align: center">
-						<a href="javascript:void(0):loaddmore()">更多 </a>
+						<a href="javascript:void(0)" onclick = "showMore()">更多 </a>
 					</div>
 
 				</div>
@@ -75,8 +75,9 @@
 </body>
 
 <script type="text/javascript" src="../js/job.js"></script>
+
 <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+
 <script
 	src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
-	
 </html>

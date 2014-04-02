@@ -8,7 +8,6 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import com.thosepeople.dao.JobDao;
-import com.thosepeople.dao.PageDao;
 import com.thosepeople.po.JobInfo;
 import com.thosepeople.vo.JobDetailInfo;
 import com.thosepeople.vo.JobInfoProfile;
