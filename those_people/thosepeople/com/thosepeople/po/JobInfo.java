@@ -1,6 +1,5 @@
 package com.thosepeople.po;
 
-import java.util.BitSet;
 
 public class JobInfo {
 
