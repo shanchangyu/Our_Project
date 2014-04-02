@@ -28,7 +28,7 @@
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="#">鹊桥</a></li>
 					<li><a href="#about">房屋</a></li>
-					<li><a href="#contact">工作</a></li>
+					<li><a href="/those_people/job/jobInfo.do">工作</a></li>
 					<li><a href="#activity">活动</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
