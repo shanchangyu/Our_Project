@@ -5,6 +5,7 @@ import java.util.List;
 import com.thosepeople.dao.PageDao;
 import com.thosepeople.service.PageService;
 
+
 public class PageServiceImpl implements PageService{
 
 	private PageDao pagedao;
@@ -13,6 +14,7 @@ public class PageServiceImpl implements PageService{
 		this.pagedao = pagedao;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public List getMoreInfo(String keyword,int pageNum,int pageSize,String tableName) {
 		

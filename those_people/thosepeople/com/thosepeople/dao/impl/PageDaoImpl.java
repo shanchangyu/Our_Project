@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import com.thosepeople.dao.PageDao;
 import com.thosepeople.vo.JobInfoProfile;
 
+@SuppressWarnings("rawtypes")
 public class PageDaoImpl extends JdbcDaoSupport implements PageDao{
 
 	private static final BeanPropertyRowMapper<JobInfoProfile> rowMapper = new BeanPropertyRowMapper<JobInfoProfile>(JobInfoProfile.class);
