@@ -40,7 +40,7 @@
 							</div>
 							<div class="col-md-10">
 								<div class="col-md-8">
-								<input type="hidden" id="jobInfoId" value="${jobDetailInfo.id}">
+								<input type="hidden" id="infoId" value="${jobDetailInfo.id}">
 								<B>${loveInfo.title}</B>
 								</div>
 								<div class="col-md-4">
@@ -93,45 +93,16 @@
 					</div>
 				</div>
 				<div class="panel panel-default">
-					<div class="panel-body">
+					<div id="commentBody"  class="panel-body">
 						<span class="glyphicon glyphicon-comment"></span> 说两句 <br>
 						<textarea id="commentConten" class="form-control" rows="5"></textarea>
 						<div class="row">
-							<button type="button" onclick="postCommnet(1,0,${userInfo.uid})" class="btn btn-info" id="commentBtn">评论</button>
+							<button type="button" onclick="postCommnet(2,0,${userInfo.uid})" class="btn btn-info" id="commentBtn">评论</button>
 						</div>
 						<h4>评论</h4>
 						<br>
-						<div class="row">
-							<div class="col-md-2">
-								<img src="../img/head-pic/head.jpg" class="img-rounded"
-									id="head-pic-comment"> <label id="commentUser">忒各色:</label>
-							</div>
-							<div class="col-md-10">哇塞，美女哦！真心不错，男同胞们快来吧！</div>
-						</div>
-						<hr class="featurette-divider">
-						<div class="row">
-							<div class="col-md-2">
-								<img src="../img/head-pic/head.jpg" class="img-rounded"
-									id="head-pic-comment"> <label id="commentUser">忒各色</label>
-							</div>
-							<div class="col-md-10">哇塞，美女哦！真心不错，男同胞们快来吧！</div>
-						</div>
-						<hr class="featurette-divider">
-						<div class="row">
-							<div class="col-md-2">
-								<img src="../img/head-pic/head.jpg" class="img-rounded"
-									id="head-pic-comment"> <label id="commentUser">忒各色</label>
-							</div>
-							<div class="col-md-10">哇塞，美女哦！真心不错，男同胞们快来吧！</div>
-						</div>
-						<hr class="featurette-divider">
-						<div class="row">
-							<div class="col-md-2">
-								<img src="../img/head-pic/head.jpg" class="img-rounded"
-									id="head-pic-comment"> <label id="commentUser">忒各色</label>
-							</div>
-							<div class="col-md-10">哇塞，美女哦！真心不错，男同胞们快来吧！</div>
-						</div>
+						
+
 					</div>
 				</div>
 				<div class="col-md-2"></div>
