@@ -24,7 +24,7 @@ function verifyTelFormat(tel)
 }
 
 
-function checkLogin()
+/*function checkLogin()
 {
 	var uid = document.getElementById("uid").value;
 	if(uid.length==0)
@@ -34,7 +34,7 @@ function checkLogin()
 			 window.location.href = url;
 			 return;
 	}
-}
+}*/
 
 
 function checkJobInfo()

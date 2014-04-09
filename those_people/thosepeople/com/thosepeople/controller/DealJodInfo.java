@@ -109,11 +109,11 @@ public class DealJodInfo {
 			HttpSession session)
 	{
 
-		int login_id =  ((UserInfo)session.getAttribute("userInfo")).getUid();
-		if(uid!=login_id)
-		{
-			throw new SystemException("post jobInfo fail,uid is illegal!");
-		}
+//		int login_id =  ((UserInfo)session.getAttribute("userInfo")).getUid();
+//		if(uid!=login_id)
+//		{
+//			throw new SystemException("post jobInfo fail,uid is illegal!");
+//		}
 
 		JobDetailInfo detail=jobService.loadJobDetail(jid);
 

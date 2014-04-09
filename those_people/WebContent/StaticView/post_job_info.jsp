@@ -14,7 +14,7 @@
 </head>
 <jsp:include page="/WEB-INF/view/header.html" />
  
-<body id="common_body" onload="checkLogin()">
+<body id="common_body" >
 	<div class="container">
 		<div class="row">
 			<div class="col-md-1"></div>

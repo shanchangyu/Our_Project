@@ -37,18 +37,27 @@ public class InfoComment {
 			@RequestParam("infoType") int infoType,
 			@RequestParam("commentType") int commentType, HttpSession session)
 			throws BusinessException {
+		
+		if(beRepliedUserId==null)
+		{
+			beRepliedUserId=1;
+		}
+		
 		boolean result = postCommentService.postComment(infoId, commentUserId,
 				beRepliedUserId, commentContent, infoType);
 		if (result) {
 			Map<String, String> response = new HashMap<String, String>(4);
 			response.put("result", "success");
-			if (commentType == 1) {// 0 comment the info ,1 reply other's
+			if (commentType == 1) 
+			{// 0 comment the info ,1 reply other's
 									// comment
 				String beRepliedUserName = postCommentService
 						.getTheNickNameWhoBeReplied(beRepliedUserId);
 				response.put("beRepliedUserName", beRepliedUserName);
 				response.put("beRepliedUserId", String.valueOf(beRepliedUserId));
 			}
+			
+			
 			response.put("commentContent", commentContent);
 			return response;
 		} else {

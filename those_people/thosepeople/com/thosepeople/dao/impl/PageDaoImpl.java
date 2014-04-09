@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import com.thosepeople.dao.PageDao;
 import com.thosepeople.vo.JobInfoProfile;
 
+@SuppressWarnings("rawtypes")
 public class PageDaoImpl extends JdbcDaoSupport implements PageDao{
 
 	private static final BeanPropertyRowMapper<JobInfoProfile> rowMapper = new BeanPropertyRowMapper<JobInfoProfile>(JobInfoProfile.class);
@@ -16,7 +17,7 @@ public class PageDaoImpl extends JdbcDaoSupport implements PageDao{
 	
 	
 	
-	private static final String LOAD_JOB_INFO = "select j.id, j.title,j.workplace,j.jobtype,j.postdate,u.nickName,u_d.headPicPath from job j,user u,user_detail u_d where j.uid=u.id and j.uid=u_d.uid "
+	private static final String LOAD_JOB_INFO = "select j.id, j.title,j.workplace,j.jobtype,j.postdate,u.nickName,u_d.headPicPath from job_info j,user u,user_detail u_d where j.uid=u.id and j.uid=u_d.uid "
 			+ "order by j.postdate desc limit ?,?";
 	
 	private static final String LOAD_LOVE_INFO ="";
