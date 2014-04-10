@@ -62,7 +62,7 @@
 
 					<div id="noMoreInfo"></div>
 					<div class="panel-footer" style="text-align: center">
-						<a href="javascript:void(0)" onclick = "showMore()">更多 </a>
+						<a href="javascript:void(0)" onclick = "showMore(2)">更多 </a>
 					</div>
 
 				</div>

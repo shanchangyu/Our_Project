@@ -2,6 +2,9 @@ package com.thosepeople.service;
 
 import java.util.List;
 
+import com.thosepeople.exception.BusinessException;
+import com.thosepeople.vo.InfoProfile;
+
 
 /**
  * 
@@ -11,6 +14,5 @@ import java.util.List;
 
 public interface PageService {
 	
-	@SuppressWarnings("rawtypes")
-	List getMoreInfo(String keyword,int pageNum,int pageSize,String tableName);
+	List<InfoProfile> getMoreInfo(String keyword,int pageNum,int infoType) throws BusinessException;
 }
