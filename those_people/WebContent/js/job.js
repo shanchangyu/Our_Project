@@ -24,19 +24,6 @@ function verifyTelFormat(tel)
 }
 
 
-/*function checkLogin()
-{
-	var uid = document.getElementById("uid").value;
-	if(uid.length==0)
-	{
-			alert("请您先登录！");
-			var url = "/those_people/index/home.do?uid=";
-			 window.location.href = url;
-			 return;
-	}
-}*/
-
-
 function checkJobInfo()
 {
 		

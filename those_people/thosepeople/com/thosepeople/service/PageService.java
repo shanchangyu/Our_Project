@@ -12,5 +12,5 @@ import java.util.List;
 public interface PageService {
 	
 	@SuppressWarnings("rawtypes")
-	List getMoreInfo(String keyword,int pageNum,int pageSize,String tableName);
+	List getMoreInfo(String keyword,int pageNum,String tableName);
 }

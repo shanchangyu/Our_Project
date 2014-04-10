@@ -59,8 +59,6 @@
 							<hr class="featurette-divider">
 						</c:forEach>
 					</div>
-
-					<div id="noMoreInfo"></div>
 					<div class="panel-footer" style="text-align: center">
 						<a href="javascript:void(0)" onclick = "showMore()">更多 </a>
 					</div>

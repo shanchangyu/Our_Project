@@ -12,11 +12,9 @@ import com.thosepeople.vo.JobInfoProfile;
 @SuppressWarnings("rawtypes")
 public class PageDaoImpl extends JdbcDaoSupport implements PageDao{
 
-	private static final BeanPropertyRowMapper<JobInfoProfile> rowMapper = new BeanPropertyRowMapper<JobInfoProfile>(JobInfoProfile.class);
+	private static final BeanPropertyRowMapper<JobInfoProfile> jobRowMapper = new BeanPropertyRowMapper<JobInfoProfile>(JobInfoProfile.class);
 	
-	
-	
-	
+
 	private static final String LOAD_JOB_INFO = "select j.id, j.title,j.workplace,j.jobtype,j.postdate,u.nickName,u_d.headPicPath from job_info j,user u,user_detail u_d where j.uid=u.id and j.uid=u_d.uid "
 			+ "order by j.postdate desc limit ?,?";
 	
@@ -27,7 +25,6 @@ public class PageDaoImpl extends JdbcDaoSupport implements PageDao{
 
 	@Override
 	public List getMoreInfo(String keyword, int pageNum, int pageSize,String tableName) {
-
 
 		switch(tableName)
 		{
@@ -52,7 +49,7 @@ public class PageDaoImpl extends JdbcDaoSupport implements PageDao{
 
 		if(keyword==null)
 		{
-			list = this.getJdbcTemplate().query(LOAD_JOB_INFO,new Object[]{(pageNum-1)*pageSize,pageSize},rowMapper);
+			list = this.getJdbcTemplate().query(LOAD_JOB_INFO,new Object[]{(pageNum-1)*pageSize,pageSize},jobRowMapper);
 		}
 		return list;
 	}

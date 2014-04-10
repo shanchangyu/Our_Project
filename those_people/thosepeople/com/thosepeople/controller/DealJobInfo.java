@@ -35,7 +35,7 @@ import com.thosepeople.vo.UserInfo;
 
 @Controller
 @RequestMapping("/job")
-public class DealJodInfo {
+public class DealJobInfo {
 	@Autowired
 	@Qualifier("jobService")
 	private JobService jobService;
@@ -43,8 +43,6 @@ public class DealJodInfo {
 	@Qualifier("pageService")
 	private PageService pageService;
 
-
-	private  final int pageSize = 10;
 
 	public void setJobService(JobService jobService) {
 		this.jobService = jobService;
@@ -109,12 +107,6 @@ public class DealJodInfo {
 			HttpSession session)
 	{
 
-//		int login_id =  ((UserInfo)session.getAttribute("userInfo")).getUid();
-//		if(uid!=login_id)
-//		{
-//			throw new SystemException("post jobInfo fail,uid is illegal!");
-//		}
-
 		JobDetailInfo detail=jobService.loadJobDetail(jid);
 
 
@@ -134,39 +126,34 @@ public class DealJodInfo {
 	@SuppressWarnings("unchecked")
 	public ModelAndView loadJobInfo()
 	{
-
-		List<JobInfoProfile> list=(List<JobInfoProfile>)pageService.getMoreInfo(null, 1,pageSize,"job");
-
+		List<JobInfoProfile> list=(List<JobInfoProfile>)pageService.getMoreInfo(null, 1,"job");
 		ModelMap	modelMap = new ModelMap();
 		modelMap.put("jobInfo", list);
-		modelMap.put("currentPage", 1);
-
 		return new ModelAndView("job_info",modelMap); 
 	}
 
 	@RequestMapping("/moreJobInfo")
 	@SuppressWarnings("unchecked")
 	@ResponseBody
-	public Map<String, Object> loadMoreJobInfo(@RequestParam("currentPage") Integer currentPage)
+	public Map<String, Object> loadMoreJobInfo(@RequestParam(value ="currentPage", required = false) Integer currentPage)
 	{
 		int pageNum;
-		if(currentPage==null){
-			pageNum=1;
-		}
-		else
+		if(currentPage==null)
 		{
-			pageNum = currentPage+1;
+			currentPage=1;
 		}
 
-		List<JobInfoProfile> list=(List<JobInfoProfile>)pageService.getMoreInfo(null, pageNum,pageSize,"job");
+		pageNum = currentPage+1;
+
+		List<JobInfoProfile> list=(List<JobInfoProfile>)pageService.getMoreInfo(null, pageNum,"job");
 
 		if(list==null ||list.size()==0)
 		{
-			
+
 			Map<String, Object> modelMap = new HashMap<String, Object>(1);  
 			modelMap.put("success", "false");  	
 			return modelMap;
-			
+
 		}
 		else
 		{
