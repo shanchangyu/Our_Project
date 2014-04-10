@@ -7,12 +7,14 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import com.thosepeople.dao.PageDao;
+import com.thosepeople.vo.HouseInfo;
 import com.thosepeople.vo.JobInfoProfile;
 
 @SuppressWarnings("rawtypes")
 public class PageDaoImpl extends JdbcDaoSupport implements PageDao{
 
 	private static final BeanPropertyRowMapper<JobInfoProfile> rowMapper = new BeanPropertyRowMapper<JobInfoProfile>(JobInfoProfile.class);
+	private static final BeanPropertyRowMapper<HouseInfo> HouseInfoRowMapper = new BeanPropertyRowMapper<HouseInfo>(HouseInfo.class);
 	
 	
 	
@@ -21,7 +23,8 @@ public class PageDaoImpl extends JdbcDaoSupport implements PageDao{
 			+ "order by j.postdate desc limit ?,?";
 	
 	private static final String LOAD_LOVE_INFO ="";
-	private static final String LOAD_HOUSE_INFO ="";
+	private static final String LOAD_HOUSE_INFO =" select h.id,h.title,h.infoType,h.houseType,h.postTime,u.nickName,u_d.headPicPath from house_info h, user u,user_detail u_d where h.uid=u.id and h.uid=u_d.uid "
+			+ "order by h.postTime desc limit ?,?";
 	private static final String LOAD_ACTIVITY_INFO ="";
 	
 
@@ -67,8 +70,13 @@ public class PageDaoImpl extends JdbcDaoSupport implements PageDao{
 	
 	private List getMoreHouseInfo(String keyword ,int pageNum,int pageSize)
 	{
+		List<HouseInfo> list = new ArrayList<HouseInfo>(pageSize);
 
-		return null;
+		if(keyword==null)
+		{
+			list = this.getJdbcTemplate().query(LOAD_HOUSE_INFO,new Object[]{(pageNum-1)*pageSize,pageSize},HouseInfoRowMapper);
+		}
+		return list;
 	}
 	
 	private List getMoreActivityInfo(String keyword ,int pageNum,int pageSize)

@@ -200,7 +200,7 @@
 									<span class="glyphicon glyphicon-bullhorn"></span> 发布信息
 								</h3> <br>
 								<h4>
-									<a href="../StaticView/text_editor.jsp">房屋信息</a>
+									<a href="../StaticView/post_house_info.jsp">房屋信息</a>
 								</h4> <br>
 								<h4>
 									<a href="../StaticView/post_love_info.jsp">交友信息</a>
