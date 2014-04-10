@@ -37,10 +37,10 @@ public class InfoComment {
 			@RequestParam("infoType") int infoType,
 			@RequestParam("commentType") int commentType, HttpSession session)
 			throws BusinessException {
-		
+		System.out.println("fffffff");
 		if(beRepliedUserId==null)
 		{
-			beRepliedUserId=1;
+			beRepliedUserId=-1;
 		}
 		
 		boolean result = postCommentService.postComment(infoId, commentUserId,
@@ -56,8 +56,6 @@ public class InfoComment {
 				response.put("beRepliedUserName", beRepliedUserName);
 				response.put("beRepliedUserId", String.valueOf(beRepliedUserId));
 			}
-			
-			
 			response.put("commentContent", commentContent);
 			return response;
 		} else {

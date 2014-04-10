@@ -35,7 +35,7 @@ public class PostCommentServiceImpl implements PostCommentService {
 	@Override
 	public boolean postComment(int infoId, int commentUserId,
 			int beRepliedUserId, String commentContent, int infoType) throws BusinessException {
-		if (StringUtils.isEmpty(commentContent) || commentUserId <= 0|| beRepliedUserId <= 0) {
+		if (StringUtils.isEmpty(commentContent) || commentUserId <= 0) {
 			return false;
 		}
 		if (infoType < 0 || infoType > 4) {

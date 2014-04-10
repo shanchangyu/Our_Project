@@ -67,9 +67,9 @@
 					</div>
 				</div>
 				<div class="panel panel-default">
-					<div class="panel-body">
+					<div id="commentOfInfo" class="panel-body">
 						<span class="glyphicon glyphicon-comment"></span> 说两句 <br>
-						<textarea id="commentConten" class="form-control" rows="5"></textarea>
+						<textarea id="commentContent" class="form-control" rows="5"></textarea>
 						<div class="row">
 							<button type="button" onclick="postCommnet(1,0,${userInfo.uid})" class="btn btn-info" id="commentBtn">评论</button>
 						</div>
