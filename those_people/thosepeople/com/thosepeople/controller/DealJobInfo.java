@@ -1,5 +1,6 @@
 package com.thosepeople.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -13,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.thosepeople.constant.InfoType;
 import com.thosepeople.exception.BusinessException;
 import com.thosepeople.exception.SystemException;
 import com.thosepeople.po.JobInfo;
 import com.thosepeople.service.JobService;
 import com.thosepeople.service.PageService;
+import com.thosepeople.service.VisitCountService;
 import com.thosepeople.vo.InfoProfile;
 import com.thosepeople.vo.JobDetailInfo;
 import com.thosepeople.vo.UserInfo;
@@ -39,6 +42,9 @@ public class DealJobInfo {
 	@Qualifier("pageService")
 	private PageService pageService;
 
+	@Autowired
+	@Qualifier("visitCountService")
+	private VisitCountService visitCountService;
 
 	public void setJobService(JobService jobService) {
 		this.jobService = jobService;
@@ -78,7 +84,7 @@ public class DealJobInfo {
 			throw new SystemException("post jobInfo fail,uid is illegal!");
 		}
 
-		JobInfo job = new JobInfo(uid,title,workPlace,jobType,company,jobContent,jobRequire,email,tel);
+		JobInfo job = new JobInfo(uid,title,workPlace,jobType,new Date(),company,jobContent,jobRequire,email,tel);
 
 		boolean flag = jobService.postJobInfo(job);
 
@@ -92,12 +98,13 @@ public class DealJobInfo {
 
 	@RequestMapping("/showJobDetail")
 	public ModelAndView showJobDetail(
-			@RequestParam("uid")int uid,
 			@RequestParam("j_id")int jid,
 			HttpSession session)
 	{
+		//访问次数加1
+		visitCountService.addVisitCount(jid, InfoType.JOB_INFO);
+		
 		JobDetailInfo detail=jobService.loadJobDetail(jid);
-
 
 		if(detail!=null)
 		{

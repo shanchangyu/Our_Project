@@ -44,7 +44,7 @@
 								<B>${loveInfo.title}</B>
 								</div>
 								<div class="col-md-4">
-									发布时间： ${jobDetailInfo.postDate} <br> <br> 浏览人数：100人
+									发布时间： ${jobDetailInfo.postDate} <br> <br> 浏览次数：${jobDetailInfo.visitCnt}
 								</div>
 							</div>
 						</div>

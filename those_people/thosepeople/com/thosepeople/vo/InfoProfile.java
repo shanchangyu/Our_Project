@@ -7,7 +7,7 @@ public class InfoProfile {
 	private String nickName;
 	private String headPicPath;
 	private String title;
-	private String postDate;  //发布日期
+	private String postdate;  //发布日期
 	private int visit_count;   //访问次数
 	private String content;   //主区域显示的内容
 	
@@ -58,11 +58,13 @@ public class InfoProfile {
 	}
 
 	public String getPostDate() {
-		return postDate;
+
+		//return yyyy-mm-dd hh:MM
+		return postdate.substring(0,16);
 	}
 
 	public void setPostDate(String postDate) {
-		this.postDate = postDate;
+		this.postdate = postDate;
 	}
 
 	public int getVisit_count() {

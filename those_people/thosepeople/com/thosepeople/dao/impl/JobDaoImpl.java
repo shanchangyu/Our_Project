@@ -29,8 +29,8 @@ public class JobDaoImpl extends JdbcDaoSupport implements JobDao{
 		detailRowMapper.setPrimitivesDefaultedForNullValue(true);
 	}
 
-	private static final String INSERT_JOB_INFO="insert into job_info(uid,title,workplace,jobtype,company,content,requires,email,tel) "
-			+ "value(?,?,?,?,?,?,?,?,?)";
+	private static final String INSERT_JOB_INFO="insert into job_info(uid,title,workplace,jobtype,postdate,company,content,requires,email,tel) "
+			+ "value(?,?,?,?,?,?,?,?,?,?)";
 
 
 	@Override
@@ -46,7 +46,7 @@ public class JobDaoImpl extends JdbcDaoSupport implements JobDao{
 		return false;
 	}
 
-	private static final String LOAD_JOB_INFO = "select j.id, j.title,j.workplace,j.jobtype,j.postdate,u.nickName,u_d.headPicPath from job_info j,user u,user_detail u_d where j.uid=u.id and j.uid=u_d.uid "
+	private static final String LOAD_JOB_INFO = "select j.id, j.title,j.workplace,j.jobtype,j.postdate,j.visitCnt as visit_count,u.nickName,u_d.headPicPath from job_info j,user u,user_detail u_d where j.uid=u.id and j.uid=u_d.uid "
 			+ "order by j.postdate desc limit 0,10";
 
 	

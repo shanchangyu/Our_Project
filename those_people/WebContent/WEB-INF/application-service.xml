@@ -36,4 +36,8 @@
 		<property name="pagedao" ref="pagedao"/>
 	</bean>
 	
+	<bean id="visitCountService" class="com.thosepeople.service.impl.VisitCountServiceImpl">
+		<property name="visitCountdao" ref="visitCountdao"/>
+	</bean>
+	
 </beans>

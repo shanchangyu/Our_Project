@@ -90,19 +90,8 @@ function checkJobInfo()
 
 
 function showJobDetail(jid)
-{
-	var uid = document.getElementById("uid").value;
-	
-	if(uid.length==0)
-	{
-		
-		alert("请登录后查看！");
-		var url = "/those_people/index/home.do?uid=";
-		 window.location.href = url;
-		 return;
-	}
-	
-	var uri = "/those_people/job/showJobDetail.do?uid="+uid+"&j_id="+jid;
+{	
+	var uri = "/those_people/job/showJobDetail.do?j_id="+jid;
 	window.location.href=uri;
 }
 

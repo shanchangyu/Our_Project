@@ -28,8 +28,11 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
-		<bean id="pagedao" class="com.thosepeople.dao.impl.PageDaoImpl">
+	<bean id="pagedao" class="com.thosepeople.dao.impl.PageDaoImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
+	<bean id="visitCountdao" class="com.thosepeople.dao.impl.VisitCountDapImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 </beans>
