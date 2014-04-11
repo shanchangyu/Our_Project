@@ -2,9 +2,7 @@ package com.thosepeople.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,15 +13,15 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.thosepeople.exception.BusinessException;
 import com.thosepeople.exception.SystemException;
 import com.thosepeople.po.JobInfo;
 import com.thosepeople.service.JobService;
 import com.thosepeople.service.PageService;
+import com.thosepeople.vo.InfoProfile;
 import com.thosepeople.vo.JobDetailInfo;
-import com.thosepeople.vo.JobInfoProfile;
 import com.thosepeople.vo.UserInfo;
 
 
@@ -32,13 +30,13 @@ import com.thosepeople.vo.UserInfo;
  *
  */
 
-
 @Controller
 @RequestMapping("/job")
 public class DealJobInfo {
 	@Autowired
 	@Qualifier("jobService")
 	private JobService jobService;
+
 	@Autowired
 	@Qualifier("pageService")
 	private PageService pageService;
@@ -48,9 +46,8 @@ public class DealJobInfo {
 		this.jobService = jobService;
 	}
 
-
 	@RequestMapping(value="/postJobInfo", method = RequestMethod.POST)
-	public ModelAndView postJobInfo(
+	public ModelAndView postJobInfo (
 			@RequestParam("jobInfoTitle")String title,
 			@RequestParam("jobCompany")String company,
 			@RequestParam("workplace")String workPlace,
@@ -61,8 +58,8 @@ public class DealJobInfo {
 			@RequestParam("contactTel")String tel,
 			@RequestParam("uid")int uid,
 			HttpSession session
-			)
-	{
+			)throws BusinessException
+			{
 
 		if( title==null ||title=="" 
 				||company==null||company=="" 
@@ -92,11 +89,10 @@ public class DealJobInfo {
 
 		if(flag)
 		{
-
-			return loadJobInfo();
+			return loadJobInfo();	
 		}
 		return new ModelAndView("404");
-	}
+			}
 
 
 	@RequestMapping("/showJobDetail")
@@ -106,7 +102,6 @@ public class DealJobInfo {
 			@RequestParam("j_id")int jid,
 			HttpSession session)
 	{
-
 		JobDetailInfo detail=jobService.loadJobDetail(jid);
 
 
@@ -121,47 +116,13 @@ public class DealJobInfo {
 
 	}
 
-
 	@RequestMapping("/jobInfo")
-	@SuppressWarnings("unchecked")
-	public ModelAndView loadJobInfo()
+	public ModelAndView loadJobInfo()throws BusinessException
 	{
-		List<JobInfoProfile> list=(List<JobInfoProfile>)pageService.getMoreInfo(null, 1,"job");
+		List<InfoProfile> list = pageService.getMoreInfo(null, 1, 2);
 		ModelMap	modelMap = new ModelMap();
 		modelMap.put("jobInfo", list);
+		modelMap.put("currentPage", 1);
 		return new ModelAndView("job_info",modelMap); 
-	}
-
-	@RequestMapping("/moreJobInfo")
-	@SuppressWarnings("unchecked")
-	@ResponseBody
-	public Map<String, Object> loadMoreJobInfo(@RequestParam(value ="currentPage", required = false) Integer currentPage)
-	{
-		int pageNum;
-		if(currentPage==null)
-		{
-			currentPage=1;
-		}
-
-		pageNum = currentPage+1;
-
-		List<JobInfoProfile> list=(List<JobInfoProfile>)pageService.getMoreInfo(null, pageNum,"job");
-
-		if(list==null ||list.size()==0)
-		{
-
-			Map<String, Object> modelMap = new HashMap<String, Object>(1);  
-			modelMap.put("success", "false");  	
-			return modelMap;
-
-		}
-		else
-		{
-			Map<String, Object> modelMap = new HashMap<String, Object>(3);  
-			modelMap.put("currentPage", pageNum);
-			modelMap.put("data", list);  
-			modelMap.put("success", "true");  		 
-			return modelMap; 
-		}
 	}
 }

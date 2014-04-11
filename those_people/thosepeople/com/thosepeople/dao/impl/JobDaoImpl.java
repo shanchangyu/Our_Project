@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import com.thosepeople.dao.JobDao;
 import com.thosepeople.po.JobInfo;
 import com.thosepeople.vo.JobDetailInfo;
-import com.thosepeople.vo.JobInfoProfile;
+import com.thosepeople.vo.InfoProfile;
 
 
 /**
@@ -22,7 +22,7 @@ import com.thosepeople.vo.JobInfoProfile;
 public class JobDaoImpl extends JdbcDaoSupport implements JobDao{
 
 
-	private static final BeanPropertyRowMapper<JobInfoProfile> rowMapper = new BeanPropertyRowMapper<JobInfoProfile>(JobInfoProfile.class);
+	private static final BeanPropertyRowMapper<InfoProfile> rowMapper = new BeanPropertyRowMapper<InfoProfile>(InfoProfile.class);
 	private static final BeanPropertyRowMapper<JobDetailInfo> detailRowMapper = new BeanPropertyRowMapper<JobDetailInfo>(JobDetailInfo.class);
 	static {
 		rowMapper.setPrimitivesDefaultedForNullValue(true);
@@ -51,9 +51,9 @@ public class JobDaoImpl extends JdbcDaoSupport implements JobDao{
 
 	
 	
-	public List<JobInfoProfile> getMoreInfo(String keyword, int pageNum,int pageSize) {
+	public List<InfoProfile> getMoreInfo(String keyword, int pageNum,int pageSize) {
 		
-		List<JobInfoProfile> list = new ArrayList<JobInfoProfile>(10);
+		List<InfoProfile> list = new ArrayList<InfoProfile>(10);
 
 		if(keyword==null)
 		{

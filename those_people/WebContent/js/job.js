@@ -107,18 +107,18 @@ function showJobDetail(jid)
 }
 
 
-function showMore() 
+function showMore( infoType) 
 { 
 	var currentpage = document.getElementById("currentPage").value;
-	ajaxRead(currentpage); 
+	ajaxRead(currentpage,infoType); 
 } 
 
-function ajaxRead(currentpage) 
+function ajaxRead(currentpage,infoType) 
 { 
 	$.ajax({ 
 		type:'get', 
 		dataType:'json', 
-		url: '/those_people/job/moreJobInfo.do?currentPage='+currentpage,
+		url: '/those_people/job/moreJobInfo.do?currentPage='+currentpage+'&infoType='+infoType,
 		beforeSend:function(){}, 
 
 		success:function(data){ 
@@ -136,7 +136,6 @@ function ajaxRead(currentpage)
 							'</span></div>&nbsp	<div class="row" id="workplace"><p>工作城市:'+res.workPlace+
 							'</p></div>	<div class="row" id="postDate">	<p>发布日期:'+res.postDate+
 							'</p></div>	</div>	</div>	<hr class="featurette-divider">'
-
 					);  
 				});  
 			}

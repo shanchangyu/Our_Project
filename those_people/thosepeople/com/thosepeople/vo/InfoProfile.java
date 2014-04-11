@@ -1,6 +1,6 @@
 package com.thosepeople.vo;
 
-public class JobInfoProfile {
+public class InfoProfile {
 
 	
 	private int id;
