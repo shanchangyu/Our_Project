@@ -57,9 +57,11 @@
 							<hr class="featurette-divider">
 						</c:forEach>
 					</div>
-					<div class="panel-footer" style="text-align: center">
+					<c:if test="${totalPageNum > currentPage}">
+					<div id ="linkMore" class="panel-footer" style="text-align: center">
 						<a href="javascript:void(0)" onclick="showMore(2)">更多 </a>
 					</div>
+					</c:if>
 
 				</div>
 				<div class="col-md-2"></div>

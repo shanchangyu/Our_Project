@@ -23,5 +23,11 @@ public class PageServiceImpl implements PageService{
 		return pagedao.getMoreInfo(keyword,pageNum,it);
 	}
 	
+	@Override
+	public int getInfoCount(String keyword, int infoType)
+			throws BusinessException {
+		InfoType it = InfoType.getInfoTypeByValue(infoType);
+		return pagedao.getPageCount(keyword, it);
+	}
 	
 }

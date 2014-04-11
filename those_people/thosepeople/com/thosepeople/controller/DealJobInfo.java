@@ -114,9 +114,11 @@ public class DealJobInfo {
 	public ModelAndView loadJobInfo()throws BusinessException
 	{
 		List<InfoProfile> list = pageService.getMoreInfo(null, 1, 2);
+		int totalPageNum = pageService.getInfoCount(null, 2);
 		ModelMap	modelMap = new ModelMap();
 		modelMap.put("jobInfo", list);
 		modelMap.put("currentPage", 1);
+		modelMap.put("totalPageNum",totalPageNum);
 		return new ModelAndView("job_info",modelMap); 
 	}
 }

@@ -15,4 +15,5 @@ import com.thosepeople.vo.InfoProfile;
 public interface PageService {
 	
 	List<InfoProfile> getMoreInfo(String keyword,int pageNum,int infoType) throws BusinessException;
+	int getInfoCount(String keyword, int infoType)throws BusinessException;
 }

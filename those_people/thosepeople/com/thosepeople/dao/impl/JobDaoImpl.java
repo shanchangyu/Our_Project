@@ -30,7 +30,7 @@ public class JobDaoImpl extends JdbcDaoSupport implements JobDao{
 	}
 
 	private static final String INSERT_JOB_INFO="insert into job_info(uid,title,workplace,jobtype,company,content,requires,email,tel) "
-			+ "value(?,?,?,?,?,,?,?,?,?)";
+			+ "value(?,?,?,?,?,?,?,?,?)";
 
 
 	@Override
