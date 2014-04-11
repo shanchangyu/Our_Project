@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +17,8 @@ import com.thosepeople.exception.BusinessException;
 import com.thosepeople.service.PageService;
 import com.thosepeople.vo.InfoProfile;
 
+@Controller
+@RequestMapping("/page")
 public class Page {
 
 	@Autowired
@@ -24,7 +28,7 @@ public class Page {
 	@RequestMapping("/moreInfo")
 	@ResponseBody
 	public Map<String, Object> loadMoreJobInfo (
-			@RequestParam(value="currentPage",required=false) String keyword,
+			@RequestParam(value="keyword",required=false) String keyword,
 			@RequestParam(value="currentPage",required=false) Integer currentPage,
 			@RequestParam("infoType") int infoType) throws BusinessException
 	{

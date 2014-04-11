@@ -8,13 +8,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <link rel="stylesheet" type="text/css" href="../css/common_body.css">
-<link rel="stylesheet" type="text/css" href="../css/love.css">
+<link rel="stylesheet" type="text/css" href="../css/job_info.css">
 
 <!-[if IE]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]->
 </head>
-<title>主页</title>
+<title>工作信息</title>
 </head>
 <c:choose>
 	<c:when test="${!empty sessionScope.userInfo}">
@@ -43,24 +43,22 @@
 								</div>
 								<div class="col-md-10">
 									<div class="row" id="jobinfotitle">
-										<a href="javascript:void(0)" onclick="showJobDetail(${res.id})"> ${res.title}</a>
-										&nbsp<span class="label label-info" style="font-size: 15px;">${res.jobtype}</span>
+										${res.nickName }发布了 <a href="javascript:void(0)"
+											onclick="showJobDetail(${res.id})">${res.title}</a> <span class="label label-info"
+											style="font-size: 15px;">${res.jobtype}</span>
 									</div>
+									<div class="row" id="jobinfohead">公司：${res.company} 工作地点：${res.workPlace}</div>
 									&nbsp
-									<div class="row" id="workplace">
-										<p>工作城市:${res.workPlace}</p>
+									<div class="row" id="jobinfocontent">
+										<p>工作职责：${res.content}</p>
 									</div>
-									<div class="row" id="postDate">
-										<p>发布日期:${res.postDate}</p>
-									</div>
-
 								</div>
 							</div>
 							<hr class="featurette-divider">
 						</c:forEach>
 					</div>
 					<div class="panel-footer" style="text-align: center">
-						<a href="javascript:void(0)" onclick = "showMore(2)">更多 </a>
+						<a href="javascript:void(0)" onclick="showMore(2)">更多 </a>
 					</div>
 
 				</div>
@@ -73,9 +71,7 @@
 </body>
 
 <script type="text/javascript" src="../js/job.js"></script>
-
+<script type="text/javascript" src="../js/more_info.js"></script>
 <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
-
-<script
-	src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script	src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
 </html>

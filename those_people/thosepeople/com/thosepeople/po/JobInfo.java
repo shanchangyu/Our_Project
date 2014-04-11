@@ -8,7 +8,6 @@ public class JobInfo {
 	private String title;
 	private String workplace;
 	private int jobtype;
-	private String postdate;
 	
 	private String company;
 	private String content;
@@ -20,14 +19,13 @@ public class JobInfo {
 
 
 	public JobInfo(int uid, String title, String workplace, int jobtype,
-			String postdate, String company, String content, String require,
+			 String company, String content, String require,
 			String email, String tel) {
 		super();
 		this.uid = uid;
 		this.title = title;
 		this.workplace = workplace;
 		this.jobtype = jobtype;
-		this.postdate = postdate;
 		this.company = company;
 		this.content = content;
 		this.require = require;
@@ -64,16 +62,9 @@ public class JobInfo {
 	public void setJobtype(int jobtype) {
 		this.jobtype = jobtype;
 	}
-	public String getPostdate() {
-		return postdate;
-	}
-	public void setPostdate(String postdate) {
-		this.postdate = postdate;
-	}
-
 	
 	public Object[] toStrArray()
 	{
-		return new Object[]{uid,title,workplace,jobtype,postdate,company,content,require,email,tel};
+		return new Object[]{uid,title,workplace,jobtype,company,content,require,email,tel};
 	}
 }

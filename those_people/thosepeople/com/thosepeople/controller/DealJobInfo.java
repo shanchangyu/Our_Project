@@ -1,7 +1,5 @@
 package com.thosepeople.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -80,10 +78,7 @@ public class DealJobInfo {
 			throw new SystemException("post jobInfo fail,uid is illegal!");
 		}
 
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		String today=format.format(new Date());
-
-		JobInfo job = new JobInfo(uid,title,workPlace,jobType,today,company,jobContent,jobRequire,email,tel);
+		JobInfo job = new JobInfo(uid,title,workPlace,jobType,company,jobContent,jobRequire,email,tel);
 
 		boolean flag = jobService.postJobInfo(job);
 
@@ -96,7 +91,6 @@ public class DealJobInfo {
 
 
 	@RequestMapping("/showJobDetail")
-
 	public ModelAndView showJobDetail(
 			@RequestParam("uid")int uid,
 			@RequestParam("j_id")int jid,

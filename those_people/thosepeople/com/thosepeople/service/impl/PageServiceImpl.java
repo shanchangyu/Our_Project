@@ -13,7 +13,6 @@ public class PageServiceImpl implements PageService{
 
 	private PageDao pagedao;
 
-	private int pageSize = 10;
 	public void setPagedao(PageDao pagedao) {
 		this.pagedao = pagedao;
 	}
@@ -21,7 +20,7 @@ public class PageServiceImpl implements PageService{
 	@Override
 	public List<InfoProfile> getMoreInfo(String keyword,int pageNum,int infoType) throws BusinessException {
 		InfoType it = InfoType.getInfoTypeByValue(infoType);
-		return pagedao.getMoreInfo(keyword,pageNum,pageSize,it);
+		return pagedao.getMoreInfo(keyword,pageNum,it);
 	}
 	
 	

@@ -13,7 +13,7 @@
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]->
 </head>
-<title>交友详细信息</title>
+<title>工作详细信息</title>
 </head>
 <c:choose>
 	<c:when test="${!empty sessionScope.userInfo}">

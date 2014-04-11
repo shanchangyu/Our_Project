@@ -16,15 +16,16 @@ import com.thosepeople.vo.InfoProfile;
 
 public class PageDaoImpl extends JdbcDaoSupport implements PageDao{
 
+	private int pageSize = 1;
 	private static final BeanPropertyRowMapper<InfoProfile> rowMapper = new BeanPropertyRowMapper<InfoProfile>(InfoProfile.class);
-	//TODO:通过sql语句中的select as,将查询结果同一为一个返回值，有利于后面的统一，或者在vo InfoProfile中添加个性化的字段来将返回结果统一
-	private static final String LOAD_JOB_INFO = "select j.id, j.title,j.workplace,j.jobtype,j.postdate,u.nickName,u_d.headPicPath from job_info j,user u,user_detail u_d where j.uid=u.id and j.uid=u_d.uid "
+	private static final String LOAD_JOB_INFO = "select j.id, j.title,j.workplace,j.jobtype, LEFT(content,100) as content,j.company,j.postdate,u.nickName,u_d.headPicPath from job_info j,user u,user_detail u_d where j.uid=u.id and j.uid=u_d.uid "
 			+ "order by j.postdate desc limit ?,?";
 	
 	private static final String LOAD_LOVE_INFO ="";
 	private static final String LOAD_HOUSE_INFO ="";
+	private static final String LOAD_ACTIVITY_INFO ="";
 	
-	public List<InfoProfile> getMoreInfo(String keyword, int pageNum, int pageSize,InfoType it) {
+	public List<InfoProfile> getMoreInfo(String keyword, int pageNum,InfoType it) {
 
 		String sql=null;
 		switch(it)
@@ -38,6 +39,8 @@ public class PageDaoImpl extends JdbcDaoSupport implements PageDao{
 		case HOUSE_INFO:
 			sql = LOAD_HOUSE_INFO;
 			break;
+		case ACTIVITY_INFO:
+			sql = LOAD_ACTIVITY_INFO;
 		default:
 			return null;
 		}

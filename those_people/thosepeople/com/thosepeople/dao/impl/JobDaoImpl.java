@@ -29,8 +29,8 @@ public class JobDaoImpl extends JdbcDaoSupport implements JobDao{
 		detailRowMapper.setPrimitivesDefaultedForNullValue(true);
 	}
 
-	private static final String INSERT_JOB_INFO="insert into job_info(uid,title,workplace,jobtype,postdate,company,content,requires,email,tel) "
-			+ "value(?,?,?,?,?,?,?,?,?,?)";
+	private static final String INSERT_JOB_INFO="insert into job_info(uid,title,workplace,jobtype,company,content,requires,email,tel) "
+			+ "value(?,?,?,?,?,,?,?,?,?)";
 
 
 	@Override
