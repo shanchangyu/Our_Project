@@ -1,11 +1,9 @@
-/**
- * 
- */
 package com.thosepeople.dao.impl;
 
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import com.thosepeople.dao.PostCommentDao;
+
 
 /**
  * @author chenzhuo

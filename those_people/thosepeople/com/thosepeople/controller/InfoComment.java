@@ -1,5 +1,5 @@
-package com.thosepeople.controller;
 
+<<<<<<< HEAD
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +17,24 @@ import com.thosepeople.exception.BusinessException;
 import com.thosepeople.service.PostCommentService;
 import com.thosepeople.util.DateUtils;
 import com.thosepeople.vo.UserInfo;
+=======
+package com.thosepeople.controller;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.thosepeople.exception.BusinessException;
+import com.thosepeople.service.PostCommentService;
+>>>>>>> pr/11
 
 @Controller
 @RequestMapping("/post_comment")

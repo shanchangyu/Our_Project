@@ -24,19 +24,6 @@ function verifyTelFormat(tel)
 }
 
 
-/*function checkLogin()
-{
-	var uid = document.getElementById("uid").value;
-	if(uid.length==0)
-	{
-			alert("请您先登录！");
-			var url = "/those_people/index/home.do?uid=";
-			 window.location.href = url;
-			 return;
-	}
-}*/
-
-
 function checkJobInfo()
 {
 		
@@ -103,62 +90,8 @@ function checkJobInfo()
 
 
 function showJobDetail(jid)
-{
-	var uid = document.getElementById("uid").value;
-	
-	if(uid.length==0)
-	{
-		
-		alert("请登录后查看！");
-		var url = "/those_people/index/home.do?uid=";
-		 window.location.href = url;
-		 return;
-	}
-	
-	var uri = "/those_people/job/showJobDetail.do?uid="+uid+"&j_id="+jid;
+{	
+	var uri = "/those_people/job/showJobDetail.do?j_id="+jid;
 	window.location.href=uri;
 }
 
-
-function showMore() 
-{ 
-	var currentpage = document.getElementById("currentPage").value;
-	ajaxRead(currentpage); 
-} 
-
-function ajaxRead(currentpage) 
-{ 
-	$.ajax({ 
-		type:'get', 
-		dataType:'json', 
-		url: '/those_people/job/moreJobInfo.do?currentPage='+currentpage,
-		beforeSend:function(){}, 
-
-		success:function(data){ 
-			if (data && data.success == "true") 
-			{
-				$('#currentPage').attr('value',data.currentPage);
-				
-				$.each(data.data, function(i, res) {  
-					$('#infoBody').append(  
-							'<div class="row"><div class="col-md-2">'+
-							'<img src='+res.headPicPath+'class="img-rounded" id="head-pic-detail"> <label style="padding-left: 15px;">'+
-							res.nickName+'</label></div><div class="col-md-10">	<div class="row" id="jobinfotitle">'+
-							'<a href="javascript:void(0)" onclick="showJobDetail('+res.id+')">'+res.title+
-							'</a>&nbsp<span class="label label-info" style="font-size: 15px;">'+res.jobtype+
-							'</span></div>&nbsp	<div class="row" id="workplace"><p>工作城市:'+res.workPlace+
-							'</p></div>	<div class="row" id="postDate">	<p>发布日期:'+res.postDate+
-							'</p></div>	</div>	</div>	<hr class="featurette-divider">'
-
-					);  
-				});  
-			}
-			else
-			{
-				alert("已加载全部信息");
-			}
-
-		}, 
-		complete:function(){} 
-	}); 
-}
