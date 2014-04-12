@@ -10,12 +10,12 @@ import com.thosepeople.constant.InfoType;
 import com.thosepeople.dao.PageDao;
 import com.thosepeople.vo.InfoProfile;
 
+
 /**
  * 
  * @author xuyingjie
  *
  */
-
 
 
 public class PageDaoImpl extends JdbcDaoSupport implements PageDao{
@@ -88,6 +88,7 @@ public class PageDaoImpl extends JdbcDaoSupport implements PageDao{
 	private int getInfoCount(String count_sql)
 	{
 		return getJdbcTemplate().queryForInt(count_sql);
+
 	}
 
 	private List<InfoProfile> getMoreJobInfo(String keyword ,int pageNum,int pageSize,String sql , String count_sql)

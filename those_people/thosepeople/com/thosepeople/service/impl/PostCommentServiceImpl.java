@@ -1,3 +1,4 @@
+
 /**
  * 
  */
@@ -69,5 +70,5 @@ public class PostCommentServiceImpl implements PostCommentService {
 	public String getTheNickNameWhoBeReplied(int uid) {
        return userDao.getUserNickNameById(uid);
 	}
-
 }
+

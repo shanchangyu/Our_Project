@@ -1,3 +1,4 @@
+
 function postCommnet(infoType,commentType,commentUserId){
 	var content=$("#commentContent").val();
 	if($.trim(content).length==0){
@@ -20,4 +21,5 @@ function postCommnet(infoType,commentType,commentUserId){
 				);  
 			}
 		});
+
 }
