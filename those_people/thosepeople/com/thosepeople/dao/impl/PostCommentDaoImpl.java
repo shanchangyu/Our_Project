@@ -22,7 +22,7 @@ public class PostCommentDaoImpl extends JdbcDaoSupport implements
 	public int postComment(int infoId, int commentUserId,
 			int beRepliedUserId, String commentContent,String tableName) {
 		
-		
+		System.out.println(INSERT_SQL+tableName+INSERT_DETAIL);
 		return this.getJdbcTemplate().update(
 				INSERT_SQL+tableName+INSERT_DETAIL,
 				new Object[] { infoId, commentUserId, beRepliedUserId,

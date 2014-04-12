@@ -16,6 +16,8 @@ import com.thosepeople.vo.InfoProfile;
  *
  */
 
+
+
 public class PageDaoImpl extends JdbcDaoSupport implements PageDao{
 
 	private int pageSize = 1;
@@ -25,7 +27,8 @@ public class PageDaoImpl extends JdbcDaoSupport implements PageDao{
 			+ "order by j.postdate desc limit ?,?";
 	
 	private static final String LOAD_LOVE_INFO ="";
-	private static final String LOAD_HOUSE_INFO ="";
+	private static final String LOAD_HOUSE_INFO =" select h.id,h.title,h.infoType,h.houseType,h.postTime,u.nickName,u_d.headPicPath from house_info h, user u,user_detail u_d where h.uid=u.id and h.uid=u_d.uid "
+			+ "order by h.postTime desc limit ?,?";
 	private static final String LOAD_ACTIVITY_INFO ="";
 	
 	private static final String select_count_sql = " select count(*) from ";	

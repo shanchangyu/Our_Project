@@ -15,10 +15,13 @@
 	http://www.springframework.org/schema/util
 	http://www.springframework.org/schema/util/spring-util.xsd">
 	<bean id="registerService" class="com.thosepeople.service.impl.RegisterServiceImpl">
-		<property name="userDao" ref="userDao" />
+	<property name="userDao" ref="userDao"/>
 	</bean>
 	<bean id="loginService" class="com.thosepeople.service.impl.LoginServiceImpl">
-		<property name="userDao" ref="userDao" />
+		<property name="userDao" ref="userDao"/>
+	</bean>
+	<bean id="houseService" class="com.thosepeople.service.impl.HouseServiceImpl">
+		<property name="houseDao" ref="houseDao"/>
 	</bean>
 	<bean id="postLoveInfoService" class="com.thosepeople.service.impl.PostLoveInfoServiceImpl">
 		<property name="postInfoDao" ref="postInfoDao" />
@@ -35,9 +38,9 @@
 	<bean id="pageService" class="com.thosepeople.service.impl.PageServiceImpl">
 		<property name="pagedao" ref="pagedao"/>
 	</bean>
-	
 	<bean id="visitCountService" class="com.thosepeople.service.impl.VisitCountServiceImpl">
 		<property name="visitCountdao" ref="visitCountdao"/>
 	</bean>
 	
 </beans>
+

@@ -14,9 +14,12 @@
 	http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
 	http://www.springframework.org/schema/util
 	http://www.springframework.org/schema/util/spring-util.xsd">
-	<bean id="userDao" class="com.thosepeople.dao.impl.UserDaoImpl">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
+    <bean id="userDao" class="com.thosepeople.dao.impl.UserDaoImpl">
+       <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <bean id="houseDao" class="com.thosepeople.dao.impl.HouseDaoImpl">
+       <property name="dataSource" ref="dataSource"/>
+    </bean>
 	<bean id="postInfoDao" class="com.thosepeople.dao.impl.PostInfoDaoImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
