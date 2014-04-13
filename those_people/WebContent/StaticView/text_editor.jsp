@@ -3,7 +3,9 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <link rel="stylesheet" type="text/css" href="../css/common_body.css">
@@ -12,19 +14,23 @@
 <link
 	href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css"
 	rel="stylesheet">
+
+
 <!-[if IE]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]->
 </head>
+
 <c:choose>
-	<c:when test="${!empty sessionScope.userInfo}">
-		<jsp:include page="/WEB-INF/view/login_header.jsp" />
-	</c:when>
-	<c:otherwise>
-		<jsp:include page="/WEB-INF/view/header.jsp" />
-	</c:otherwise>
+<c:when test="${!empty sessionScope.userInfo}">
+<jsp:include page="/WEB-INF/view/login_header.jsp" />
+</c:when>
+<c:otherwise>
+<jsp:include page="/WEB-INF/view/header.jsp" />
+</c:otherwise>
 </c:choose>
-<body>
+
+
 <body id="common_body">
 	<div class="container">
 		<div class="row">
@@ -32,6 +38,7 @@
 			<div class="col-md-1"></div>
 			<!--end placeholder-->
 			<div class="col-md-7">
+
 
 				<div class="jumbotron">
 					标题 (必填)<input type="text" class="form-control"> <br>
@@ -63,20 +70,16 @@
 								class="icon-align-right"></i></a>
 						</div>
 						<div class="btn-group">
-							<a class="btn btn-default" data-edit="link" title="超链接"> <i
-								class="icon-link"></i>
-							</a>
-							<div class="dropdown-menu input-append">
-								<input class="span2" placeholder="URL" type="text"
-									data-edit="createLink" />
-								<button class="btn" type="button">Add</button>
-							</div>
-						</div>
+						  <a class="btn btn-default" data-toggle="dropdown" title="超链接"><i class="icon-link"></i></a>
+						    <div class="dropdown-menu input-append ">
+							    <input class="span2" placeholder="URL" type="text" data-edit="createLink"/>
+							    <button class="btn btn-default" type="button">增加</button>
+				        </div>
+				      </div>
 						<div class="btn-group">
 							<a class="btn btn-default" title="图片（可直接拖拽）" id="pictureBtn"><i
-								class="icon-picture"></i> </a> 
-								<input type="file"
-								data-role="magic-overlay" data-target="#pictureBtn"
+								class="icon-picture"></i></a>
+							<input type="file" data-role="magic-overlay" data-target="#pictureBtn" 
 								data-edit="insertImage"/>
 						</div>
 						<div class="btn-group">
@@ -86,15 +89,19 @@
 						</div>
 					</div>
 
+
 					<div id="editor"></div>
 					<br>
 					<div class="row">
 						<div class="col-md-1">
-							<button type="button" class="btn btn-default btn-lg">取消</button>
+						<button type="button" class="btn btn-default btn-lg">取消</button>
 						</div>
-						<div class="col-md-9"></div>
+						<div class="col-md-9">
+
+
+						</div>
 						<div class="col-md-1">
-							<button type="button" class="btn btn-success btn-lg">发布</button>
+						<button type="button" class="btn btn-success btn-lg">发布</button>
 						</div>
 					</div>
 				</div>
@@ -178,6 +185,7 @@
 					this.value = '';
 					$(this).change();
 				});
+
 
 				$('[data-role=magic-overlay]').each(
 						//picture

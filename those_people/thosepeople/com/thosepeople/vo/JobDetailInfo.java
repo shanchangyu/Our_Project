@@ -8,12 +8,13 @@ public class JobDetailInfo {
 	private String title;
 	private String workPlace;
 	private String jobtype;
-	private String postDate;  //发布日期
+	private String postdate;  //发布日期
 	private String company;
 	private String content;
 	private String requires;
 	private String email;
 	private String tel;
+	private int visitCnt;
 	public int getId() {
 		return id;
 	}
@@ -63,10 +64,12 @@ public class JobDetailInfo {
 		this.jobtype = jobtype;
 	}
 	public String getPostDate() {
-		return postDate;
+
+		//return yyyy-mm-dd hh:MM
+		return postdate.substring(0,16);
 	}
 	public void setPostDate(String postDate) {
-		this.postDate = postDate;
+		this.postdate = postDate;
 	}
 	public String getCompany() {
 		return company;
@@ -98,7 +101,11 @@ public class JobDetailInfo {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-
-
+	public int getVisitCnt() {
+		return visitCnt;
+	}
+	public void setVisitCnt(int visitCnt) {
+		this.visitCnt = visitCnt;
+	}
 
 }

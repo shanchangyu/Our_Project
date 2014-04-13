@@ -40,8 +40,8 @@
 							</div>
 							<div class="col-md-10">
 								<div class="col-md-8">
-								<input type="hidden" id="infoId" value="${loveInfo.id}">
-								<B>${loveInfo.title}</B>
+									<input type="hidden" id="infoId" value="${loveInfo.id}">
+									<B>${loveInfo.title}</B>
 								</div>
 								<div class="col-md-4">
 									发布时间：2014-3-20 <br> <br> 浏览人数：100人
@@ -50,61 +50,85 @@
 						</div>
 						<hr class="featurette-divider">
 						<p>自我描述：</p>
-						<p>
-						${loveInfo.selfDescribe}
-                        </p>
+						<p>${loveInfo.selfDescribe}</p>
 
 						<br> <br>
 						<p>期望对方：</p>
-						<p>
-						${loveInfo.expectOther}
-                        </p>
-                        <br><br>
-                        <p>联系方式：</p>
-                        <p>${loveInfo.contactWay}</p>
+						<p>${loveInfo.expectOther}</p>
+						<br>
+						<br>
+						<p>联系方式：</p>
+						<p>${loveInfo.contactWay}</p>
 						<hr class="featurette-divider">
 						<button type="button" class="btn btn-info" id="collectBtn">收藏</button>
 					</div>
 				</div>
 				<div class="panel panel-default">
-					<div class="panel-body">
+					<div id="commentOfInfo" class="panel-body">
 						<span class="glyphicon glyphicon-comment"></span> 说两句 <br>
-						<textarea id="commentConten" class="form-control" rows="5"></textarea>
+						<textarea id="commentContent" class="form-control" rows="5"></textarea>
 						<div class="row">
-							<button type="button" onclick="postCommnet(1,0,${userInfo.uid})" class="btn btn-info" id="commentBtn">评论</button>
+							<button type="button" onclick="postCommnet(1,0,${userInfo.uid})"
+								class="btn btn-info" id="commentBtn">评论</button>
 						</div>
 						<h4>评论</h4>
 						<br>
-						<div class="row">
-							<div class="col-md-2">
-								<img src="../img/head-pic/head.jpg" class="img-rounded"
-									id="head-pic-comment"> <label id="commentUser">忒各色:</label>
+						<div id="commentContend">
+							<div class="row">
+								<div class="col-md-2">
+									<img src="../img/head-pic/head.jpg" class="img-rounded"
+										id="head-pic-comment"> <label id="commentUser">忒各色:</label>
+								</div>
+								<div class="col-md-10">
+									<div class="row">哇塞，美女哦！真心不错，男同胞们快来吧！(2014-4-10 1:40)</div>
+									<br>
+									<div class="row">
+										<a href="" id="replyButton">回复</a>
+									</div>
+								</div>
 							</div>
-							<div class="col-md-10">哇塞，美女哦！真心不错，男同胞们快来吧！</div>
-						</div>
-						<hr class="featurette-divider">
-						<div class="row">
-							<div class="col-md-2">
-								<img src="../img/head-pic/head.jpg" class="img-rounded"
-									id="head-pic-comment"> <label id="commentUser">忒各色</label>
+							<hr class="featurette-divider">
+							<div class="row">
+								<div class="col-md-2">
+									<img src="../img/head-pic/head.jpg" class="img-rounded"
+										id="head-pic-comment"> <label id="commentUser">忒各色</label>
+								</div>
+								<div class="col-md-10">
+									<div class="row">哇塞，美女哦！真心不错，男同胞们快来吧！(2014-4-10 1:40)</div>
+									<br>
+									<div class="row">
+										<a href="" id="replyButton">回复</a>
+									</div>
+								</div>
 							</div>
-							<div class="col-md-10">哇塞，美女哦！真心不错，男同胞们快来吧！</div>
-						</div>
-						<hr class="featurette-divider">
-						<div class="row">
-							<div class="col-md-2">
-								<img src="../img/head-pic/head.jpg" class="img-rounded"
-									id="head-pic-comment"> <label id="commentUser">忒各色</label>
+							<hr class="featurette-divider">
+							<div class="row">
+								<div class="col-md-2">
+									<img src="../img/head-pic/head.jpg" class="img-rounded"
+										id="head-pic-comment"> <label id="commentUser">忒各色</label>
+								</div>
+								<div class="col-md-10">
+									<div class="row">哇塞，美女哦！真心不错，男同胞们快来吧！(2014-4-10 1:40)</div>
+									<br>
+									<div class="row">
+										<a href="" id="replyButton">回复</a>
+									</div>
+								</div>
 							</div>
-							<div class="col-md-10">哇塞，美女哦！真心不错，男同胞们快来吧！</div>
-						</div>
-						<hr class="featurette-divider">
-						<div class="row">
-							<div class="col-md-2">
-								<img src="../img/head-pic/head.jpg" class="img-rounded"
-									id="head-pic-comment"> <label id="commentUser">忒各色</label>
+							<hr class="featurette-divider">
+							<div class="row">
+								<div class="col-md-2">
+									<img src="../img/head-pic/head.jpg" class="img-rounded"
+										id="head-pic-comment"> <label id="commentUser">忒各色</label>
+								</div>
+								<div class="col-md-10">
+									<div class="row">哇塞，美女哦！真心不错，男同胞们快来吧！(2014-4-10 1:40)</div>
+									<br>
+									<div class="row">
+										<a href="" id="replyButton">回复</a>
+									</div>
+								</div>
 							</div>
-							<div class="col-md-10">哇塞，美女哦！真心不错，男同胞们快来吧！</div>
 						</div>
 					</div>
 				</div>

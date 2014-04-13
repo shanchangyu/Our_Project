@@ -1,8 +1,12 @@
 package com.thosepeople.dao;
 
 import java.util.List;
-@SuppressWarnings("rawtypes")
+
+import com.thosepeople.constant.InfoType;
+import com.thosepeople.vo.InfoProfile;
+
 public interface PageDao {
 
-	List getMoreInfo(String keyword, int pageNum,int pageSize,String tableName);
+	List<InfoProfile> getMoreInfo(String keyword, int pageNum,InfoType it);
+	int getPageCount(String keyword,InfoType it);
 }

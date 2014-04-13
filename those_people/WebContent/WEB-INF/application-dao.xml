@@ -34,4 +34,8 @@
 	<bean id="pagedao" class="com.thosepeople.dao.impl.PageDaoImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	</beans>
+
+	<bean id="visitCountdao" class="com.thosepeople.dao.impl.VisitCountDapImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+</beans>

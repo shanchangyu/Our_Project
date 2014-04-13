@@ -2,8 +2,11 @@ package com.thosepeople.service.impl;
 
 import java.util.List;
 
+import com.thosepeople.constant.InfoType;
 import com.thosepeople.dao.PageDao;
+import com.thosepeople.exception.BusinessException;
 import com.thosepeople.service.PageService;
+import com.thosepeople.vo.InfoProfile;
 
 
 public class PageServiceImpl implements PageService{
@@ -14,12 +17,17 @@ public class PageServiceImpl implements PageService{
 		this.pagedao = pagedao;
 	}
 
-	@SuppressWarnings("rawtypes")
 	@Override
-	public List getMoreInfo(String keyword,int pageNum,int pageSize,String tableName) {
-		
-		return pagedao.getMoreInfo(keyword,pageNum,pageSize,tableName);
+	public List<InfoProfile> getMoreInfo(String keyword,int pageNum,int infoType) throws BusinessException {
+		InfoType it = InfoType.getInfoTypeByValue(infoType);
+		return pagedao.getMoreInfo(keyword,pageNum,it);
 	}
 	
+	@Override
+	public int getInfoCount(String keyword, int infoType)
+			throws BusinessException {
+		InfoType it = InfoType.getInfoTypeByValue(infoType);
+		return pagedao.getPageCount(keyword, it);
+	}
 	
 }
