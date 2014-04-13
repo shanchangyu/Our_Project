@@ -29,7 +29,23 @@ public class HouseInfo {
 		this.headPicPath = headPicPath;
 	}
 	public String getHouseType() {
-		return houseType;
+		switch(houseType)
+		{
+		case "1":
+			return "不限";
+		case "2":
+			return "普通住房";
+		case "3":
+			return "商住两用";
+		case "4":
+			return "公寓";
+		case "5":
+			return "别墅";
+		case "6":
+			return "其他";
+		default:
+			return "";
+		}
 	}
 	public void setHouseType(String houseType) {
 		this.houseType = houseType;
@@ -48,7 +64,15 @@ public class HouseInfo {
 		this.title = title;
 	}
 	public String getInfoType() {
-		return infoType;
+		switch(infoType)
+		{
+		case "1":
+			return "出租信息";
+		case "2":
+			return "求租信息";
+		default:
+			return "";
+		}
 	}
 	public void setInfoType(String infoType) {
 		this.infoType = infoType;
