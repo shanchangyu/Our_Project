@@ -20,19 +20,19 @@ public class HouseDaoImpl extends JdbcDaoSupport implements HouseDao {
 	}
 	private static final String INSERT_HOUSE_INFO = " insert into house_info (title,infoType,houseType,infoDescribe,contactWay,uid,postTime) values(?,?,?,?,?,?,?) ";
 	@Override
-	public int insertHouse(HouseInfo houseinfo) {
-
+	public int postHouseInfo(String title, String infoType, String houseType,String infoDescribe,
+			String contactWay, int uid, String postTime) {
 		 int ret = -1;
 		    try {	    
 		      ret = this.getJdbcTemplate().update(INSERT_HOUSE_INFO,
-						new Object[] { houseinfo.getTitle(), houseinfo.getInfoType(), houseinfo.getHouseType(), houseinfo.getInfoDescribe(),houseinfo.getContactWay(),houseinfo.getUid(), houseinfo.getPostTime()});
+						new Object[] { title, infoType, houseType ,infoDescribe, contactWay,uid,postTime});
 		    }
 		    catch (Exception e) {
 		    	ret =0;
 		    }
 		    return ret;
 	}
-
+	
 	private static final String GET_HOUSE_INFO = "select h.*,u.nickName,u_d.headPicPath from house_info h,user u,user_detail u_d where h.id=? and h.uid=u.id and h.uid=u_d.uid ";
 	@Override
 	public HouseInfo getDetailHouseInfo(int infoId) {

@@ -18,11 +18,17 @@ public class HouseServiceImpl implements  HouseService {
 		this.houseDao = houseDao;
 	}
 
-	@Override
-	public int insertHouse(HouseInfo houseinfo) {
-		return houseDao.insertHouse(houseinfo);
-	}
 
+	@Override
+	public int postHouseInfo(String title, String infoType, String houseType,String infoDescribe,
+			String contactWay, int uid, String postTime) {
+		
+		int generateId=houseDao.postHouseInfo( title,infoType, houseType,infoDescribe,contactWay, uid, postTime);
+		if(generateId>0){
+			return generateId;
+		}
+		return 0;
+	}
 
 	@Override
 	public HouseInfo getDetailHouseInfo(int id) {

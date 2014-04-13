@@ -8,7 +8,8 @@ import com.thosepeople.vo.HouseInfo;
  * 
  */
 public interface HouseDao {
-		public int insertHouse(HouseInfo houseinfo);
+	public int postHouseInfo(String title, String infoType, String houseType,String infoDescribe,
+			String contactWay, int uid, String postTime);
 		public HouseInfo getDetailHouseInfo(int infoId);
 
 }

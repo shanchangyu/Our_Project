@@ -6,7 +6,8 @@ import com.thosepeople.vo.HouseInfo;
  * 
  */
 public interface HouseService {
-	public int insertHouse(HouseInfo houseinfo);
-	public HouseInfo getDetailHouseInfo(int id);
+	int postHouseInfo(String title, String infoType, String houseType,String infoDescribe,
+			String contactWay, int uid, String postTime);
+	HouseInfo getDetailHouseInfo(int id);
 
 }
