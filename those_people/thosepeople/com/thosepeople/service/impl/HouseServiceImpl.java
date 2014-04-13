@@ -1,5 +1,7 @@
 package com.thosepeople.service.impl;
 
+import java.util.List;
+
 import com.thosepeople.dao.HouseDao;
 import com.thosepeople.service.HouseService;
 import com.thosepeople.vo.HouseInfo;
@@ -32,10 +34,14 @@ public class HouseServiceImpl implements  HouseService {
 
 	@Override
 	public HouseInfo getDetailHouseInfo(int id) {
-		// TODO Auto-generated method stub
 		return houseDao.getDetailHouseInfo(id);
 	}
-
+	
+	@Override
+	public List<HouseInfo> getMoreInfo(String keyword,int pageNum,int pageSize) {
+		return houseDao.getMoreInfo(keyword,pageNum,pageSize);
+	}
+	
 
 
 }

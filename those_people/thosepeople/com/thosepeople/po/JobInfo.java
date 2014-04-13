@@ -1,6 +1,9 @@
 package com.thosepeople.po;
 
 
+import java.util.Date;
+
+
 public class JobInfo {
 
 	private int id;
@@ -8,19 +11,17 @@ public class JobInfo {
 	private String title;
 	private String workplace;
 	private int jobtype;
-	private String postdate;
-	
+	private Date postdate;
 	private String company;
 	private String content;
 	private String require;
 	private String email;
 	private String tel;
 	
-	
 
 
-	public JobInfo(int uid, String title, String workplace, int jobtype,
-			String postdate, String company, String content, String require,
+	public JobInfo(int uid, String title, String workplace, int jobtype,Date postdate,
+			 String company, String content, String require,
 			String email, String tel) {
 		super();
 		this.uid = uid;
@@ -64,14 +65,60 @@ public class JobInfo {
 	public void setJobtype(int jobtype) {
 		this.jobtype = jobtype;
 	}
-	public String getPostdate() {
+	
+	public Date getPostdate() {
+
 		return postdate;
 	}
-	public void setPostdate(String postdate) {
+
+	public void setPostdate(Date postdate) {
 		this.postdate = postdate;
 	}
 
-	
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getRequire() {
+		return require;
+	}
+
+	public void setRequire(String require) {
+		this.require = require;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public Object[] toStrArray()
 	{
 		return new Object[]{uid,title,workplace,jobtype,postdate,company,content,require,email,tel};

@@ -16,6 +16,13 @@ public class HouseInfo {
 	private String postTime;
 	private String nickName;
 	private String headPicPath;
+	private int visitCnt;
+	public int getVisitCnt() {
+		return visitCnt;
+	}
+	public void setVisitCnt(int visitCnt) {
+		this.visitCnt = visitCnt;
+	}
 	public String getNickName() {
 		return nickName;
 	}

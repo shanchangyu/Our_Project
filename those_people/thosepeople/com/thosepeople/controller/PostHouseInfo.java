@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.thosepeople.constant.InfoType;
 import com.thosepeople.service.HouseService;
-import com.thosepeople.service.PageService;
+import com.thosepeople.service.VisitCountService;
 import com.thosepeople.vo.HouseInfo;
 import com.thosepeople.vo.UserInfo;
 
@@ -33,8 +34,8 @@ public class PostHouseInfo {
 	@Qualifier("houseService")
 	HouseService houseService;
 	@Autowired
-	@Qualifier("pageService")
-	private PageService pageService;
+	@Qualifier("visitCountService")
+	private VisitCountService visitCountService;
 	private  final int pageSize = 10;
 	public HouseService getHouseService() {
 		return houseService;
@@ -44,7 +45,6 @@ public class PostHouseInfo {
 		this.houseService = houseService;
 	}
 	@RequestMapping(value = "/houseInfo" , method = RequestMethod.POST)
-	@SuppressWarnings("unchecked")
 	public ModelAndView postHouseInfo(@RequestParam("title") String title,
 			@RequestParam("infoType") String infoType,
 			@RequestParam("houseType") String houseType,
@@ -61,7 +61,7 @@ public class PostHouseInfo {
 			if(houseInfo>0)
 			{
 				session.setAttribute("houseInfo", houseInfo);
-				List<HouseInfo> list=(List<HouseInfo>)pageService.getMoreInfo(null, 1,pageSize,"house");
+				List<HouseInfo> list=(List<HouseInfo>)houseService.getMoreInfo(null, 1,pageSize);
 				ModelMap	modelMap = new ModelMap();
 				modelMap.put("HouseInfo", list);
 				modelMap.put("currentPage", 1);
@@ -74,9 +74,11 @@ public class PostHouseInfo {
 	
 
 	@RequestMapping("/showHouseDetail")
-	public ModelAndView showHouseDetail(@RequestParam("uid")int uid,@RequestParam("id")int id,
+	public ModelAndView showHouseDetail(@RequestParam("id")int id,
 			HttpSession session)
 	{
+		//访问次数加1
+		visitCountService.addVisitCount(id, InfoType.HOUSE_INFO);
 		HouseInfo detail=houseService.getDetailHouseInfo(id);
 		if(detail!=null)
 		{
@@ -90,7 +92,6 @@ public class PostHouseInfo {
 	}
 	
 	@RequestMapping("/showMoreHouseInfo")
-	@SuppressWarnings("unchecked")
 	@ResponseBody
 	public Map<String, Object> showMoreHouseInfo(@RequestParam("currentPage") Integer currentPage)
 	{
@@ -103,7 +104,7 @@ public class PostHouseInfo {
 			pageNum = currentPage+1;
 		}
 
-		List<HouseInfo> list=(List<HouseInfo>)pageService.getMoreInfo(null, pageNum,pageSize,"house");
+		List<HouseInfo> list=(List<HouseInfo>)houseService.getMoreInfo(null, pageNum,pageSize);
 
 		if(list==null ||list.size()==0)
 		{

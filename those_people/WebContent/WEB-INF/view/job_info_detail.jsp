@@ -13,7 +13,7 @@
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]->
 </head>
-<title>交友详细信息</title>
+<title>工作详细信息</title>
 </head>
 <c:choose>
 	<c:when test="${!empty sessionScope.userInfo}">
@@ -44,7 +44,7 @@
 								<B>${loveInfo.title}</B>
 								</div>
 								<div class="col-md-4">
-									发布时间： ${jobDetailInfo.postDate} <br> <br> 浏览人数：100人
+									发布时间： ${jobDetailInfo.postDate} <br> <br> 浏览次数：${jobDetailInfo.visitCnt}
 								</div>
 							</div>
 						</div>
