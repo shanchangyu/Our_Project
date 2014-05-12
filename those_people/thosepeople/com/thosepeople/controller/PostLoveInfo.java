@@ -40,7 +40,7 @@ public class PostLoveInfo {
 			@RequestParam("contactWay") String contactWay,
 			HttpSession session) {
 		UserInfo ui=(UserInfo) session.getAttribute("userInfo");
-		LoveInfo loveInfo=postLoveService.postLoveInfo(ui.getUid(), title, selfDescribe, expectOther, contactWay);
+		LoveInfo loveInfo=postLoveService.postLoveInfo(ui.getUid(), ui.getSchool(),title, selfDescribe, expectOther, contactWay);
 		return new ModelAndView("love_info_detail").addObject("loveInfo",loveInfo);
 	}
 }

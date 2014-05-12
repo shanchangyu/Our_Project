@@ -16,14 +16,15 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.util.CollectionUtils;
 
 import com.mysql.jdbc.Statement;
-import com.thosepeople.dao.PostInfoDao;
+import com.thosepeople.dao.LoveDao;
 import com.thosepeople.model.LoveInfo;
+import com.thosepeople.vo.SimpleLoveInfo;
 
 /**
  * @author chenzhuo
  * 
  */
-public class PostInfoDaoImpl extends JdbcDaoSupport implements PostInfoDao {
+public class LoveDaoImpl extends JdbcDaoSupport implements LoveDao {
 	private static final BeanPropertyRowMapper<LoveInfo> rowMapper = new BeanPropertyRowMapper<>(
 			LoveInfo.class);
 	static {
@@ -31,12 +32,16 @@ public class PostInfoDaoImpl extends JdbcDaoSupport implements PostInfoDao {
 	}
 
 	@Override
-	public int postLove(int uid, String title, String selfDescribe,
+	public int postLove(int uid,String userSchool, String title, String selfDescribe,
 			String expectOther, String contactWay) {
-		final String post_sql = " insert into love_info(uid,title,selfDescribe,"
+		final String post_sql = " insert into love_info(uid,userSchool,title,selfDescribe,"
 				+ "expectOther,contactWay) value( "
 				+ uid
 				+ ","
+				+"'"
+				+userSchool
+				+"'"
+				+","
 				+ "'"
 				+ title
 				+ "'"
@@ -88,6 +93,11 @@ public class PostInfoDaoImpl extends JdbcDaoSupport implements PostInfoDao {
 		if (!CollectionUtils.isEmpty(result)) {
 			return result.get(0);
 		}
+		return null;
+	}
+
+	@Override
+	public List<SimpleLoveInfo> listLoveInfoBySchool(String schoolInfo) {
 		return null;
 	}
 

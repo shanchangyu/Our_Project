@@ -10,5 +10,5 @@ import com.thosepeople.model.LoveInfo;
  *
  */
 public interface PostLoveInfoService {
-   LoveInfo postLoveInfo(int uid,String title,String selfDescribe,String expectOther,String contactWay);
+   LoveInfo postLoveInfo(int uid,String userSchool,String title,String selfDescribe,String expectOther,String contactWay);
 }
