@@ -6,6 +6,7 @@ package com.thosepeople.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -18,17 +19,19 @@ import org.springframework.util.CollectionUtils;
 import com.mysql.jdbc.Statement;
 import com.thosepeople.dao.LoveDao;
 import com.thosepeople.model.LoveInfo;
-import com.thosepeople.vo.SimpleLoveInfo;
+import com.thosepeople.vo.LoveInfoOutline;
 
 /**
  * @author chenzhuo
  * 
  */
 public class LoveDaoImpl extends JdbcDaoSupport implements LoveDao {
-	private static final BeanPropertyRowMapper<LoveInfo> rowMapper = new BeanPropertyRowMapper<>(
+	private static final BeanPropertyRowMapper<LoveInfo> infoMapper = new BeanPropertyRowMapper<>(
 			LoveInfo.class);
+	private static final BeanPropertyRowMapper<LoveInfoOutline> outlineInfoMapper=new BeanPropertyRowMapper<>();
 	static {
-		rowMapper.setPrimitivesDefaultedForNullValue(true);
+		infoMapper.setPrimitivesDefaultedForNullValue(true);
+		outlineInfoMapper.setPrimitivesDefaultedForNullValue(true);
 	}
 
 	@Override
@@ -89,16 +92,21 @@ public class LoveDaoImpl extends JdbcDaoSupport implements LoveDao {
 	@Override
 	public LoveInfo getLoveInfoById(int infoId) {
 		List<LoveInfo> result = this.getJdbcTemplate().query(
-				GET_INFO_BY_INFOID, new Object[] { infoId }, rowMapper);
+				GET_INFO_BY_INFOID, new Object[] { infoId }, infoMapper);
 		if (!CollectionUtils.isEmpty(result)) {
 			return result.get(0);
 		}
 		return null;
 	}
 
+	private static final String LIST_LOVE_INFO=" select title,postTime,uid from love_info where userSchool=? order by postTime limit 5 ";
 	@Override
-	public List<SimpleLoveInfo> listLoveInfoBySchool(String schoolInfo) {
-		return null;
+	public List<LoveInfoOutline> listLoveInfoBySchool(String schoolInfo) {
+		List<LoveInfoOutline> result=this.getJdbcTemplate().query(LIST_LOVE_INFO,new Object[]{schoolInfo},outlineInfoMapper);
+		if(!CollectionUtils.isEmpty(result))	{
+           return result;
+		}
+		return Collections.emptyList();
 	}
 
 }

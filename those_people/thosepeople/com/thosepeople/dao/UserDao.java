@@ -4,8 +4,10 @@
 package com.thosepeople.dao;
 
 import java.util.Date;
+import java.util.List;
 
 import com.thosepeople.vo.UserInfo;
+import com.thosepeople.vo.UserInfoOutline;
 
 /**
  * @author chenzhuo
@@ -24,4 +26,5 @@ public interface UserDao {
 	void saveHeadPicPath(int uid,String path);
 	UserInfo getDetailUserInfo(String email);
 	String getUserNickNameById(int id);
+	List<UserInfoOutline> getUserInfoOutline(List<Integer> userIdList);
 	}

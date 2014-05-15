@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.thosepeople.model.LoveInfo;
-import com.thosepeople.service.PostLoveInfoService;
+import com.thosepeople.service.LoveInfoService;
 import com.thosepeople.vo.UserInfo;
 
 /**
@@ -27,9 +27,9 @@ public class PostLoveInfo {
 
 	@Autowired
 	@Qualifier("postLoveInfoService")
-	private PostLoveInfoService postLoveService;
+	private LoveInfoService postLoveService;
 	
-	public void setPostLoveService(PostLoveInfoService postLoveService) {
+	public void setPostLoveService(LoveInfoService postLoveService) {
 		this.postLoveService = postLoveService;
 	}
 

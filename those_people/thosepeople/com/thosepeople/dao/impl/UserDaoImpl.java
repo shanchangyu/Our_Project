@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import com.thosepeople.dao.UserDao;
 import com.thosepeople.vo.UserInfo;
+import com.thosepeople.vo.UserInfoOutline;
 
 /**
  * @author chenzhuo
@@ -21,8 +22,11 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 
 	private static final BeanPropertyRowMapper<UserInfo> rowMapper = new BeanPropertyRowMapper<UserInfo>(
 			UserInfo.class);
+	private static final BeanPropertyRowMapper<UserInfoOutline> outLineInfoMapper = new BeanPropertyRowMapper<UserInfoOutline>(
+			UserInfoOutline.class);
 	static {
 		rowMapper.setPrimitivesDefaultedForNullValue(true);
+		outLineInfoMapper.setPrimitivesDefaultedForNullValue(true);
 	}
 	private static final String REGISTER_USER = " insert into user(realName,nickName,passWord,email) value(?,?,?,?) ";
 	private static final String GET_UID = " select id from user where email=? ";
@@ -101,5 +105,12 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao {
 	public String getUserNickNameById(int id) {
 		return this.getJdbcTemplate().queryForObject(GET_NICKNAME,
 				new Object[] { id }, String.class);
+	}
+
+	private static final String GET_OUTLINE_INFO=" select uid,headPicPath,nickName from user_detail where uid in ? ";
+	@Override
+	public List<UserInfoOutline> getUserInfoOutline(List<Integer> userIdList) {
+		
+		return null;
 	}
 }
