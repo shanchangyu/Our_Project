@@ -26,11 +26,11 @@ import com.thosepeople.vo.UserInfo;
 public class PostLoveInfo {
 
 	@Autowired
-	@Qualifier("postLoveInfoService")
-	private LoveInfoService postLoveService;
+	@Qualifier("loveInfoService")
+	private LoveInfoService loveInfoService;
 	
-	public void setPostLoveService(LoveInfoService postLoveService) {
-		this.postLoveService = postLoveService;
+	public void setloveInfoService(LoveInfoService loveInfoService) {
+		this.loveInfoService = loveInfoService;
 	}
 
 	@RequestMapping(value = "/post", method = RequestMethod.POST)
@@ -40,7 +40,7 @@ public class PostLoveInfo {
 			@RequestParam("contactWay") String contactWay,
 			HttpSession session) {
 		UserInfo ui=(UserInfo) session.getAttribute("userInfo");
-		LoveInfo loveInfo=postLoveService.postLoveInfo(ui.getUid(), ui.getSchool(),title, selfDescribe, expectOther, contactWay);
+		LoveInfo loveInfo=loveInfoService.postLoveInfo(ui.getUid(), ui.getSchool(),title, selfDescribe, expectOther, contactWay);
 		return new ModelAndView("love_info_detail").addObject("loveInfo",loveInfo);
 	}
 }

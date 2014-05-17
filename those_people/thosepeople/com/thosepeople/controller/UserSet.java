@@ -16,4 +16,14 @@ public class UserSet {
 	public ModelAndView goUserInfo(){
 		return new ModelAndView("user_info_page");
 	}
+	
+	@RequestMapping("/forgetPassword")
+	public ModelAndView goChangePassword(){
+		return new ModelAndView("forget_password");
+	}
+	
+	@RequestMapping("/login")
+	public ModelAndView goLogin(){
+		return new ModelAndView("login");
+	}
 }

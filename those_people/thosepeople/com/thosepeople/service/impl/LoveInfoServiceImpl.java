@@ -22,10 +22,9 @@ import com.thosepeople.vo.SimpleLoveInfo;
  *
  */
 public class LoveInfoServiceImpl implements InitializingBean, LoveInfoService{
-    LoveDao postInfoDao;
-    
-	public void setPostInfoDao(LoveDao postInfoDao) {
-		this.postInfoDao = postInfoDao;
+    LoveDao loveDao;
+	public void setLoveDao(LoveDao loveDao) {
+		this.loveDao = loveDao;
 	}
 
 	@Override
@@ -34,23 +33,23 @@ public class LoveInfoServiceImpl implements InitializingBean, LoveInfoService{
 		if(StringUtils.isEmpty(title)||StringUtils.isEmpty(expectOther)||StringUtils.isEmpty(selfDescribe)){
 			return null;
 		}
-		int generateId=postInfoDao.postLove(uid,userSchool,title,selfDescribe, expectOther, contactWay);
+		int generateId=loveDao.postLove(uid,userSchool,title,selfDescribe, expectOther, contactWay);
 		if(generateId>0){
-			return postInfoDao.getLoveInfoById(generateId);
+			return loveDao.getLoveInfoById(generateId);
 		}
 		return null;
 	}
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		Assert.notNull(postInfoDao, "The postInfoDao should not null !");
+		Assert.notNull(loveDao, "The loveDao should not null !");
 	}
 
 	@Override
 	public List<SimpleLoveInfo> listLoveInfoBySchool(String userSchool) {
 		if(StringUtils.isEmpty(userSchool))
 		return Collections.emptyList();
-	     List<LoveInfoOutline> outlineResult=postInfoDao.listLoveInfoBySchool(userSchool);
+	     List<LoveInfoOutline> outlineResult=loveDao.listLoveInfoBySchool(userSchool);
 	     List<Integer> postUserIdList=new ArrayList<>(5);
 	     for(LoveInfoOutline infoOutline:outlineResult){
 	      int postUserId=infoOutline.getPostUserId();
