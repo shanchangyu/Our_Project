@@ -17,4 +17,5 @@ public interface LoveDao {
   int likeInfo(int infoId,int uid);
   LoveInfo getLoveInfoById(int infoId);
   List<LoveInfoOutline> listLoveInfoBySchool(String schoolInfo);
+  
 }

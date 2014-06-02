@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomePageInitializer {
 	@RequestMapping(value="/initialize")
    public ModelAndView initialize(){
-	   return new ModelAndView("login");
+	   return new ModelAndView("reset_password");
    }
 	
 	@RequestMapping("/home")

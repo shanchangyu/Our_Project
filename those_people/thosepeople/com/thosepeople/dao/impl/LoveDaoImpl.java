@@ -99,7 +99,7 @@ public class LoveDaoImpl extends JdbcDaoSupport implements LoveDao {
 		return null;
 	}
 
-	private static final String LIST_LOVE_INFO=" select title,postTime,uid from love_info where userSchool=? order by postTime limit 5 ";
+	private static final String LIST_LOVE_INFO=" select id,title,postTime,uid from love_info where userSchool=? order by postTime limit 5 ";
 	@Override
 	public List<LoveInfoOutline> listLoveInfoBySchool(String schoolInfo) {
 		List<LoveInfoOutline> result=this.getJdbcTemplate().query(LIST_LOVE_INFO,new Object[]{schoolInfo},outlineInfoMapper);

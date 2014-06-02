@@ -38,4 +38,8 @@
 	<bean id="visitCountdao" class="com.thosepeople.dao.impl.VisitCountDapImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	
+	<bean id="infoCommonDao" class="com.thosepeople.dao.impl.InfoCommonDaoImpl">
+	<property name="dataSource" ref="dataSource" />
+	</bean>
 </beans>

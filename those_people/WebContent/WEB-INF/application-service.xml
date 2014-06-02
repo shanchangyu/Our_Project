@@ -25,6 +25,8 @@
 	</bean>
 	<bean id="loveInfoService" class="com.thosepeople.service.impl.LoveInfoServiceImpl">
 		<property name="loveDao" ref="loveDao" />
+		<property name="userDao" ref="userDao" />
+		<property name="infoCommonDao" ref="infoCommonDao"/>
 	</bean>
 	<bean id="postCommentService" class="com.thosepeople.service.impl.PostCommentServiceImpl">
 		<property name="postCommentDao" ref="postCommentDao" />
