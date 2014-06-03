@@ -23,8 +23,10 @@
 	<bean id="houseService" class="com.thosepeople.service.impl.HouseServiceImpl">
 		<property name="houseDao" ref="houseDao"/>
 	</bean>
-	<bean id="postLoveInfoService" class="com.thosepeople.service.impl.PostLoveInfoServiceImpl">
-		<property name="postInfoDao" ref="postInfoDao" />
+	<bean id="loveInfoService" class="com.thosepeople.service.impl.LoveInfoServiceImpl">
+		<property name="loveDao" ref="loveDao" />
+		<property name="userDao" ref="userDao" />
+		<property name="infoCommonDao" ref="infoCommonDao"/>
 	</bean>
 	<bean id="postCommentService" class="com.thosepeople.service.impl.PostCommentServiceImpl">
 		<property name="postCommentDao" ref="postCommentDao" />

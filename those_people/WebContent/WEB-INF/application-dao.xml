@@ -20,7 +20,7 @@
     <bean id="houseDao" class="com.thosepeople.dao.impl.HouseDaoImpl">
        <property name="dataSource" ref="dataSource"/>
     </bean>
-	<bean id="postInfoDao" class="com.thosepeople.dao.impl.PostInfoDaoImpl">
+	<bean id="loveDao" class="com.thosepeople.dao.impl.LoveDaoImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	<bean id="postCommentDao" class="com.thosepeople.dao.impl.PostCommentDaoImpl">
@@ -37,5 +37,9 @@
 
 	<bean id="visitCountdao" class="com.thosepeople.dao.impl.VisitCountDapImpl">
 		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="infoCommonDao" class="com.thosepeople.dao.impl.InfoCommonDaoImpl">
+	<property name="dataSource" ref="dataSource" />
 	</bean>
 </beans>

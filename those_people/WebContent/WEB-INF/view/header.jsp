@@ -38,8 +38,7 @@
 								<b>注册</b>
 							</button>
 					</a></li>
-					<li><a href="#
-              ">
+					<li><a href="#">
 							<button class="btn btn-info btn-sm" data-toggle="modal"
 								data-target="#loginModal">
 								<b>登录</b>

@@ -70,6 +70,9 @@ public class Register {
 		model.put("uid", result);
 		model.put("realName", realName);
 		model.put("nickName", nickName);
+		//set the default user's head picture 
+		String headPicPath="../img/head-pic/headpic_default.jpg";
+		model.put("headPicPath", headPicPath);
 		return new ModelAndView("complete_detail_info");
 	}
 
@@ -132,11 +135,12 @@ public class Register {
 					+ File.separator;
 			PictureUtil.cutImage(tempSavePath, targetPath + fileName, suffix,
 					x, y, width, height);
-			String savePath="../" + RESPONSE_PATH + "/" + fileName;
-			model.put("headPicPath",savePath);
+			String savePath = "../" + RESPONSE_PATH + "/" + fileName;
+			model.put("headPicPath", savePath);
 			new File(tempSavePath.toString()).delete();
 			PrintWriter out = response.getWriter();
-			out.print("<script>parent.callbackupload('" + savePath+ "')</script>");
+			out.print("<script>parent.callbackupload('" + savePath
+					+ "')</script>");
 			out.flush();
 			out.close();
 		} catch (Exception e) {
@@ -150,7 +154,7 @@ public class Register {
 			@ModelAttribute("uid") int uid,
 			@ModelAttribute("realName") String realName,
 			@ModelAttribute("nickName") String nickName,
-			@ModelAttribute("headPicPath") String headPicPath,
+			@ModelAttribute(value = "headPicPath") String headPicPath,
 			@RequestParam("gender") boolean gender,
 			@RequestParam("city") String city,
 			@RequestParam("school") String school,
@@ -162,7 +166,7 @@ public class Register {
 			SessionStatus sessionStatus, HttpSession session) {
 		boolean result = registerService.completeUserInfoDetail(uid, gender,
 				city, school, major, enrollmentDate, signature, showType,
-				company,headPicPath);
+				company, headPicPath);
 		UserInfo userInfo = new UserInfo();
 		if (result) {
 			userInfo.setUid(uid);
